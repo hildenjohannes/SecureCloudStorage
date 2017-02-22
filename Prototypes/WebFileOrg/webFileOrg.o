@@ -1,0 +1,275 @@
+{-# LINE 1 "C:\Users\hilden\AppData\Local\Temp\ghc3712_0\ghc_1.s" #-}
+.data
+	.align 4
+.align 1
+.globl __stginit_Main
+__stginit_Main:
+.data
+	.align 4
+.align 1
+.globl Main_main2_closure
+Main_main2_closure:
+	.long	Main_main2_info
+	.long	0
+	.long	0
+	.long	0
+.section .rodata
+	.align 4
+.align 1
+c1Di_str:
+	.byte	72
+	.byte	101
+	.byte	108
+	.byte	108
+	.byte	111
+	.byte	32
+	.byte	78
+	.byte	105
+	.byte	103
+	.byte	103
+	.byte	117
+	.byte	104
+	.byte	33
+	.byte	0
+.text
+	.align 4,0x90
+	.long	0
+	.long	22
+.globl Main_main2_info
+Main_main2_info:
+.Lc1Dj:
+	leal -12(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc1Dk
+.Lc1Dl:
+	subl $4,%esp
+	pushl %esi
+	pushl %ebx
+	call newCAF
+	addl $12,%esp
+	testl %eax,%eax
+	je .Lc1Dh
+.Lc1Dg:
+	movl $stg_bh_upd_frame_info,-12(%ebp)
+	movl %eax,-8(%ebp)
+	movl $c1Di_str,8(%ebx)
+	addl $-12,%ebp
+	jmp ghczmprim_GHCziCString_unpackCStringzh_info
+.Lc1Dh:
+	jmp *(%esi)
+.Lc1Dk:
+	jmp *-16(%ebx)
+.data
+	.align 4
+.align 1
+.globl Main_main1_closure
+Main_main1_closure:
+	.long	Main_main1_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S1Eg_srt-(Main_main1_info)+0
+	.long	65539
+	.long	0
+	.long	458767
+.globl Main_main1_info
+Main_main1_info:
+.Lc1DH:
+	leal -8(%ebp),%eax
+	cmpl 840(%ebx),%eax
+	jb .Lc1DR
+.Lc1DS:
+	movl $c1DF_info,-4(%ebp)
+	movl $Main_main2_closure,%esi
+	addl $-4,%ebp
+	jmp toJSStr
+.text
+	.align 4,0x90
+	.long	S1Eg_srt-(c1DF_info)+0
+	.long	0
+	.long	65568
+c1DF_info:
+.Lc1DF:
+	addl $8,%edi
+	cmpl 856(%ebx),%edi
+	ja .Lc1DV
+.Lc1DU:
+	movl $ghczmprim_GHCziTypes_Izh_con_info,-4(%edi)
+	movl %esi,(%edi)
+	movl $c1DQ_info,-4(%ebp)
+	movl $FxthDgO5vhFC0dVxe1OwkF_Haste_alertzuf1_closure,%esi
+	movl (%edi),%eax
+	movl %eax,(%ebp)
+	addl $-4,%ebp
+	testw $7,%si
+	jne .Lc1DQ
+.Lc1DX:
+	jmp *(%esi)
+.text
+	.align 4,0x90
+	.long	65
+	.long	32
+c1DQ_info:
+.Lc1DQ:
+	movl 4(%ebp),%eax
+	movl $c1E5_info,4(%ebp)
+	addl $4,%ebp
+	movl 3(%esi),%ecx
+	movl 872(%ebx),%edx
+	movl %ecx,64(%esp)
+	movl 20(%edx),%ecx
+	movl %ebp,12(%ecx)
+	movl 888(%ebx),%ecx
+	movl %eax,76(%esp)
+	leal 4(%edi),%eax
+	movl %eax,8(%ecx)
+	movl 100(%edx),%eax
+	movl %eax,88(%esp)
+	movl 104(%edx),%eax
+	movl %eax,100(%esp)
+	leal 4(%edi),%eax
+	subl (%ecx),%eax
+	xorl %ecx,%ecx
+	movl %ecx,112(%esp)
+	movl 88(%esp),%ecx
+	subl %eax,%ecx
+	movl 100(%esp),%eax
+	movl %ecx,124(%esp)
+	movl 112(%esp),%ecx
+	sbbl %ecx,%eax
+	movl 124(%esp),%ecx
+	movl %ecx,100(%edx)
+	movl %eax,104(%edx)
+	subl $4,%esp
+	pushl $0
+	pushl %ebx
+	call suspendThread
+	addl $12,%esp
+	subl $4,%esp
+	movl 80(%esp),%ecx
+	pushl %ecx
+	movl 72(%esp),%ecx
+	pushl %ecx
+	movl %eax,148(%esp)
+	call __app1
+	addl $12,%esp
+	subl $8,%esp
+	movl 144(%esp),%ecx
+	pushl %ecx
+	movl %eax,160(%esp)
+	call resumeThread
+	addl $12,%esp
+	movl %eax,%ebx
+	movl 872(%ebx),%eax
+	movl 20(%eax),%ecx
+	movl 12(%ecx),%ebp
+	addl $104,%ecx
+	movl %ecx,840(%ebx)
+	movl $0,904(%ebx)
+	movl 888(%ebx),%ecx
+	movl 8(%ecx),%edx
+	leal -4(%edx),%edi
+	movl %eax,160(%esp)
+	movl (%ecx),%eax
+	movl 48(%ecx),%ecx
+	shll $12,%ecx
+	decl %ecx
+	movl %ecx,172(%esp)
+	movl %eax,%ecx
+	movl %edx,184(%esp)
+	movl 172(%esp),%edx
+	addl %edx,%ecx
+	movl %ecx,856(%ebx)
+	movl 160(%esp),%ecx
+	movl 100(%ecx),%edx
+	movl 104(%ecx),%ecx
+	movl %ecx,196(%esp)
+	movl 184(%esp),%ecx
+	subl %eax,%ecx
+	xorl %eax,%eax
+	addl %ecx,%edx
+	movl 196(%esp),%ecx
+	adcl %eax,%ecx
+	movl 160(%esp),%eax
+	movl %edx,100(%eax)
+	movl %ecx,104(%eax)
+	movl 148(%esp),%eax
+	movl %eax,%esi
+	jmp *(%ebp)
+.Lc1DR:
+	movl $Main_main1_closure,%esi
+	jmp *-8(%ebx)
+.Lc1DV:
+	movl $8,904(%ebx)
+	jmp stg_gc_unbx_r1
+.text
+	.align 4,0x90
+	.long	0
+	.long	32
+c1E5_info:
+.Lc1E5:
+	addl $4,%ebp
+	jmp IBJHmTQyrtkCXFsQwT7UYx_HasteziPrimziAny_zdfFromAnyZLZR4_info
+.data
+	.align 4
+.align 1
+.globl Main_main_closure
+Main_main_closure:
+	.long	Main_main_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S1Eg_srt-(Main_main_info)+4
+	.long	65539
+	.long	0
+	.long	65551
+.globl Main_main_info
+Main_main_info:
+.Lc1EG:
+	jmp Main_main1_info
+.data
+	.align 4
+.align 1
+.globl Main_main3_closure
+Main_main3_closure:
+	.long	Main_main3_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S1Eg_srt-(Main_main3_info)+4
+	.long	65539
+	.long	0
+	.long	327695
+.globl Main_main3_info
+Main_main3_info:
+.Lc1ER:
+	movl $Main_main1_closure+1,8(%ebx)
+	jmp base_GHCziTopHandler_runMainIO1_info
+.data
+	.align 4
+.align 1
+.globl ZCMain_main_closure
+ZCMain_main_closure:
+	.long	ZCMain_main_info
+	.long	0
+.text
+	.align 4,0x90
+	.long	S1Eg_srt-(ZCMain_main_info)+16
+	.long	65539
+	.long	0
+	.long	65551
+.globl ZCMain_main_info
+ZCMain_main_info:
+.Lc1F2:
+	jmp Main_main3_info
+.section .data
+	.align 4
+.align 1
+S1Eg_srt:
+	.long	FxthDgO5vhFC0dVxe1OwkF_Haste_alertzuf1_closure
+	.long	Main_main1_closure
+	.long	Main_main2_closure
+	.long	base_GHCziTopHandler_runMainIO1_closure
+	.long	Main_main3_closure
+.ident "GHC 7.10.2"
+
