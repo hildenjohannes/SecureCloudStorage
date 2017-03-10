@@ -18,8 +18,8 @@ main = do
           --japp <- newTextElem "Hejsan"
           --appendChild japp "Filelist"
           --japp <- withElem "str" $ \x -> do
-          msg <- withElem "inputAmount" $ \inputAmount -> getProp inputAmount "value"
-          msgInt <- runParser int msg
+          msg <- toNumber $ withElem "inputAmount" $ \inputAmount -> getProp inputAmount "value"
+          --msgInt <- runParser int msg
           alert msg --FÖRSÖKER TA IN EN SIFFRA OCH LOOPA SÅ MÅNGA GÅNGER, GER MAYBE a, PROBLEM
           liftIO $ fillList 3
 
