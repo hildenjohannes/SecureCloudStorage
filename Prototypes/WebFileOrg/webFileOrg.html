@@ -16,7 +16,23 @@
   <div id="filelistDiv">
     <ul id="fileList"></ul>
   </div>
-  <div> <a href="https://www.google.se/">JAG GÅR TILL GOOGLE</a> </div>
+
+  <div>
+    <form action="register.php" method="post">
+      Username: <input type="text" name="username"><br>
+      Password: <input type="text" name="password"><br>
+      <input type="submit">
+    </form>
+    <br>
+    <form action="getshares.php" method="get">
+      <input type="submit" value="Get shared files">
+    </form>
+    <br>
+    <form action="sharefile.php" method="get">
+      <input type="submit" value="Share files">
+    </form>
+  </div>
+
   <script src="webFileOrg.js"></script>
 </body>
 </html>
