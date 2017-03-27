@@ -142,7 +142,8 @@ ul{
 /* Media Queries */
 @media(max-width: 768px){
   .Header{
-    height: 6.5rem;
+    height: 9rem;
+    padding-bottom: 1rem;
   }
   .Header #branding,
   .Header nav,
