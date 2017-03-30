@@ -1,0 +1,41 @@
+<div id="main"></div>
+<script src="forge/util.js"></script>
+<script src="forge/debug.js"></script>
+<script src="forge/jsbn.js"></script>
+<script src="forge/oids.js"></script>
+<script src="forge/asn1.js"></script>
+<script src="forge/sha1.js"></script>
+<script src="forge/sha256.js"></script>
+<script src="forge/md5.js"></script>
+<script src="forge/md.js"></script>
+<script src="forge/aes.js"></script>
+<script src="forge/prng.js"></script>
+<script src="forge/random.js"></script>
+<script src="forge/jsbn.js"></script>
+<script src="forge/pkcs1.js"></script>
+<script src="forge/rsa.js"></script>
+
+<script src="forge/des.js"></script>
+<script src="forge/rc2.js"></script>
+<script src="forge/pbe.js"></script>
+<script src="forge/pem.js"></script>
+<script src="forge/hmac.js"></script>
+<script src="forge/pbkdf2.js"></script>
+<script src="forge/pkcs7asn1.js"></script>
+<script src="forge/pkcs12.js"></script>
+<script src="forge/pss.js"></script>
+<script src="forge/mgf1.js"></script>
+<script src="forge/mgf.js"></script>
+<script src="forge/x509.js"></script>
+<script src="forge/pki.js"></script>
+<script src="test.js"></script>
+<script>
+    var node = document.getElementById('main');
+    var app = Elm.Main.embed(node);
+    // Note: if your Elm module is named "MyThing.Root" you
+    // would call "Elm.MyThing.Root.embed(node)" instead.
+    app.ports.check.subscribe(function(input) {
+        var encryptedInput = ;
+        app.ports.suggestions.send(encryptedInput);
+    });
+</script>
