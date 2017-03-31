@@ -1,0 +1,155 @@
+/* COLORS
+cerulean blue - 217CA3
+mustard       - E29930
+asphalt       - 32384D
+shadow        - 211F30
+*/
+
+/*
+black - #000000
+greyish- #BEB7A4
+red - #DE1A1A
+orange -#FF3F00
+white - #FFFFFF
+*/
+html,
+body {
+  font-family: 'Oswald', sans-serif;
+  color: #ebebeb;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+ul{
+  margin:0;
+  padding:0;
+}
+
+.Button{
+  height:1rem;
+  background:#FF3F00;
+  border:0;
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  color:#000000;
+}
+
+.Dark{
+  background:#211F30;
+  color:#ffffff;
+}
+
+/* Header */
+.Header{
+  height: 5rem;
+  background:#FF3F00;
+  color:#000000;
+  border-bottom:#DE1A1A 3px solid;
+  overflow: hidden;
+}
+
+.Header a{
+  color:#000000;
+  text-decoration:none;
+  text-transform: uppercase;
+  font-size:16px;
+}
+
+.Header li{
+  float:left;
+  display:inline;
+  padding: 0 20px 0 20px;
+}
+
+.Header #branding{
+  float:left;
+}
+
+.Header #branding h1{
+  margin:1rem;
+}
+
+.Header nav{
+  float: right;
+  margin-top:1.5rem;
+}
+
+.Header .highlight, header .current a{
+  color:#BEB7A4;
+  font-weight:bold;
+}
+
+.Header a:hover{
+  color:#cccccc;
+  font-weight:bold;
+}
+
+/*----------------------------------*/
+/* Main-content */
+.MainContent {
+  display:flex;
+  flex: 1;
+  background-color:#ffffff;
+  padding: .5rem;
+  overflow: hidden;
+}
+
+#sidebar {
+  width:10rem;
+  margin-top:1rem;
+}
+#team-header{
+    margin-left: 25%;
+}
+.Team {
+  height: 2.5rem;
+  background:#211F30;
+  color:#ffffff;
+  text-align: center;
+}
+
+.Files{
+  width: 100%;
+  margin-left: 0.5rem;
+  overflow: scroll;
+}
+
+.File {
+  height: 2.5rem;
+  background:#211F30;
+  color:#ffffff;
+  text-align: center;
+}
+
+/*----------------------------------*/
+
+/* Footer */
+.Footer {
+  background-color: #DE1A1A;
+  padding: 1rem;
+  text-align: center;
+}
+
+/*----------------------------------*/
+
+/* Media Queries */
+@media(max-width: 768px){
+  .Header{
+    height: 9rem;
+    padding-bottom: 1rem;
+  }
+  .Header #branding,
+  .Header nav,
+  .Header nav li{
+    float: none;
+    text-align: center;
+    width: 100%;
+  }
+}
