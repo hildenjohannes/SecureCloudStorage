@@ -33,10 +33,6 @@ init =
 type Msg
     = Upload
     | FilesSelect Files
-    | FilesSelectUpload Files
-    | Submit
-    | FileData (Result FileReader.Error String)
-    -- | FileDataBinary (Result FileReader.Error FileContentArrayBuffer)
     | PostResult (Result Http.Error Json.Value)
 
 
@@ -52,20 +48,6 @@ update msg model =
                 , message = "Something selected"
             }
                 ! []
-
-        FilesSelectUpload fileInstances ->
-            { model | selected = fileInstances } ! List.map readTextFile fileInstances
-
-        Submit ->
-            { model | message = Basics.toString model.selected } ! List.map readTextFile model.selected
-
-        FileData (Ok str) ->
-            { model | contents = str :: model.contents } ! []
-
-        FileData (Err err) ->
-            { model | message = FileReader.prettyPrint err } ! []
-        -- FileDataBinary (Ok data) ->
-        --     (model, Cmd.none)
         PostResult (Ok msg) ->
             { model | message = toString msg } ! []
 
@@ -90,28 +72,6 @@ view model =
             , button
                 [ onClick Upload ]
                 [ text "Read file" ]
-            ]
-        , div []
-            [ h1 [] [ text "Multiple files with automatic upload" ]
-            , input
-                [ type_ "file"
-                , onchange FilesSelectUpload
-                , multiple True
-                ]
-                []
-            ]
-        , form
-            [ onSubmit Submit ]
-            [ h1 [] [ text "Form with submit button" ]
-            , input
-                [ type_ "file"
-                , onchange FilesSelect
-                , multiple True
-                ]
-                []
-            , button
-                [ type_ "submit" ]
-                [ text "Submit" ]
             ]
         , div []
             [ h1 [] [ text "Results" ]
@@ -149,28 +109,14 @@ containerStyles =
 -- TASKS
 
 
-readTextFile : NativeFile -> Cmd Msg
-readTextFile fileValue =
-    readAsTextFile fileValue.blob
-        |> Task.attempt FileData
---
--- readArrayBuffer : NativeFile -> Cmd Msg
--- readArrayBuffer fileValue =
---     readArrayBuffer fileValue.blob
---         |> Task.attempt FileDataBinary
-
--- |> Task.map Ok
--- |> Task.onError (Task.succeed << Err)
--- |> Task.perform FileData
 
 sendFileToServer : NativeFile -> Cmd Msg
 sendFileToServer buf =
     let
         body =
             Http.multipartBody
-                [ FileReader.filePart "simtest" buf,
-                stringPart "part1" "42"
-                
+                [ FileReader.filePart "simtest" buf
+
                 ]
     in
         Http.post "http://localhost:5000/upload" body Json.value
