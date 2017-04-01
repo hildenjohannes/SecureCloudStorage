@@ -125,7 +125,7 @@ view model =
          div [class "container-fluid"]
           [div [class "row", style [("margin-top","5%")]]
             [
-            sidebar
+            sidebar, center
             ]
           ],
          stylesheet
@@ -133,39 +133,85 @@ view model =
 
 navigationbar : Html Msg
 navigationbar =
-    nav [class "navbar navbar-inverse navbar-fixed-top" ]
-      [div [class "container-fluid"]
-        [div [class "navbar-header"]
-          [button [
-            property "navbar-toggle" (Json.string "collapsed"),
-            property "data-toggle" (Json.string "collapse"),
-            property "data-target" (Json.string "#navbar"),
-            property "aria-expanded" (Json.string "false"),
-            property "aria-controls" (Json.string "navbar")]
-            [text "toggle"],
-          a [class "navbar-brand", href "#"] [text "Secure Cloud Storage"]
-          ]--!navbar-header
-        ,
-        div [id "navbar", class "navbar-collapse collpase"]
-         [ul [class "nav navbar-nav navbar-right"]
-          [li [class "active"] [a [href "#"] [text "Home"]],
-           li [] [a [href "#"] [text "Profile"]],
-           li [] [a [href "#"] [text "Settings"]]
-          ]--! ul
-         ]--! navbar
-        ]--! container-fluid
-      ]--! nav
+  nav [class "navbar navbar-inverse navbar-fixed-top" ]
+    [div [class "container-fluid"]
+      [div [class "navbar-header"]
+        [button [
+          property "navbar-toggle" (Json.string "collapsed"),
+          property "data-toggle" (Json.string "collapse"),
+          property "data-target" (Json.string "#navbar"),
+          property "aria-expanded" (Json.string "false"),
+          property "aria-controls" (Json.string "navbar")]
+          [text "toggle"],
+        a [class "navbar-brand", href "#"] [text "Secure Cloud Storage"]
+        ]--!navbar-header
+      ,
+      div [id "navbar", class "navbar-collapse collpase"]
+       [ul [class "nav navbar-nav navbar-right"]
+        [li [class "active"] [a [href "#"] [text "Home"]],
+         li [] [a [href "#"] [text "Profile"]],
+         li [] [a [href "#"] [text "Settings"]]
+        ]--! ul
+       ]--! navbar
+      ]--! container-fluid
+    ]--! nav
 
 sidebar : Html Msg
 sidebar =
-    div [class "col-sm-3 col-md-2 sidebar"]
+  div [class "col-sm-3 col-md-2 sidebar"]
+    [
+    ul [class "nav nav-sidebar"]
       [
-      ul [class "nav nav-sidebar"]
-        [
-         li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
-         li [] [a [href "#"] [text "TEAM 0"]],
-         li [] [a [href "#"] [text "TEAM 1"]],
-         li [] [a [href "#"] [text "TEAM 2"]],
-         li [] [a [href "#"] [text "TEAM 3"]]
-        ]
+       li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
+       li [] [a [href "#"] [text "TEAM 0"]],
+       li [] [a [href "#"] [text "TEAM 1"]],
+       li [] [a [href "#"] [text "TEAM 2"]],
+       li [] [a [href "#"] [text "TEAM 3"]]
       ]
+    ]
+
+center : Html Msg
+center =
+  div [class "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"]
+    [
+    h1 [class "page-header"] [text "Files"],
+    div [class "table-responsive"]
+      [table [class "table table-striped"]
+        [thead []
+          [tr []
+            [
+            th [] [text "Name"],
+            th [] [text "Owner"],
+            th [] [text "Size"],
+            th [] [text "Upload date"]
+            ]
+          ],--!thead
+          tbody []
+            [tr []
+              [
+              td [] [text "File1"],
+              td [] [text "Rebecka"],
+              td [] [text "1 KB"],
+              td [] [text "1 April 2017"]
+              ],
+            tr []
+              [
+              td [] [text "File2"],
+              td [] [text "Rebecka"],
+              td [] [text "1 KB"],
+              td [] [text "1 April 2017"]
+              ],
+            tr []
+              [
+              td [] [text "File3"],
+              td [] [text "Rebecka"],
+              td [] [text "1 KB"],
+              td [] [text "1 April 2017"]
+              ]
+            ]
+        ]--!table
+      ]--! table-responsive
+    ]
+
+--table-headers : List (Html Msg)
+--table-headers = [tr [] []]
