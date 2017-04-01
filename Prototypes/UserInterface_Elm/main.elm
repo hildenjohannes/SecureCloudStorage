@@ -178,40 +178,42 @@ center =
     div [class "table-responsive"]
       [table [class "table table-striped"]
         [thead []
-          [tr []
-            [
-            th [] [text "Name"],
-            th [] [text "Owner"],
-            th [] [text "Size"],
-            th [] [text "Upload date"]
-            ]
+          [tr [] thList
           ],--!thead
-          tbody []
-            [tr []
-              [
-              td [] [text "File1"],
-              td [] [text "Rebecka"],
-              td [] [text "1 KB"],
-              td [] [text "1 April 2017"]
-              ],
-            tr []
-              [
-              td [] [text "File2"],
-              td [] [text "Rebecka"],
-              td [] [text "1 KB"],
-              td [] [text "1 April 2017"]
-              ],
-            tr []
-              [
-              td [] [text "File3"],
-              td [] [text "Rebecka"],
-              td [] [text "1 KB"],
-              td [] [text "1 April 2017"]
-              ]
-            ]
+          tbody [] tbList
         ]--!table
       ]--! table-responsive
     ]
 
---table-headers : List (Html Msg)
---table-headers = [tr [] []]
+thList : List (Html Msg)
+thList =             [
+  th [] [text "Name"],
+  th [] [text "Owner"],
+  th [] [text "Size"],
+  th [] [text "Upload date"]
+  ]
+
+tbList : List (Html Msg)
+tbList =
+  [tr []
+    [
+    td [] [text "File1"],
+    td [] [text "Rebecka"],
+    td [] [text "1 KB"],
+    td [] [text "1 April 2017"]
+    ],
+  tr []
+    [
+    td [] [text "File2"],
+    td [] [text "Rebecka"],
+    td [] [text "1 KB"],
+    td [] [text "1 April 2017"]
+    ],
+  tr []
+    [
+    td [] [text "File3"],
+    td [] [text "Rebecka"],
+    td [] [text "1 KB"],
+    td [] [text "1 April 2017"]
+    ]
+  ]
