@@ -120,47 +120,52 @@ view : Model -> Html Msg
 view model =
   div []
       [
-        --NAVIGATIONBAR
-        nav [class "navbar navbar-inverse navbar-fixed-top" ]
-          [div [class "container-fluid"]
-            [div [class "navbar-header"]
-              [button [
-                property "navbar-toggle" (Json.string "collapsed"),
-                property "data-toggle" (Json.string "collapse"),
-                property "data-target" (Json.string "#navbar"),
-                property "aria-expanded" (Json.string "false"),
-                property "aria-controls" (Json.string "navbar")]
-                [text "toggle"],
-              a [class "navbar-brand", href "#"] [text "Secure Cloud Storage"]
-              ]--!navbar-header
-            ,
-            div [id "navbar", class "navbar-collapse collpase"]
-             [ul [class "nav navbar-nav navbar-right"]
-              [li [class "active"] [a [href "#"] [text "Home"]],
-               li [] [a [href "#"] [text "Profile"]],
-               li [] [a [href "#"] [text "Settings"]]
-              ]--! ul
-             ]--! navbar
-            ]--! container-fluid
-          ],--! nav
+        navigationbar,
          --MAIN CONTENT
          div [class "container-fluid"]
-          [div [class "row", style [("margin-top","10%")]]
+          [div [class "row", style [("margin-top","5%")]]
             [
-            --SIDEBAR
-            div [class "col-sm-3 col-md-2 sidebar"]
-              [
-              ul [class "nav nav-sidebar"]
-                [
-                 li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
-                 li [] [a [href "#"] [text "TEAM 0"]],
-                 li [] [a [href "#"] [text "TEAM 1"]],
-                 li [] [a [href "#"] [text "TEAM 2"]],
-                 li [] [a [href "#"] [text "TEAM 3"]]
-                ]
-              ]
-            --OTHER
+            sidebar
             ]
           ],
          stylesheet
+      ]
+
+navigationbar : Html Msg
+navigationbar =
+    nav [class "navbar navbar-inverse navbar-fixed-top" ]
+      [div [class "container-fluid"]
+        [div [class "navbar-header"]
+          [button [
+            property "navbar-toggle" (Json.string "collapsed"),
+            property "data-toggle" (Json.string "collapse"),
+            property "data-target" (Json.string "#navbar"),
+            property "aria-expanded" (Json.string "false"),
+            property "aria-controls" (Json.string "navbar")]
+            [text "toggle"],
+          a [class "navbar-brand", href "#"] [text "Secure Cloud Storage"]
+          ]--!navbar-header
+        ,
+        div [id "navbar", class "navbar-collapse collpase"]
+         [ul [class "nav navbar-nav navbar-right"]
+          [li [class "active"] [a [href "#"] [text "Home"]],
+           li [] [a [href "#"] [text "Profile"]],
+           li [] [a [href "#"] [text "Settings"]]
+          ]--! ul
+         ]--! navbar
+        ]--! container-fluid
+      ]--! nav
+
+sidebar : Html Msg
+sidebar =
+    div [class "col-sm-3 col-md-2 sidebar"]
+      [
+      ul [class "nav nav-sidebar"]
+        [
+         li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
+         li [] [a [href "#"] [text "TEAM 0"]],
+         li [] [a [href "#"] [text "TEAM 1"]],
+         li [] [a [href "#"] [text "TEAM 2"]],
+         li [] [a [href "#"] [text "TEAM 3"]]
+        ]
       ]
