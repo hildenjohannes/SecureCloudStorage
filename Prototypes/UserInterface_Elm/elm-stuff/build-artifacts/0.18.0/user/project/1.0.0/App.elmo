@@ -1,0 +1,79 @@
+var _user$project$App$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$App$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'ShowTeam':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'AddTeam':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'RemoveFile':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$App$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(
+				_elm_lang$core$Basics$toString(model)),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$App$init = {
+	ctor: '_Tuple2',
+	_0: {
+		teams: {
+			ctor: '::',
+			_0: 'team1',
+			_1: {
+				ctor: '::',
+				_0: 'team2',
+				_1: {ctor: '[]'}
+			}
+		},
+		files_team1: {
+			ctor: '::',
+			_0: 'file1',
+			_1: {
+				ctor: '::',
+				_0: 'file2',
+				_1: {
+					ctor: '::',
+					_0: 'file3',
+					_1: {
+						ctor: '::',
+						_0: 'file4',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		files_team2: {
+			ctor: '::',
+			_0: 'file1',
+			_1: {
+				ctor: '::',
+				_0: 'file2',
+				_1: {ctor: '[]'}
+			}
+		}
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$App$main = _elm_lang$html$Html$program(
+	{init: _user$project$App$init, view: _user$project$App$view, update: _user$project$App$update, subscriptions: _user$project$App$subscriptions})();
+var _user$project$App$Model = F3(
+	function (a, b, c) {
+		return {teams: a, files_team1: b, files_team2: c};
+	});
+var _user$project$App$AddFile = {ctor: 'AddFile'};
+var _user$project$App$RemoveFile = {ctor: 'RemoveFile'};
+var _user$project$App$AddTeam = {ctor: 'AddTeam'};
+var _user$project$App$ShowTeam = {ctor: 'ShowTeam'};
