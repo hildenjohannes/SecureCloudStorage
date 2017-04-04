@@ -138,13 +138,7 @@ navigationbar =
   nav [class "navbar navbar-inverse navbar-fixed-top" ]
     [div [class "container-fluid"]
       [div [class "navbar-header"]
-        [button [
-          property "navbar-toggle" (Json.string "collapsed"),
-          property "data-toggle" (Json.string "collapse"),
-          property "data-target" (Json.string "#navbar"),
-          property "aria-expanded" (Json.string "false"),
-          property "aria-controls" (Json.string "navbar")]
-          [text "toggle"],
+        [
         a [class "navbar-brand", href "#"] [text "Secure Cloud Storage"]
         ]--!navbar-header
       ,
@@ -209,7 +203,7 @@ thList =             [
 
 tbList : List (Html Msg)
 tbList =
-  [tr []
+  [tr [onClick AddTodo ]
     [
     td [] [text "File1"],
     td [] [text "Rebecka"],
