@@ -124,7 +124,8 @@ view model =
         navigationbar,
          --MAIN CONTENT
          div [class "container-fluid"]
-          [div [class "row", style [("margin-top","5%")]]
+          [fileNav,
+          div [class "row"]--, style [("margin-top","1%")]]
             [
             sidebar, center
             ]
@@ -171,10 +172,22 @@ sidebar =
       ]
     ]
 
+fileNav : Html Msg
+fileNav =
+  div [class "row", style [("margin-top","6%")]]
+    [
+    div [class "pull-right"]
+      [
+      button [class "btn btn-info"] [text "Manage Team"],
+      button [class "btn btn-warning"] [text "Upload file"],
+      button [class "btn btn-info"] [text "Download file"]
+      ]
+    ]
+
 center : Html Msg
 center =
-  div [class "col-sm-9 col-md-9"]--"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"]
-    [
+  div [class "col-sm-9 col-md-10 main"]
+    [ --"col-sm-9 col-md-9"
     h1 [class "page-header"] [text "Files"],
     div [class "table-responsive"]
       [table [class "table table-striped"]
