@@ -1,4 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
+import cgi
+#from requests_toolbelt.multipart import decoder
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -19,11 +21,18 @@ class SocketHandler(websocket.WebSocketHandler):
 
 class UploadHandler(web.RequestHandler):
     def post(self):
+        form = cgi.FieldStorage()
+        value1 = form.getfirst("qwe", "")
         data = self.request.body
-        self.write("ok")
-        self.flush()
-        #self.write_message("tjillevippen")
-        print(data)
+        print(value1)
+        #multipart_data = decoder.MultipartDecoder.from_response(self)
+
+        #self.flush()
+        # for part in multipart_data.parts:
+        #     print(part.content)  # Alternatively, part.text if you want unicode
+        #     print(part.headers)
+        #self.write("Ok")
+
 
 
 
