@@ -97,8 +97,11 @@ var _user$project$State$update = F2(
 						'ws://localhost:8000/ws',
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							model.email,
-							A2(_elm_lang$core$Basics_ops['++'], '|', model.password)))
+							'login|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.email,
+								A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))
 				};
 			default:
 				var _p2 = _p0._0;
