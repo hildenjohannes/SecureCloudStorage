@@ -1,0 +1,14 @@
+var _user$project$Login_Types$Model = F4(
+	function (a, b, c, d) {
+		return {email: a, password: b, message: c, showFeedback: d};
+	});
+var _user$project$Login_Types$Login = {ctor: 'Login'};
+var _user$project$Login_Types$Message = function (a) {
+	return {ctor: 'Message', _0: a};
+};
+var _user$project$Login_Types$Password = function (a) {
+	return {ctor: 'Password', _0: a};
+};
+var _user$project$Login_Types$Email = function (a) {
+	return {ctor: 'Email', _0: a};
+};
