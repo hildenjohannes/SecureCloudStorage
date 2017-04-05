@@ -17,8 +17,8 @@ type alias Model =
   , showFeedback: Bool}
 
 type Msg =
-  ShowLogin |
-  ShowUpload |
+  ShowLogin |   --switch to login view
+  ShowUpload |  --switch to upload view 
   --Upload
   Upload |
   FilesSelect Files |
@@ -26,8 +26,8 @@ type Msg =
   --Login
   Email String |
   Password String |
-  Message String |
-  Login
+  Message String | --from server
+  Login            --if the login button has been pressed
 
 type View =
   LoginView |
