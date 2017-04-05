@@ -56,7 +56,7 @@ update msg model =
 
     Login ->
       ({model | showFeedback = True}, WebSocket.send "ws://localhost:8000/ws"
-      (model.email ++ "|" ++ model.password))
+      ("login|" ++ model.email ++ "|" ++ model.password))
 
     Message message ->
       case message of
