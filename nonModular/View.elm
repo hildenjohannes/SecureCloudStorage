@@ -16,14 +16,45 @@ view model =
     UploadView ->
       uploadView model
 
+stylesheet : Html Msg
+stylesheet =
+    let
+        tag =
+            "link"
+
+        attrs =
+            [ attribute "Rel" "stylesheet"
+            , attribute "property" "stylesheet"
+            , attribute "href" "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            --, attribute "href" "css/bootstrap.min.css"
+            ]
+
+        children =
+            []
+    in
+        node tag attrs children
+
 loginView : Model -> Html Msg
 loginView model =
-  div []
-    [ input [ type_ "text", placeholder "Email", onInput Email ] []
+  div []--class "container"
+      [
+      div [style [ ("padding-left", "35%"), ("padding-right", "35%")]] [
+        Html.form [class "form-signin"]--style [("width", "50%")]
+          [h2 [class "form-signin-heading"] [text "Please sign in"]
+          , label [for "inputEmail", class "sr-only"] [text "Email address"]
+          , input [type_ "email", id "inputEmail", class "form-control", placeholder "Email address", onInput Email] []
+          , label [for "inputPassword", class "sr-only"] [text "Password"]
+          , input [type_ "password", id "inputPassword", class "form-control", placeholder "Password", onInput Password] []
+          , button [class "btn btn-lg btn-primary btn-block", type_ "submit", onClick Login] [text "Sign in"]
+          , if model.showFeedback then feedback else div [] []]
+        ]
+        ,stylesheet
+      ]
+  {--  [ input [ type_ "text", placeholder "Email", onInput Email ] []
     , input [ type_ "password", placeholder "Password", onInput Password ] []
     , button [ onClick Login ] [ text "Login" ]
     , if model.showFeedback then feedback else div [] []
-    ]
+    ] -}
 
 feedback : Html Msg
 feedback =
