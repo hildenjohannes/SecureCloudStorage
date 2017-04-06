@@ -19,46 +19,25 @@ class SocketHandler(websocket.WebSocketHandler):
         pass
 
     def on_message(self, message):
-        if message == "test@chalmers.se|qwerty":
-            self.write_message("ok")
+        params = message.split("|")
+        method = params.pop(0)
+        if method == "login":
+            self.write_message(str(self.login(params)))
         else:
-            self.write_message("wrong")
+            self.write_message("Invalid argument")
 
     def on_close(self):
         pass
 
+    def login(self, params):
+        if params[0] != "test@chalmers.se":
+            return False
+        if params[1] != "qwerty":
+            return False
+        return True
 
-class UploadHandler(web.RequestHandler):
-    def post(self):
-        form = cgi.FieldStorage()
-        data = form.getfirst("simtest", "")
 
 
-        #recieved_json_data = json.loads(data)
-        #print(recieved_json_data)
-        #data' = json.decode(data)
-        #with open('data.txt', 'w') as outfile:
-        #json.dump(data', outfile)
-        print(data.value)
-        self.clear()
-        self.set_status(200)
-        self.finish('')
-        #multipart_data = decoder.MultipartDecoder.from_response(self)
-
-        #self.flush()
-        # for part in multipart_data.parts:
-        #     print(part.content)  # Alternatively, part.text if you want unicode
-        #     print(part.headers)
-        #self.write("Ok")
-class MyStreamer(MultiPartStreamer):
-    def create_part(self, headers):
-        """In the create_part method, you should create and return StreamedPart instance.
-
-        If you do not override this method, then the default create_part() method that creates a
-        TemporaryFileStreamedPart instance for you. and it will stream file data into the system default
-        temporary directory.
-        """
-        return TemporaryFileStreamedPart(self, headers, tmp_dir="/home/rasmus/Documents/")
 
 MAX_STREAMED_SIZE = 1*GB # Max. size to be streamed
 
@@ -88,9 +67,11 @@ class StreamHandler(web.RequestHandler):
             self.ps.data_complete() # You MUST call this to close the incoming stream.
             # Here can use self.ps to access the fields and the corresponding ``StreamedPart`` objects.
             for part in self.ps.parts:
-                filepart = open('test.hs', 'w+')
-                filepart.write(part.get_payload().decode('utf-8'))
+                filepart = open(part.get_filename(), 'bw+')
+                # Todo: get_payload() cant load more than the size of the ram...
+                filepart.write(part.get_payload())
                 filepart.close()
+                #to examine the part:
                 print("PART name=%s, filename=%s, size=%s" % (part.get_name(), part.get_filename(), part.get_size()))
                 print("Data = %s" % (part.get_payload()))
                 for hdr in part.headers:
@@ -99,7 +80,7 @@ class StreamHandler(web.RequestHandler):
                         if key.lower() != "name":
                             print("\t\t\t%s=%s" % (key, hdr[key]))
 
-            #print(a)
+
         finally:
             # When ready, don't forget to release resources.
             self.ps.release_parts()
