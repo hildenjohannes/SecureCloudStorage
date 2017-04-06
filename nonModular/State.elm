@@ -55,7 +55,7 @@ update msg model =
       ({model | password = password, showFeedback = False}, Cmd.none)
 
     Login ->
-      ({model | showFeedback = True}, WebSocket.send "ws://localhost:8000/ws"
+      ({model | showFeedback = True}, WebSocket.send "ws://localhost:5000/ws"
       ("login|" ++ model.email ++ "|" ++ model.password))
 
     Message message ->
@@ -68,7 +68,7 @@ update msg model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
   Sub.batch
-    [ WebSocket.listen "ws://localhost:8000/ws" Message ]
+    [ WebSocket.listen "ws://localhost:5000/ws" Message ]
 
 --Upload
 sendFileToServer : NativeFile -> Cmd Msg
