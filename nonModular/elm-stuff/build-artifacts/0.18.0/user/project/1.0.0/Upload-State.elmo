@@ -1,0 +1,55 @@
+var _user$project$Upload_State$sendFileToServer = function (buf) {
+	var body = _elm_lang$http$Http$multipartBody(
+		{
+			ctor: '::',
+			_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
+			_1: {ctor: '[]'}
+		});
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Upload_Types$PostResult,
+		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
+};
+var _user$project$Upload_State$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Upload':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					A2(_elm_lang$core$List$map, _user$project$Upload_State$sendFileToServer, model.selected));
+			case 'FilesSelect':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{selected: _p0._0, message: 'Something selected'}),
+					{ctor: '[]'});
+			default:
+				if (_p0._0.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								message: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								message: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				}
+		}
+	});
+var _user$project$Upload_State$init = {
+	message: 'Waiting...',
+	selected: {ctor: '[]'},
+	contents: {ctor: '[]'}
+};

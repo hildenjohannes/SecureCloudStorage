@@ -1,0 +1,141 @@
+var _user$project$State$sendFileToServer = function (buf) {
+	var body = _elm_lang$http$Http$multipartBody(
+		{
+			ctor: '::',
+			_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
+			_1: {ctor: '[]'}
+		});
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Types$PostResult,
+		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
+};
+var _user$project$State$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:8000/ws', _user$project$Types$Message),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$State$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'ShowLogin':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$LoginView}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ShowUpload':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$UploadView}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Upload':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					A2(_elm_lang$core$List$map, _user$project$State$sendFileToServer, model.selected));
+			case 'FilesSelect':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{selected: _p0._0, uploadMsg: 'Something selected'}),
+					{ctor: '[]'});
+			case 'PostResult':
+				if (_p0._0.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				}
+			case 'Email':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{email: _p0._0, showFeedback: false}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Password':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{password: _p0._0, showFeedback: false}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Login':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{showFeedback: true}),
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:8000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'login|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.email,
+								A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))
+				};
+			default:
+				var _p2 = _p0._0;
+				var _p1 = _p2;
+				if (_p1 === 'True') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{loginMsg: _p2, view: _user$project$Types$UploadView}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{loginMsg: _p2}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+		}
+	});
+var _user$project$State$init = {
+	ctor: '_Tuple2',
+	_0: {
+		view: _user$project$Types$LoginView,
+		uploadMsg: 'Waiting...',
+		selected: {ctor: '[]'},
+		contents: {ctor: '[]'},
+		email: '',
+		password: '',
+		loginMsg: '',
+		showFeedback: false
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};

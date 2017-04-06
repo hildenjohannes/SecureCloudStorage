@@ -25,63 +25,54 @@ subscriptions model =
 --MODEL
 
 type alias Model =
-    { teams : List String
+    { name : String
+    , password : String
+    , loggedin : Bool
     , files : List String
+    , teams : List String
     }
 
 
 init :  ( Model, Cmd Msg )
 init =
-    ({ teams = []
+    ({ name = ""
+    , password = ""
+    , loggedin = False
     , files = []
+    , teams = []
     }, Cmd.none)
 
 
 --UPDATE
 
 type Msg
-    = UpdateTodo String
-    | AddTodo
-    | RemoveItem String
-    | RemoveAll
-    | ClearInput
+    = UpdateName String
+    | UpdatePassword String
+    | LogIn
+    | LogOut
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        UpdateTodo text ->
-                ({ teams = []
-                , files = []
+        UpdateName text ->
+                ({ name = text
+                , password = model.password
+                , loggedin = model.loggedin
+                , files = model.files
+                , teams = model.teams
                 }, Cmd.none)
-
-        AddTodo ->
-                ({ teams = []
-                , files = []
+        UpdatePassword text ->
+                ({ name = model.name
+                , password = text
+                , loggedin = model.loggedin
+                , files = model.files
+                , teams = model.teams
                 }, Cmd.none)
-
-        RemoveItem text ->
-                ({ teams = []
-                , files = []
-                }, Cmd.none)
-
-        RemoveAll ->
-                ({ teams = []
-                , files = []
-                }, Cmd.none)
-
-        ClearInput ->
-                ({ teams = []
-                , files = []
-                }, Cmd.none)
---JS
---script : List Attribute -> List Html -> Html
---script attrs children = node "script" attrs children
-
---scriptSrc : String -> Html
---scriptSrc s = script [ type_ "text/javascript", src s ] []
-
---bootstrapScript = scriptSrc "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        LogIn ->
+                ({model | loggedin = True}, Cmd.none)
+        LogOut ->
+                ({model | loggedin = False}, Cmd.none)
 
 --VIEW
 stylesheet : Html Msg
@@ -102,22 +93,26 @@ stylesheet =
     in
         node tag attrs children
 
-todoItem : String -> Html Msg
-todoItem todo =
-    li [ class "list-group-item" ] [ text todo, button [ onClick (RemoveItem todo), class "btn btn-info" ] [ text "x" ] ]
-
-
-todoList : List String -> Html Msg
-todoList todos =
-    let
-        child =
-            List.map todoItem todos
-    in
-        ul [ class "list-group" ] child
-
 
 view : Model -> Html Msg
 view model =
+  div [] [if model.loggedin then teamView else loginView, stylesheet]
+
+loginView : Html Msg
+loginView = --div [] [text "Not logged in!", button [onClick LogIn] [text "Log in!"]]
+  div [style [ ("padding-left", "35%"), ("padding-right", "35%")]] [
+    Html.form [class "form-signin"]--style [("width", "50%")]
+      [h2 [class "form-signin-heading"] [text "Please sign in"]
+      , label [for "inputEmail", class "sr-only"] [text "Email address"]
+      , input [type_ "email", id "inputEmail", class "form-control", placeholder "Email address"] []
+      , label [for "inputPassword", class "sr-only"] [text "Password"]
+      , input [type_ "password", id "inputPassword", class "form-control", placeholder "Password"] []
+      , button [class "btn btn-lg btn-primary btn-block", type_ "submit", onClick LogIn] [text "Sign in"]
+      ]
+    ]
+
+teamView : Html Msg
+teamView = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out!"]]
   div []
       [
         --NAVIGATION
@@ -175,6 +170,7 @@ fileNav =
       button [class "btn btn-info"] [text "Manage Team"],
       button [class "btn btn-warning"] [text "Upload file"],
       button [class "btn btn-info"] [text "Download file"]
+      , button [class "btn btn-info", onClick LogOut] [text "Log out"]
       ]
     ]
 
@@ -203,7 +199,7 @@ thList =             [
 
 tbList : List (Html Msg)
 tbList =
-  [tr [onClick AddTodo ]
+  [tr [] --onClick
     [
     td [] [text "File1"],
     td [] [text "Rebecka"],
