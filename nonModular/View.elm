@@ -14,7 +14,6 @@ view model =
       loginView model
 
     UploadView ->
-      --uploadView model
       teamView model
 
 stylesheet : Html Msg

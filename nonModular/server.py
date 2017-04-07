@@ -10,6 +10,7 @@ TB=1024*GB
 
 MAX_BUFFER_SIZE = 1 * MB  # Max. size loaded into memory!
 MAX_BODY_SIZE = 1 * MB  # Max. size loaded into memory!
+MAX_STREAMED_SIZE = 1*GB # Max. size to be streamed
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -35,11 +36,6 @@ class SocketHandler(websocket.WebSocketHandler):
         if params[1] != "qwerty":
             return False
         return True
-
-
-
-
-MAX_STREAMED_SIZE = 1*GB # Max. size to be streamed
 
 @web.stream_request_body
 class StreamHandler(web.RequestHandler):
@@ -85,8 +81,6 @@ class StreamHandler(web.RequestHandler):
             # When ready, don't forget to release resources.
             self.ps.release_parts()
             self.finish() # And of course, you MUST call finish()
-
-
 
 app = web.Application([
     (r'/ws', SocketHandler),
