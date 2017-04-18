@@ -1,6 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
 from tornadostreamform.multipart_streamer import MultiPartStreamer, StreamedPart, TemporaryFileStreamedPart
-#import cgi
+from database import Usermeta
 import json
 #from requests_toolbelt.multipart import decoder
 
@@ -10,6 +10,7 @@ TB=1024*GB
 
 MAX_BUFFER_SIZE = 1 * MB  # Max. size loaded into memory!
 MAX_BODY_SIZE = 1 * MB  # Max. size loaded into memory!
+MAX_STREAMED_SIZE = 1*GB # Max. size to be streamed
 
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -22,7 +23,10 @@ class SocketHandler(websocket.WebSocketHandler):
         params = message.split("|")
         method = params.pop(0)
         if method == "login":
-            self.write_message(str(self.login(params)))
+            #self.write_message(str(self.login(params)))
+            self.write_message(str(Usermeta.userLogin(params)))
+        elif method == "register":
+            self.write_message("register:" ++ str(Usermeta.userRegister(params)))
         else:
             self.write_message("Invalid argument")
 
@@ -35,11 +39,6 @@ class SocketHandler(websocket.WebSocketHandler):
         if params[1] != "qwerty":
             return False
         return True
-
-
-
-
-MAX_STREAMED_SIZE = 1*GB # Max. size to be streamed
 
 @web.stream_request_body
 class StreamHandler(web.RequestHandler):
@@ -85,8 +84,6 @@ class StreamHandler(web.RequestHandler):
             # When ready, don't forget to release resources.
             self.ps.release_parts()
             self.finish() # And of course, you MUST call finish()
-
-
 
 app = web.Application([
     (r'/ws', SocketHandler),

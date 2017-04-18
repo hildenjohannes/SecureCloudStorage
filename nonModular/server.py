@@ -1,6 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
 from tornadostreamform.multipart_streamer import MultiPartStreamer, StreamedPart, TemporaryFileStreamedPart
-#import cgi
+from database import Usermeta
 import json
 #from requests_toolbelt.multipart import decoder
 
@@ -23,7 +23,10 @@ class SocketHandler(websocket.WebSocketHandler):
         params = message.split("|")
         method = params.pop(0)
         if method == "login":
-            self.write_message(str(self.login(params)))
+            #self.write_message(str(self.login(params)))
+            self.write_message(str(Usermeta.userLogin(params)))
+        elif method == "register":
+            self.write_message("register:" ++ str(Usermeta.userRegister(params)))
         else:
             self.write_message("Invalid argument")
 
