@@ -38,6 +38,14 @@ var _user$project$State$update = F2(
 						{view: _user$project$Types$UploadView}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'ShowRegister':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$RegisterView}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'Upload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -86,6 +94,22 @@ var _user$project$State$update = F2(
 						{password: _p0._0, showFeedback: false}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'FirstName':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{firstname: _p0._0, showFeedback: false}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'LastName':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{lastname: _p0._0, showFeedback: false}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'Login':
 				return {
 					ctor: '_Tuple2',
@@ -102,6 +126,35 @@ var _user$project$State$update = F2(
 								_elm_lang$core$Basics_ops['++'],
 								model.email,
 								A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))
+				};
+			case 'Register':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{showFeedback: true}),
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:5000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'register|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.firstname,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'|',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										model.lastname,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'|',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												model.email,
+												A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))))))
 				};
 			default:
 				var _p2 = _p0._0;
@@ -134,6 +187,8 @@ var _user$project$State$init = {
 		contents: {ctor: '[]'},
 		email: '',
 		password: '',
+		firstname: '',
+		lastname: '',
 		loginMsg: '',
 		showFeedback: false
 	},

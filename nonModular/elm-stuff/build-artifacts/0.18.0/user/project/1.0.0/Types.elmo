@@ -1,10 +1,34 @@
-var _user$project$Types$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h};
-	});
+var _user$project$Types$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, firstname: g, lastname: h, loginMsg: i, showFeedback: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Types$Register = {ctor: 'Register'};
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
+};
+var _user$project$Types$LastName = function (a) {
+	return {ctor: 'LastName', _0: a};
+};
+var _user$project$Types$FirstName = function (a) {
+	return {ctor: 'FirstName', _0: a};
 };
 var _user$project$Types$Password = function (a) {
 	return {ctor: 'Password', _0: a};
@@ -19,7 +43,9 @@ var _user$project$Types$FilesSelect = function (a) {
 	return {ctor: 'FilesSelect', _0: a};
 };
 var _user$project$Types$Upload = {ctor: 'Upload'};
+var _user$project$Types$ShowRegister = {ctor: 'ShowRegister'};
 var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$RegisterView = {ctor: 'RegisterView'};
 var _user$project$Types$UploadView = {ctor: 'UploadView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};

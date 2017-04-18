@@ -26,7 +26,7 @@ class SocketHandler(websocket.WebSocketHandler):
             #self.write_message(str(self.login(params)))
             self.write_message(str(Usermeta.userLogin(params)))
         elif method == "register":
-            self.write_message("register:" ++ str(Usermeta.userRegister(params)))
+            self.write_message(str(Usermeta.userRegister(params)))
         else:
             self.write_message("Invalid argument")
 

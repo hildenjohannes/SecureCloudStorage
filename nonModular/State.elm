@@ -18,6 +18,8 @@ init =
     --Login
     , email = ""
     , password = ""
+    , firstname = ""
+    , lastname = ""
     , loginMsg = ""
     , showFeedback = False }
     , Cmd.none
@@ -31,6 +33,9 @@ update msg model =
 
     ShowUpload ->
       ({model | view = UploadView}, Cmd.none)
+
+    ShowRegister ->
+      ({model | view = RegisterView}, Cmd.none)
 
     --Upload
     Upload ->
@@ -53,10 +58,18 @@ update msg model =
 
     Password password ->
       ({model | password = password, showFeedback = False}, Cmd.none)
+    FirstName fn ->
+      ({model | firstname = fn, showFeedback = False}, Cmd.none)
+    LastName ln ->
+      ({model | lastname = ln, showFeedback = False}, Cmd.none)
+
 
     Login ->
       ({model | showFeedback = True}, WebSocket.send "ws://localhost:5000/ws"
       ("login|" ++ model.email ++ "|" ++ model.password))
+    Register ->
+      ({model | showFeedback = True}, WebSocket.send "ws://localhost:5000/ws"
+      ("register|" ++ model.firstname ++ "|" ++ model.lastname ++ "|" ++ model.email ++ "|" ++ model.password))
 
     Message message ->
       case message of

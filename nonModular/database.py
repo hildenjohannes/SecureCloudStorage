@@ -23,10 +23,12 @@ class Usermeta(BaseModel):
         #todo: check so that email isn't already taken.
         try:
             with db.atomic():
-                User.create(fnamn=params[0], enamn=params[1], email=params[2], pw=params[3])
+                Usermeta.create(fnamn=params[0], enamn=params[1], email=params[2], pw=params[3])
         except peewee.IntegrityError:
                 return False
         return True
+
+
 
 #Usermeta.create_table()
 #user = Usermeta(fnamn='Test', enamn='Testsson', email='test@chalmers.se', pw='testpw')

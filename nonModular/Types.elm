@@ -13,12 +13,15 @@ type alias Model =
   --Login
   , email : String
   , password : String
+  , firstname : String
+  , lastname : String
   , loginMsg : String
   , showFeedback: Bool}
 
 type Msg =
   ShowLogin |   --switch to login view
-  ShowUpload |  --switch to upload view 
+  ShowUpload |  --switch to upload view
+  ShowRegister | --switch to register view
   --Upload
   Upload |
   FilesSelect Files |
@@ -26,12 +29,16 @@ type Msg =
   --Login
   Email String |
   Password String |
+  FirstName String |
+  LastName String |
   Message String | --from server
-  Login            --if the login button has been pressed
+  Login          |  --if the login button has been pressed
+  Register
 
 type View =
   LoginView |
-  UploadView
+  UploadView |
+  RegisterView
 
 type alias Files =
   List NativeFile
