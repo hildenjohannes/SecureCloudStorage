@@ -39,7 +39,7 @@ update msg model =
 
     --Upload
     Upload ->
-      model ! List.map sendFileToServer model.selected
+      model ! List.map (sendFileToServer model.email) model.selected
 
     FilesSelect fileInstances ->
       { model
@@ -84,12 +84,13 @@ subscriptions model =
     [ WebSocket.listen "ws://localhost:5000/ws" Message ]
 
 --Upload
-sendFileToServer : NativeFile -> Cmd Msg
-sendFileToServer buf =
+sendFileToServer : String -> NativeFile -> Cmd Msg
+sendFileToServer email buf =
   let
     body =
       Http.multipartBody
-        [ FileReader.filePart "simtest" buf ]
+        [ stringPart "owner" email
+        ,FileReader.filePart "simtest" buf ]
   in
     Http.post "http://localhost:5000/upload" body Json.value
       |> Http.send PostResult

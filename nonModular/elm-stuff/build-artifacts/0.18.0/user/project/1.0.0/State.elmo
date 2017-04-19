@@ -1,15 +1,20 @@
-var _user$project$State$sendFileToServer = function (buf) {
-	var body = _elm_lang$http$Http$multipartBody(
-		{
-			ctor: '::',
-			_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
-			_1: {ctor: '[]'}
-		});
-	return A2(
-		_elm_lang$http$Http$send,
-		_user$project$Types$PostResult,
-		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
-};
+var _user$project$State$sendFileToServer = F2(
+	function (email, buf) {
+		var body = _elm_lang$http$Http$multipartBody(
+			{
+				ctor: '::',
+				_0: A2(_elm_lang$http$Http$stringPart, 'owner', email),
+				_1: {
+					ctor: '::',
+					_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
+					_1: {ctor: '[]'}
+				}
+			});
+		return A2(
+			_elm_lang$http$Http$send,
+			_user$project$Types$PostResult,
+			A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
+	});
 var _user$project$State$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -50,7 +55,10 @@ var _user$project$State$update = F2(
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					model,
-					A2(_elm_lang$core$List$map, _user$project$State$sendFileToServer, model.selected));
+					A2(
+						_elm_lang$core$List$map,
+						_user$project$State$sendFileToServer(model.email),
+						model.selected));
 			case 'FilesSelect':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],

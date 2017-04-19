@@ -1,6 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
 from tornadostreamform.multipart_streamer import MultiPartStreamer, StreamedPart, TemporaryFileStreamedPart
-from database import Usermeta
+from database import Usermeta, Filemeta
 import json
 #from requests_toolbelt.multipart import decoder
 
@@ -65,11 +65,21 @@ class StreamHandler(web.RequestHandler):
         try:
             self.ps.data_complete() # You MUST call this to close the incoming stream.
             # Here can use self.ps to access the fields and the corresponding ``StreamedPart`` objects.
+            filename=""
+            size=""
+            owner=""
             for part in self.ps.parts:
-                filepart = open(part.get_filename(), 'bw+')
-                # Todo: get_payload() cant load more than the size of the ram...
-                filepart.write(part.get_payload())
-                filepart.close()
+                if part.get_name() == "simtest":
+                    filename=part.get_filename();
+                    size=part.get_size();
+                    filepart = open(part.get_filename(), 'bw+')
+                    # Todo: get_payload() cant load more than the size of the ram...
+                    filepart.write(part.get_payload())
+                    filepart.close()
+                elif part.get_name() == "owner":
+                    owner = part.get_payload().decode('utf-8')
+
+                    #print("##############################################\n##########################" + owner + "###########################\n#####################################################\n")
                 #to examine the part:
                 print("PART name=%s, filename=%s, size=%s" % (part.get_name(), part.get_filename(), part.get_size()))
                 print("Data = %s" % (part.get_payload()))
@@ -79,6 +89,8 @@ class StreamHandler(web.RequestHandler):
                         if key.lower() != "name":
                             print("\t\t\t%s=%s" % (key, hdr[key]))
 
+            if Filemeta.addFile([filename,size,Usermeta.filter(email=owner)]):
+                print("-----Filemetadata added successfully!!!-----\n")
 
         finally:
             # When ready, don't forget to release resources.

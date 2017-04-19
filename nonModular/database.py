@@ -46,7 +46,16 @@ class Usermeta(BaseModel):
 # class Teams(BaseModel):
 #
 #
-# class Filemeta(BaseModel):
-#     name=CharField(max_length=50)
-#     owner=ForeignKeyField(Usermeta)
-#     sharedWith=ForeignKeyField(Usermeta, related_name='sharedwith')
+class Filemeta(BaseModel):
+    name=CharField(max_length=50)
+    size=CharField(max_length=20)
+    owner=ForeignKeyField(Usermeta, related_name='files')
+
+    def addFile(params):
+        try:
+            with db.atomic():
+                Filemeta.create(name=params[0],size=params[1],owner=params[2])
+                return True
+        except peewee.IntegrityError:
+            return False
+        return False
