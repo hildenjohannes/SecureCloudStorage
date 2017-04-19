@@ -1,0 +1,11 @@
+var _user$project$Upload_Types$Model = F3(
+	function (a, b, c) {
+		return {message: a, selected: b, contents: c};
+	});
+var _user$project$Upload_Types$PostResult = function (a) {
+	return {ctor: 'PostResult', _0: a};
+};
+var _user$project$Upload_Types$FilesSelect = function (a) {
+	return {ctor: 'FilesSelect', _0: a};
+};
+var _user$project$Upload_Types$Upload = {ctor: 'Upload'};
