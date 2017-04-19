@@ -7910,43 +7910,109 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _user$project$Main$update = F2(
+var _user$project$Encrypt$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'encrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$Encrypt$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'decrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$Encrypt$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Encrypt$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Encrypt$Model = F3(
+	function (a, b, c) {
+		return {word: a, encrypted: b, decrypted: c};
+	});
+var _user$project$Encrypt$init = {
+	ctor: '_Tuple2',
+	_0: A3(_user$project$Encrypt$Model, 'Encrypt me please', '', ''),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Encrypt$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		if (_p0.ctor === 'Encrypt') {
-			return A2(_elm_lang$core$Basics_ops['++'], model, '1');
-		} else {
-			return A2(_elm_lang$core$Basics_ops['++'], model, '2');
+		switch (_p0.ctor) {
+			case 'Change':
+				return {
+					ctor: '_Tuple2',
+					_0: A3(_user$project$Encrypt$Model, _p0._0, model.encrypted, model.decrypted),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Encrypt':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Encrypt$encrypt(model.word)
+				};
+			case 'Encrypted':
+				return {
+					ctor: '_Tuple2',
+					_0: A3(_user$project$Encrypt$Model, model.word, _p0._0, model.decrypted),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Decrypt':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Encrypt$decrypt(model.encrypted)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A3(_user$project$Encrypt$Model, model.word, model.encrypted, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
 	});
-var _user$project$Main$Decrypt = {ctor: 'Decrypt'};
-var _user$project$Main$Encrypt = {ctor: 'Encrypt'};
-var _user$project$Main$view = function (model) {
+var _user$project$Encrypt$Decrypted = function (a) {
+	return {ctor: 'Decrypted', _0: a};
+};
+var _user$project$Encrypt$Decrypt = {ctor: 'Decrypt'};
+var _user$project$Encrypt$Encrypted = function (a) {
+	return {ctor: 'Encrypted', _0: a};
+};
+var _user$project$Encrypt$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$Encrypt$encrypted(_user$project$Encrypt$Encrypted),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Encrypt$decrypted(_user$project$Encrypt$Decrypted),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Encrypt$Encrypt = {ctor: 'Encrypt'};
+var _user$project$Encrypt$Change = function (a) {
+	return {ctor: 'Change', _0: a};
+};
+var _user$project$Encrypt$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
+				_elm_lang$html$Html$input,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(model),
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Encrypt$Change),
 					_1: {ctor: '[]'}
-				}),
+				},
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Encrypt),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Encrypt'),
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Basics_ops['++'], 'Text: ', model.word)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -7955,26 +8021,65 @@ var _user$project$Main$view = function (model) {
 						_elm_lang$html$Html$button,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Decrypt),
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Encrypt$Encrypt),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Decrypt'),
+							_0: _elm_lang$html$Html$text('Encrypt'),
 							_1: {ctor: '[]'}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'Encrypted: ', model.encrypted)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Encrypt$Decrypt),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Decrypt'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(
+											A2(_elm_lang$core$Basics_ops['++'], 'Decrypted: ', model.decrypted)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
 				}
 			}
 		});
 };
-var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
-	{model: 'Decrypt this message', view: _user$project$Main$view, update: _user$project$Main$update})();
+var _user$project$Encrypt$main = _elm_lang$html$Html$program(
+	{init: _user$project$Encrypt$init, view: _user$project$Encrypt$view, update: _user$project$Encrypt$update, subscriptions: _user$project$Encrypt$subscriptions})();
 
 var Elm = {};
-Elm['Main'] = Elm['Main'] || {};
-if (typeof _user$project$Main$main !== 'undefined') {
-    _user$project$Main$main(Elm['Main'], 'Main', undefined);
+Elm['Encrypt'] = Elm['Encrypt'] || {};
+if (typeof _user$project$Encrypt$main !== 'undefined') {
+    _user$project$Encrypt$main(Elm['Encrypt'], 'Encrypt', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

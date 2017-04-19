@@ -1,5 +1,14 @@
+port module
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
+
+--port module test exposing (...)
+
+-- port for sending strings out to JavaScript
+--port encrypt : String -> Cmd msg
+
+-- port for listening for suggestions from JavaScript
+--port decrypt : (List String -> msg) -> Sub msg
 
 main =
   Html.beginnerProgram { model = "Decrypt this message", view = view, update = update }

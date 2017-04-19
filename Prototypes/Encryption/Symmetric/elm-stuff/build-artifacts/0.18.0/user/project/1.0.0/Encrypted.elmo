@@ -1,0 +1,94 @@
+var _user$project$Encrypted$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'encrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$Encrypted$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Encrypted$Model = F2(
+	function (a, b) {
+		return {word: a, encrypted: b};
+	});
+var _user$project$Encrypted$init = {
+	ctor: '_Tuple2',
+	_0: A2(_user$project$Encrypted$Model, 'Encrypt me please', ''),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Encrypted$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Change':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Encrypted$Model, _p0._0, ''),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Encrypt':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Encrypted$encrypt(model.word)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Encrypted$Model, model.word, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Encrypted$Encrypted = function (a) {
+	return {ctor: 'Encrypted', _0: a};
+};
+var _user$project$Encrypted$subscriptions = function (model) {
+	return _user$project$Encrypted$encrypted(_user$project$Encrypted$Encrypted);
+};
+var _user$project$Encrypted$Encrypt = {ctor: 'Encrypt'};
+var _user$project$Encrypted$Change = function (a) {
+	return {ctor: 'Change', _0: a};
+};
+var _user$project$Encrypted$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(model.word),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$Encrypted$Change),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Encrypted$Encrypt),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Encrypt'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Encrypted$main = _elm_lang$html$Html$program(
+	{init: _user$project$Encrypted$init, view: _user$project$Encrypted$view, update: _user$project$Encrypted$update, subscriptions: _user$project$Encrypted$subscriptions})();

@@ -1,0 +1,103 @@
+var _user$project$Spelling$check = _elm_lang$core$Native_Platform.outgoingPort(
+	'check',
+	function (v) {
+		return v;
+	});
+var _user$project$Spelling$suggestions = _elm_lang$core$Native_Platform.incomingPort(
+	'suggestions',
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
+var _user$project$Spelling$Model = F2(
+	function (a, b) {
+		return {word: a, suggestions: b};
+	});
+var _user$project$Spelling$init = {
+	ctor: '_Tuple2',
+	_0: A2(
+		_user$project$Spelling$Model,
+		'',
+		{ctor: '[]'}),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Spelling$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Change':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(
+						_user$project$Spelling$Model,
+						_p0._0,
+						{ctor: '[]'}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Check':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Spelling$check(model.word)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_user$project$Spelling$Model, model.word, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Spelling$Suggest = function (a) {
+	return {ctor: 'Suggest', _0: a};
+};
+var _user$project$Spelling$subscriptions = function (model) {
+	return _user$project$Spelling$suggestions(_user$project$Spelling$Suggest);
+};
+var _user$project$Spelling$Check = {ctor: 'Check'};
+var _user$project$Spelling$Change = function (a) {
+	return {ctor: 'Change', _0: a};
+};
+var _user$project$Spelling$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Spelling$Change),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Spelling$Check),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Check'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(_elm_lang$core$String$join, ', ', model.suggestions)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Spelling$main = _elm_lang$html$Html$program(
+	{init: _user$project$Spelling$init, view: _user$project$Spelling$view, update: _user$project$Spelling$update, subscriptions: _user$project$Spelling$subscriptions})();

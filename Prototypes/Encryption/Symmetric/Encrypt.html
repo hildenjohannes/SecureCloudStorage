@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Encrypt</title>
+  </head>
+  <body>
+    <div id="elm"></div>
+    <script src="/home/johannes/Documents/SecureCloudStorage/Prototypes/Encryption/Symmetric/forge-master/dist/forge.js"></script>
+    <script src="encrypt.js"></script>
+    <script>
+      //var node = document.getElementById('elm');
+      //var app = Elm.Encrypt.embed(node);
+      var app = Elm.Encrypt.fullscreen();
+
+      app.ports.encrypt.subscribe(function(msg) {
+        var encrypted = encrypt(msg);
+        app.ports.encrypted.send(encrypted);
+      });
+
+      app.ports.decrypt.subscribe(function(msg) {
+        var decrypted = decrypt(msg);
+        app.ports.decrypted.send(decrypted);
+      });
+
+      var key;
+      var iv;
+
+      function encrypt(msg) {
+        // generate a random key and IV
+        // Note: a key size of 16 bytes will use AES-128, 24 => AES-192, 32 => AES-256
+        key = forge.random.getBytesSync(16);
+        iv = forge.random.getBytesSync(16);
+
+        /* alternatively, generate a password-based 16-byte key
+        var salt = forge.random.getBytesSync(128);
+        var key = forge.pkcs5.pbkdf2('password', salt, numIterations, 16);
+        */
+
+        // encrypt some bytes using CBC mode
+        // (other modes include: ECB, CFB, OFB, CTR, and GCM)
+        // Note: CBC and ECB modes use PKCS#7 padding as default
+        var cipher = forge.cipher.createCipher('AES-CBC', key);
+        cipher.start({iv: iv});
+        cipher.update(forge.util.createBuffer(msg));
+        cipher.finish();
+        var encrypted = cipher.output;
+        // transforms to hex
+        var encryptedHex = encrypted.toHex();
+        return encryptedHex;
+      }
+
+      function decrypt(encrypted) {
+        // transforms hex(string) into bytes
+        var encryptedBytes = forge.util.hexToBytes(encrypted);
+
+        // decrypt some bytes using CBC mode
+        // (other modes include: CFB, OFB, CTR, and GCM)
+        var decipher = forge.cipher.createDecipher('AES-CBC', key);
+        decipher.start({iv: iv});
+        decipher.update(forge.util.createBuffer(encryptedBytes));
+        decipher.finish();
+        var decrypted = decipher.output;
+        // transforms to hex
+        var decryptedHex = decrypted.toHex()
+
+        // transforms to string?
+        return forge.util.hexToBytes(decryptedHex);
+      }
+    </script>
+  </body>
+</html>
