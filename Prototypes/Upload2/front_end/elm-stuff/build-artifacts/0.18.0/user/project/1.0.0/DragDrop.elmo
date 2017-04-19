@@ -1,0 +1,28 @@
+var _user$project$DragDrop$onDragFunctionIgnoreFiles = F2(
+	function (nativeEventName, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			nativeEventName,
+			{stopPropagation: false, preventDefault: true},
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p0) {
+					return message;
+				},
+				_elm_lang$core$Json_Decode$value));
+	});
+var _user$project$DragDrop$onDragEnter = _user$project$DragDrop$onDragFunctionIgnoreFiles('dragenter');
+var _user$project$DragDrop$onDragOver = _user$project$DragDrop$onDragFunctionIgnoreFiles('dragover');
+var _user$project$DragDrop$onDragLeave = _user$project$DragDrop$onDragFunctionIgnoreFiles('dragleave');
+var _user$project$DragDrop$defs = {stopPropagation: false, preventDefault: true};
+var _user$project$DragDrop$onDragFunctionDecodeFiles = F2(
+	function (nativeEventName, actionCreator) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			nativeEventName,
+			_user$project$DragDrop$defs,
+			A2(_elm_lang$core$Json_Decode$map, actionCreator, _simonh1000$file_reader$FileReader$parseDroppedFiles));
+	});
+var _user$project$DragDrop$onDrop = _user$project$DragDrop$onDragFunctionDecodeFiles('drop');
+var _user$project$DragDrop$Hovering = {ctor: 'Hovering'};
+var _user$project$DragDrop$Normal = {ctor: 'Normal'};

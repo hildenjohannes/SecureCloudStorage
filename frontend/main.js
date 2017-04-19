@@ -10064,9 +10064,7 @@ var _user$project$State$update = F2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
+							{uploadMsg: 'Ok'}),
 						{ctor: '[]'});
 				}
 			case 'Encrypt':
@@ -10867,7 +10865,11 @@ var _user$project$View_TeamView$fileNav = function (model) {
 								},
 								{
 									ctor: '::',
+<<<<<<< 8d2349cfa7f44f1ef6633f6197a2d1449409a7c7:frontend/main.js
 									_0: _elm_lang$html$Html$text('Upload'),
+=======
+									_0: _elm_lang$html$Html$text('Upload file'),
+>>>>>>> some old prototype code and start of functionality which lists file in team/upload view:nonModular/index.html
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}

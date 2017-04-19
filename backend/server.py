@@ -4,6 +4,9 @@ from tornadostreamform.multipart_streamer import MultiPartStreamer, StreamedPart
 import json
 #from requests_toolbelt.multipart import decoder
 
+json = '{"jsonKey": "Blaha", "jsonKey2": "Jaha"}'
+
+
 MB = 1024*1024
 GB = 1024*MB
 TB=1024*GB
@@ -24,6 +27,8 @@ class SocketHandler(websocket.WebSocketHandler):
         method = params.pop(0)
         if method == "login":
             self.write_message(str(self.login(params)))
+        elif method == "listFiles":
+            self.write_message(json) # TODO: get actual files
         else:
             self.write_message("Invalid argument")
 

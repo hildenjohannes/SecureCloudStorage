@@ -17,7 +17,8 @@ type alias Model =
   , email : String
   , password : String
   , loginMsg : String
-  , showFeedback: Bool}
+  , showFeedback: Bool
+  , files: List String}
 
 type Msg =
   ShowLogin |   --switch to login view

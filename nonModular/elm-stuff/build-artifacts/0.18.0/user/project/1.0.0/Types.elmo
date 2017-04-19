@@ -1,0 +1,25 @@
+var _user$project$Types$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h, files: i};
+	});
+var _user$project$Types$Login = {ctor: 'Login'};
+var _user$project$Types$Message = function (a) {
+	return {ctor: 'Message', _0: a};
+};
+var _user$project$Types$Password = function (a) {
+	return {ctor: 'Password', _0: a};
+};
+var _user$project$Types$Email = function (a) {
+	return {ctor: 'Email', _0: a};
+};
+var _user$project$Types$PostResult = function (a) {
+	return {ctor: 'PostResult', _0: a};
+};
+var _user$project$Types$FilesSelect = function (a) {
+	return {ctor: 'FilesSelect', _0: a};
+};
+var _user$project$Types$Upload = {ctor: 'Upload'};
+var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
+var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$UploadView = {ctor: 'UploadView'};
+var _user$project$Types$LoginView = {ctor: 'LoginView'};

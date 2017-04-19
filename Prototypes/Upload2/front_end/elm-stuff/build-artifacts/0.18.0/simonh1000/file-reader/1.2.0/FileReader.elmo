@@ -1,0 +1,76 @@
+var _simonh1000$file_reader$FileReader$mtypeDecoder = A2(
+	_elm_lang$core$Json_Decode$map,
+	_danyx23$elm_mimetype$MimeType$parseMimeType,
+	A2(_elm_lang$core$Json_Decode$field, 'type', _elm_lang$core$Json_Decode$string));
+var _simonh1000$file_reader$FileReader$isTextFile = function (fileRef) {
+	var _p0 = A2(_elm_lang$core$Json_Decode$decodeValue, _simonh1000$file_reader$FileReader$mtypeDecoder, fileRef);
+	if (_p0.ctor === 'Ok') {
+		var _p1 = _p0._0;
+		if (_p1.ctor === 'Just') {
+			var _p2 = _p1._0;
+			if (_p2.ctor === 'Text') {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
+	} else {
+		return false;
+	}
+};
+var _simonh1000$file_reader$FileReader$prettyPrint = function (err) {
+	var _p3 = err;
+	switch (_p3.ctor) {
+		case 'ReadFail':
+			return 'File reading error';
+		case 'NoValidBlob':
+			return 'Blob was not valid';
+		default:
+			return 'Not a text file';
+	}
+};
+var _simonh1000$file_reader$FileReader$filePart = F2(
+	function (name, nf) {
+		return A2(_simonh1000$file_reader$Native_FileReader.filePart, name, nf.blob);
+	});
+var _simonh1000$file_reader$FileReader$readAsDataUrl = _simonh1000$file_reader$Native_FileReader.readAsDataUrl;
+var _simonh1000$file_reader$FileReader$readAsArrayBuffer = _simonh1000$file_reader$Native_FileReader.readAsArrayBuffer;
+var _simonh1000$file_reader$FileReader$NativeFile = F4(
+	function (a, b, c, d) {
+		return {name: a, size: b, mimeType: c, blob: d};
+	});
+var _simonh1000$file_reader$FileReader$nativeFileDecoder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	_simonh1000$file_reader$FileReader$NativeFile,
+	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'size', _elm_lang$core$Json_Decode$int),
+	_simonh1000$file_reader$FileReader$mtypeDecoder,
+	_elm_lang$core$Json_Decode$value);
+var _simonh1000$file_reader$FileReader$fileParser = function (fieldName) {
+	return A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: fieldName,
+			_1: {
+				ctor: '::',
+				_0: 'files',
+				_1: {ctor: '[]'}
+			}
+		},
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			_elm_lang$core$List$filterMap(_elm_lang$core$Tuple$second),
+			_elm_lang$core$Json_Decode$keyValuePairs(
+				_elm_lang$core$Json_Decode$maybe(_simonh1000$file_reader$FileReader$nativeFileDecoder))));
+};
+var _simonh1000$file_reader$FileReader$parseSelectedFiles = _simonh1000$file_reader$FileReader$fileParser('target');
+var _simonh1000$file_reader$FileReader$parseDroppedFiles = _simonh1000$file_reader$FileReader$fileParser('dataTransfer');
+var _simonh1000$file_reader$FileReader$NotTextFile = {ctor: 'NotTextFile'};
+var _simonh1000$file_reader$FileReader$readAsTextFile = function (fileRef) {
+	return _simonh1000$file_reader$FileReader$isTextFile(fileRef) ? _simonh1000$file_reader$Native_FileReader.readAsTextFile(fileRef) : _elm_lang$core$Task$fail(_simonh1000$file_reader$FileReader$NotTextFile);
+};
+var _simonh1000$file_reader$FileReader$ReadFail = {ctor: 'ReadFail'};
+var _simonh1000$file_reader$FileReader$NoValidBlob = {ctor: 'NoValidBlob'};
