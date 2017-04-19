@@ -1,6 +1,6 @@
-var _user$project$Types$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h};
+var _user$project$Types$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h, files: i};
 	});
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {

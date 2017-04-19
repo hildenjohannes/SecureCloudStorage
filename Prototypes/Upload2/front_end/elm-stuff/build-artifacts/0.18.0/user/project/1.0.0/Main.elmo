@@ -1,0 +1,299 @@
+var _user$project$Main$dropZoneHover = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'height', _1: '120px'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '10px'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'border', _1: '3px dashed red'},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Main$dropZoneDefault = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'height', _1: '120px'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '10px'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'border', _1: '3px dashed steelblue'},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Main$containerStyles = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'padding', _1: '20px'},
+		_1: {ctor: '[]'}
+	});
+var _user$project$Main$onchange = function (action) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, action, _simonh1000$file_reader$FileReader$parseSelectedFiles));
+};
+var _user$project$Main$commaSeperate = function (lst) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return A2(_elm_lang$core$Basics_ops['++'], x, y);
+			}),
+		'',
+		A2(_elm_lang$core$List$intersperse, ', ', lst));
+};
+var _user$project$Main$init = {
+	message: 'Waiting...',
+	dnd: 0,
+	files: {ctor: '[]'}
+};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {message: a, dnd: b, files: c};
+	});
+var _user$project$Main$PostResult = function (a) {
+	return {ctor: 'PostResult', _0: a};
+};
+var _user$project$Main$sendFileToServer = function (buf) {
+	var body = _elm_lang$http$Http$multipartBody(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$http$Http$stringPart, 'body', 'this is the stringpPart'),
+			_1: {
+				ctor: '::',
+				_0: A2(_simonh1000$file_reader$FileReader$filePart, 'data', buf),
+				_1: {ctor: '[]'}
+			}
+		});
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Main$PostResult,
+		A3(_elm_lang$http$Http$post, 'http://localhost:8001/upload', body, _elm_lang$core$Json_Decode$value));
+};
+var _user$project$Main$update = F2(
+	function (message, model) {
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'DragEnter':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{dnd: model.dnd + 1}),
+					{ctor: '[]'});
+			case 'DragOver':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			case 'DragLeave':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{dnd: model.dnd - 1}),
+					{ctor: '[]'});
+			case 'Drop':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{dnd: 0, files: _p0._0}),
+					{ctor: '[]'});
+			case 'Submit':
+				var _p1 = _elm_lang$core$List$head(model.files);
+				if (_p1.ctor === 'Just') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{
+							ctor: '::',
+							_0: _user$project$Main$sendFileToServer(_p1._0),
+							_1: {ctor: '[]'}
+						});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				}
+			case 'FilesSelect':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{files: _p0._0}),
+					{ctor: '[]'});
+			default:
+				if (_p0._0.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								message: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								message: _elm_lang$core$Basics$toString(_p0._0._0)
+							}),
+						{ctor: '[]'});
+				}
+		}
+	});
+var _user$project$Main$Submit = {ctor: 'Submit'};
+var _user$project$Main$FilesSelect = function (a) {
+	return {ctor: 'FilesSelect', _0: a};
+};
+var _user$project$Main$Drop = function (a) {
+	return {ctor: 'Drop', _0: a};
+};
+var _user$project$Main$DragLeave = {ctor: 'DragLeave'};
+var _user$project$Main$DragOver = {ctor: 'DragOver'};
+var _user$project$Main$DragEnter = {ctor: 'DragEnter'};
+var _user$project$Main$renderZoneAttributes = function (_p2) {
+	var _p3 = _p2;
+	return {
+		ctor: '::',
+		_0: function () {
+			var _p4 = _p3.dnd;
+			if (_p4 === 0) {
+				return _user$project$Main$dropZoneDefault;
+			} else {
+				return _user$project$Main$dropZoneHover;
+			}
+		}(),
+		_1: {
+			ctor: '::',
+			_0: _user$project$DragDrop$onDragEnter(_user$project$Main$DragEnter),
+			_1: {
+				ctor: '::',
+				_0: _user$project$DragDrop$onDragOver(_user$project$Main$DragOver),
+				_1: {
+					ctor: '::',
+					_0: _user$project$DragDrop$onDragLeave(_user$project$Main$DragLeave),
+					_1: {
+						ctor: '::',
+						_0: _user$project$DragDrop$onDrop(_user$project$Main$Drop),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+};
+var _user$project$Main$renderDropZone = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_user$project$Main$renderZoneAttributes(model),
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('Drop here'),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _user$project$Main$containerStyles,
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Drag \'n Drop'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('file'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$onchange(_user$project$Main$FilesSelect),
+							_1: {ctor: '[]'}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$renderDropZone(model),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Submit),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Submit'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'Files: ',
+											_user$project$Main$commaSeperate(
+												A2(
+													_elm_lang$core$List$map,
+													function (_) {
+														return _.name;
+													},
+													model.files)))),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$p,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(model.message),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$program(
+	{
+		init: {ctor: '_Tuple2', _0: _user$project$Main$init, _1: _elm_lang$core$Platform_Cmd$none},
+		update: _user$project$Main$update,
+		view: _user$project$Main$view,
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
+	})();

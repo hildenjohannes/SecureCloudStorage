@@ -14,11 +14,12 @@ type alias Model =
   , email : String
   , password : String
   , loginMsg : String
-  , showFeedback: Bool}
+  , showFeedback: Bool
+  , files: List String}
 
 type Msg =
   ShowLogin |   --switch to login view
-  ShowUpload |  --switch to upload view 
+  ShowUpload |  --switch to upload view
   --Upload
   Upload |
   FilesSelect Files |

@@ -65,9 +65,7 @@ var _user$project$State$update = F2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
+							{uploadMsg: 'Ok'}),
 						{ctor: '[]'});
 				}
 			case 'Email':
