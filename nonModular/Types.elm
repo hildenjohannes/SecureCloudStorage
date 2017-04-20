@@ -10,6 +10,9 @@ type alias Model =
   , uploadMsg : String
   , selected : Files
   , contents : List String
+  --Encryption
+  , encrypted : String
+  , decrypted : String
   --Login
   , email : String
   , password : String
@@ -18,11 +21,16 @@ type alias Model =
 
 type Msg =
   ShowLogin |   --switch to login view
-  ShowUpload |  --switch to upload view 
+  ShowUpload |  --switch to upload view
   --Upload
   Upload |
   FilesSelect Files |
   PostResult (Result Http.Error Json.Value) |
+  --Encryption
+  Encrypt |
+  Encrypted String |
+  Decrypt |
+  Decrypted String |
   --Login
   Email String |
   Password String |

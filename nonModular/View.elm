@@ -156,7 +156,7 @@ fileNav model =
       [
        h1 [] [text "Single file select"]
        , input [type_ "file", onchange FilesSelect] []
-       , button [onClick Upload] [text "Read file"]
+       , button [onClick Upload] [text "Upload"]
       ]
     , div [class "center"]
       [

@@ -1,6 +1,4 @@
-<!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
-body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
+
 (function() {
 'use strict';
 
@@ -136,6 +134,7 @@ function A9(fun, a, b, c, d, e, f, g, h, i)
     ? fun.func(a, b, c, d, e, f, g, h, i)
     : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
 }
+
 //import Maybe, Native.List, Native.Utils, Result //
 
 var _elm_lang$core$Native_String = function() {
@@ -475,6 +474,7 @@ return {
 };
 
 }();
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Char = function() {
@@ -488,7 +488,8 @@ return {
 	toLocaleLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleLowerCase()); }
 };
 
-}();//import Native.Utils //
+}();
+//import Native.Utils //
 
 var _elm_lang$core$Native_Basics = function() {
 
@@ -628,7 +629,8 @@ return {
 	isInfinite: isInfinite
 };
 
-}();//import //
+}();
+//import //
 
 var _elm_lang$core$Native_Utils = function() {
 
@@ -1115,7 +1117,8 @@ return {
 	toString: toString
 };
 
-}();var _elm_lang$core$Basics$never = function (_p0) {
+}();
+var _elm_lang$core$Basics$never = function (_p0) {
 	never:
 	while (true) {
 		var _p1 = _p0;
@@ -1240,6 +1243,7 @@ var _elm_lang$core$Basics$LT = {ctor: 'LT'};
 var _elm_lang$core$Basics$JustOneMore = function (a) {
 	return {ctor: 'JustOneMore', _0: a};
 };
+
 var _elm_lang$core$Char$fromCode = _elm_lang$core$Native_Char.fromCode;
 var _elm_lang$core$Char$toCode = _elm_lang$core$Native_Char.toCode;
 var _elm_lang$core$Char$toLocaleLower = _elm_lang$core$Native_Char.toLocaleLower;
@@ -1282,6 +1286,7 @@ var _elm_lang$core$Char$isHexDigit = function ($char) {
 		_elm_lang$core$Native_Utils.chr('F'),
 		$char));
 };
+
 var _elm_lang$core$Maybe$withDefault = F2(
 	function ($default, maybe) {
 		var _p0 = maybe;
@@ -1354,6 +1359,7 @@ var _elm_lang$core$Maybe$map5 = F6(
 			return _elm_lang$core$Maybe$Nothing;
 		}
 	});
+
 var _elm_lang$core$Result$toMaybe = function (result) {
 	var _p0 = result;
 	if (_p0.ctor === 'Ok') {
@@ -1495,6 +1501,7 @@ var _elm_lang$core$Result$fromMaybe = F2(
 			return _elm_lang$core$Result$Err(err);
 		}
 	});
+
 var _elm_lang$core$String$fromList = _elm_lang$core$Native_String.fromList;
 var _elm_lang$core$String$toList = _elm_lang$core$Native_String.toList;
 var _elm_lang$core$String$toFloat = _elm_lang$core$Native_String.toFloat;
@@ -1538,6 +1545,7 @@ var _elm_lang$core$String$fromChar = function ($char) {
 	return A2(_elm_lang$core$String$cons, $char, '');
 };
 var _elm_lang$core$String$isEmpty = _elm_lang$core$Native_String.isEmpty;
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Debug = function() {
@@ -1567,8 +1575,10 @@ return {
 	log: F2(log)
 };
 
-}();var _elm_lang$core$Debug$crash = _elm_lang$core$Native_Debug.crash;
+}();
+var _elm_lang$core$Debug$crash = _elm_lang$core$Native_Debug.crash;
 var _elm_lang$core$Debug$log = _elm_lang$core$Native_Debug.log;
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_List = function() {
@@ -1705,7 +1715,8 @@ return {
 	sortWith: F2(sortWith)
 };
 
-}();var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
+}();
+var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
 var _elm_lang$core$List$sortBy = _elm_lang$core$Native_List.sortBy;
 var _elm_lang$core$List$sort = function (xs) {
 	return A2(_elm_lang$core$List$sortBy, _elm_lang$core$Basics$identity, xs);
@@ -2257,6 +2268,7 @@ var _elm_lang$core$List$indexedMap = F2(
 				_elm_lang$core$List$length(xs) - 1),
 			xs);
 	});
+
 var _elm_lang$core$Tuple$mapSecond = F2(
 	function (func, _p0) {
 		var _p1 = _p0;
@@ -2283,6 +2295,7 @@ var _elm_lang$core$Tuple$first = function (_p6) {
 	var _p7 = _p6;
 	return _p7._0;
 };
+
 //import //
 
 var _elm_lang$core$Native_Platform = function() {
@@ -2842,6 +2855,7 @@ return {
 };
 
 }();
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Scheduler = function() {
@@ -3122,7 +3136,8 @@ return {
 	rawSend: rawSend
 };
 
-}();var _elm_lang$core$Platform_Cmd$batch = _elm_lang$core$Native_Platform.batch;
+}();
+var _elm_lang$core$Platform_Cmd$batch = _elm_lang$core$Native_Platform.batch;
 var _elm_lang$core$Platform_Cmd$none = _elm_lang$core$Platform_Cmd$batch(
 	{ctor: '[]'});
 var _elm_lang$core$Platform_Cmd_ops = _elm_lang$core$Platform_Cmd_ops || {};
@@ -3136,11 +3151,13 @@ _elm_lang$core$Platform_Cmd_ops['!'] = F2(
 	});
 var _elm_lang$core$Platform_Cmd$map = _elm_lang$core$Native_Platform.map;
 var _elm_lang$core$Platform_Cmd$Cmd = {ctor: 'Cmd'};
+
 var _elm_lang$core$Platform_Sub$batch = _elm_lang$core$Native_Platform.batch;
 var _elm_lang$core$Platform_Sub$none = _elm_lang$core$Platform_Sub$batch(
 	{ctor: '[]'});
 var _elm_lang$core$Platform_Sub$map = _elm_lang$core$Native_Platform.map;
 var _elm_lang$core$Platform_Sub$Sub = {ctor: 'Sub'};
+
 var _elm_lang$core$Platform$hack = _elm_lang$core$Native_Scheduler.succeed;
 var _elm_lang$core$Platform$sendToSelf = _elm_lang$core$Native_Platform.sendToSelf;
 var _elm_lang$core$Platform$sendToApp = _elm_lang$core$Native_Platform.sendToApp;
@@ -3150,6 +3167,7 @@ var _elm_lang$core$Platform$Program = {ctor: 'Program'};
 var _elm_lang$core$Platform$Task = {ctor: 'Task'};
 var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
 var _elm_lang$core$Platform$Router = {ctor: 'Router'};
+
 var _danyx23$elm_mimetype$MimeType$toString = function (mimeType) {
 	var _p0 = mimeType;
 	switch (_p0.ctor) {
@@ -3363,6 +3381,7 @@ var _danyx23$elm_mimetype$MimeType$parseMimeType = function (mimeString) {
 				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$OtherText)) : _elm_lang$core$Maybe$Just(_danyx23$elm_mimetype$MimeType$OtherMimeType))));
 	}
 };
+
 //import Native.List //
 
 var _elm_lang$core$Native_Array = function() {
@@ -4329,7 +4348,8 @@ return {
 	fromJSArray: fromJSArray
 };
 
-}();var _elm_lang$core$Array$append = _elm_lang$core$Native_Array.append;
+}();
+var _elm_lang$core$Array$append = _elm_lang$core$Native_Array.append;
 var _elm_lang$core$Array$length = _elm_lang$core$Native_Array.length;
 var _elm_lang$core$Array$isEmpty = function (array) {
 	return _elm_lang$core$Native_Utils.eq(
@@ -4383,6 +4403,7 @@ var _elm_lang$core$Array$repeat = F2(
 			_elm_lang$core$Basics$always(e));
 	});
 var _elm_lang$core$Array$Array = {ctor: 'Array'};
+
 var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
 var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
 var _elm_lang$core$Task$spawnCmd = F2(
@@ -4579,6 +4600,7 @@ var _elm_lang$core$Task$cmdMap = F2(
 			A2(_elm_lang$core$Task$map, tagger, _p11._0));
 	});
 _elm_lang$core$Native_Platform.effectManagers['Task'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Task$init, onEffects: _elm_lang$core$Task$onEffects, onSelfMsg: _elm_lang$core$Task$onSelfMsg, tag: 'cmd', cmdMap: _elm_lang$core$Task$cmdMap};
+
 var _elm_lang$core$Dict$foldr = F3(
 	function (f, acc, t) {
 		foldr:
@@ -5495,6 +5517,7 @@ var _elm_lang$core$Dict$diff = F2(
 			t1,
 			t2);
 	});
+
 //import Native.Scheduler //
 
 var _elm_lang$core$Native_Time = function() {
@@ -5521,7 +5544,8 @@ return {
 	setInterval_: F2(setInterval_)
 };
 
-}();var _elm_lang$core$Time$setInterval = _elm_lang$core$Native_Time.setInterval_;
+}();
+var _elm_lang$core$Time$setInterval = _elm_lang$core$Native_Time.setInterval_;
 var _elm_lang$core$Time$spawnHelp = F3(
 	function (router, intervals, processes) {
 		var _p0 = intervals;
@@ -5708,6 +5732,7 @@ var _elm_lang$core$Time$subMap = F2(
 			});
 	});
 _elm_lang$core$Native_Platform.effectManagers['Time'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Time$init, onEffects: _elm_lang$core$Time$onEffects, onSelfMsg: _elm_lang$core$Time$onSelfMsg, tag: 'sub', subMap: _elm_lang$core$Time$subMap};
+
 //import Maybe, Native.Array, Native.List, Native.Utils, Result //
 
 var _elm_lang$core$Native_Json = function() {
@@ -6283,6 +6308,7 @@ return {
 };
 
 }();
+
 var _elm_lang$core$Json_Encode$list = _elm_lang$core$Native_Json.encodeList;
 var _elm_lang$core$Json_Encode$array = _elm_lang$core$Native_Json.encodeArray;
 var _elm_lang$core$Json_Encode$object = _elm_lang$core$Native_Json.encodeObject;
@@ -6293,6 +6319,7 @@ var _elm_lang$core$Json_Encode$int = _elm_lang$core$Native_Json.identity;
 var _elm_lang$core$Json_Encode$string = _elm_lang$core$Native_Json.identity;
 var _elm_lang$core$Json_Encode$encode = _elm_lang$core$Native_Json.encode;
 var _elm_lang$core$Json_Encode$Value = {ctor: 'Value'};
+
 var _elm_lang$core$Json_Decode$null = _elm_lang$core$Native_Json.decodeNull;
 var _elm_lang$core$Json_Decode$value = _elm_lang$core$Native_Json.decodePrimitive('value');
 var _elm_lang$core$Json_Decode$andThen = _elm_lang$core$Native_Json.andThen;
@@ -6355,9 +6382,11 @@ var _elm_lang$core$Json_Decode$int = _elm_lang$core$Native_Json.decodePrimitive(
 var _elm_lang$core$Json_Decode$bool = _elm_lang$core$Native_Json.decodePrimitive('bool');
 var _elm_lang$core$Json_Decode$string = _elm_lang$core$Native_Json.decodePrimitive('string');
 var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
+
 var _elm_lang$core$Process$kill = _elm_lang$core$Native_Scheduler.kill;
 var _elm_lang$core$Process$sleep = _elm_lang$core$Native_Scheduler.sleep;
 var _elm_lang$core$Process$spawn = _elm_lang$core$Native_Scheduler.spawn;
+
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
 
@@ -8239,6 +8268,7 @@ return {
 };
 
 }();
+
 var _elm_lang$virtual_dom$VirtualDom$programWithFlags = function (impl) {
 	return A2(_elm_lang$virtual_dom$Native_VirtualDom.programWithFlags, _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags, impl);
 };
@@ -8269,6 +8299,7 @@ var _elm_lang$virtual_dom$VirtualDom$Options = F2(
 	});
 var _elm_lang$virtual_dom$VirtualDom$Node = {ctor: 'Node'};
 var _elm_lang$virtual_dom$VirtualDom$Property = {ctor: 'Property'};
+
 var _elm_lang$html$Html$programWithFlags = _elm_lang$virtual_dom$VirtualDom$programWithFlags;
 var _elm_lang$html$Html$program = _elm_lang$virtual_dom$VirtualDom$program;
 var _elm_lang$html$Html$beginnerProgram = function (_p0) {
@@ -8393,6 +8424,7 @@ var _elm_lang$html$Html$details = _elm_lang$html$Html$node('details');
 var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
+
 var _elm_lang$html$Html_Attributes$map = _elm_lang$virtual_dom$VirtualDom$mapProperty;
 var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
 var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
@@ -8742,6 +8774,7 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 				A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list))));
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
+
 var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
 var _elm_lang$html$Html_Events$targetChecked = A2(
 	_elm_lang$core$Json_Decode$at,
@@ -8856,6 +8889,7 @@ var _elm_lang$html$Html_Events$Options = F2(
 	function (a, b) {
 		return {stopPropagation: a, preventDefault: b};
 	});
+
 var _elm_lang$http$Native_Http = function() {
 
 
@@ -9094,6 +9128,7 @@ return {
 };
 
 }();
+
 var _elm_lang$http$Http_Internal$map = F2(
 	function (func, request) {
 		return _elm_lang$core$Native_Utils.update(
@@ -9120,6 +9155,7 @@ var _elm_lang$http$Http_Internal$Header = F2(
 	function (a, b) {
 		return {ctor: 'Header', _0: a, _1: b};
 	});
+
 var _elm_lang$http$Http$decodeUri = _elm_lang$http$Native_Http.decodeUri;
 var _elm_lang$http$Http$encodeUri = _elm_lang$http$Native_Http.encodeUri;
 var _elm_lang$http$Http$expectStringResponse = _elm_lang$http$Native_Http.expectStringResponse;
@@ -9214,6 +9250,7 @@ var _elm_lang$http$Http$StringPart = F2(
 		return {ctor: 'StringPart', _0: a, _1: b};
 	});
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
+
 var _elm_lang$websocket$Native_WebSocket = function() {
 
 function open(url, settings)
@@ -9313,6 +9350,7 @@ return {
 };
 
 }();
+
 var _elm_lang$websocket$WebSocket_LowLevel$bytesQueued = _elm_lang$websocket$Native_WebSocket.bytesQueued;
 var _elm_lang$websocket$WebSocket_LowLevel$send = _elm_lang$websocket$Native_WebSocket.send;
 var _elm_lang$websocket$WebSocket_LowLevel$closeWith = _elm_lang$websocket$Native_WebSocket.close;
@@ -9335,6 +9373,7 @@ var _elm_lang$websocket$WebSocket_LowLevel$BadReason = {ctor: 'BadReason'};
 var _elm_lang$websocket$WebSocket_LowLevel$BadCode = {ctor: 'BadCode'};
 var _elm_lang$websocket$WebSocket_LowLevel$BadString = {ctor: 'BadString'};
 var _elm_lang$websocket$WebSocket_LowLevel$NotOpen = {ctor: 'NotOpen'};
+
 var _elm_lang$websocket$WebSocket$closeConnection = function (connection) {
 	var _p0 = connection;
 	if (_p0.ctor === 'Opening') {
@@ -9746,6 +9785,7 @@ var _elm_lang$websocket$WebSocket$onSelfMsg = F3(
 		}
 	});
 _elm_lang$core$Native_Platform.effectManagers['WebSocket'] = {pkg: 'elm-lang/websocket', init: _elm_lang$websocket$WebSocket$init, onEffects: _elm_lang$websocket$WebSocket$onEffects, onSelfMsg: _elm_lang$websocket$WebSocket$onSelfMsg, tag: 'fx', cmdMap: _elm_lang$websocket$WebSocket$cmdMap, subMap: _elm_lang$websocket$WebSocket$subMap};
+
 // var _user$project$Native_FileReader = function() {
 var _simonh1000$file_reader$Native_FileReader = function() {
 
@@ -9809,6 +9849,7 @@ var _simonh1000$file_reader$Native_FileReader = function() {
         filePart: F2(filePart)
     };
 }();
+
 var _simonh1000$file_reader$FileReader$mtypeDecoder = A2(
 	_elm_lang$core$Json_Decode$map,
 	_danyx23$elm_mimetype$MimeType$parseMimeType,
@@ -9885,10 +9926,28 @@ var _simonh1000$file_reader$FileReader$readAsTextFile = function (fileRef) {
 };
 var _simonh1000$file_reader$FileReader$ReadFail = {ctor: 'ReadFail'};
 var _simonh1000$file_reader$FileReader$NoValidBlob = {ctor: 'NoValidBlob'};
-var _user$project$Types$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h};
-	});
+
+var _user$project$Types$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {view: a, uploadMsg: b, selected: c, contents: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
@@ -9899,6 +9958,14 @@ var _user$project$Types$Password = function (a) {
 var _user$project$Types$Email = function (a) {
 	return {ctor: 'Email', _0: a};
 };
+var _user$project$Types$Decrypted = function (a) {
+	return {ctor: 'Decrypted', _0: a};
+};
+var _user$project$Types$Decrypt = {ctor: 'Decrypt'};
+var _user$project$Types$Encrypted = function (a) {
+	return {ctor: 'Encrypted', _0: a};
+};
+var _user$project$Types$Encrypt = {ctor: 'Encrypt'};
 var _user$project$Types$PostResult = function (a) {
 	return {ctor: 'PostResult', _0: a};
 };
@@ -9910,6 +9977,7 @@ var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
 var _user$project$Types$UploadView = {ctor: 'UploadView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};
+
 var _user$project$State$sendFileToServer = function (buf) {
 	var body = _elm_lang$http$Http$multipartBody(
 		{
@@ -9922,14 +9990,32 @@ var _user$project$State$sendFileToServer = function (buf) {
 		_user$project$Types$PostResult,
 		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
 };
-var _user$project$State$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
-			ctor: '::',
-			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
-			_1: {ctor: '[]'}
-		});
+var _user$project$State$init = {
+	ctor: '_Tuple2',
+	_0: {
+		view: _user$project$Types$LoginView,
+		uploadMsg: 'Waiting...',
+		selected: {ctor: '[]'},
+		contents: {ctor: '[]'},
+		encrypted: '',
+		decrypted: '',
+		email: '',
+		password: '',
+		loginMsg: '',
+		showFeedback: false
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
 };
+var _user$project$State$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'encrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$State$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'decrypt',
+	function (v) {
+		return v;
+	});
 var _user$project$State$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -9982,6 +10068,34 @@ var _user$project$State$update = F2(
 							}),
 						{ctor: '[]'});
 				}
+			case 'Encrypt':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$State$encrypt(model.encrypted)
+				};
+			case 'Encrypted':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{encrypted: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Decrypt':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$State$decrypt(model.encrypted)
+				};
+			case 'Decrypted':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{decrypted: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'Email':
 				return {
 					ctor: '_Tuple2',
@@ -10037,20 +10151,25 @@ var _user$project$State$update = F2(
 				}
 		}
 	});
-var _user$project$State$init = {
-	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		uploadMsg: 'Waiting...',
-		selected: {ctor: '[]'},
-		contents: {ctor: '[]'},
-		email: '',
-		password: '',
-		loginMsg: '',
-		showFeedback: false
-	},
-	_1: _elm_lang$core$Platform_Cmd$none
+var _user$project$State$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$State$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$State$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
+			_1: {
+				ctor: '::',
+				_0: _user$project$State$encrypted(_user$project$Types$Encrypted),
+				_1: {
+					ctor: '::',
+					_0: _user$project$State$decrypted(_user$project$Types$Decrypted),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
+
 var _user$project$View$tbList = {
 	ctor: '::',
 	_0: A2(
@@ -10584,7 +10703,7 @@ var _user$project$View$fileNav = function (model) {
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Read file'),
+									_0: _elm_lang$html$Html$text('Upload'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -10954,8 +11073,10 @@ var _user$project$View$view = function (model) {
 		return _user$project$View$teamView(model);
 	}
 };
+
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$State$init, update: _user$project$State$update, subscriptions: _user$project$State$subscriptions, view: _user$project$View$view})();
+
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
@@ -10991,4 +11112,4 @@ for (var publicModule in Elm)
 }
 
 }).call(this);
-</script></head><body><script type="text/javascript">Elm.Main.fullscreen()</script></body></html>
+

@@ -1,4 +1,4 @@
-module State exposing (init, update, subscriptions)
+port module State exposing (init, update, subscriptions)
 
 import Types exposing (..)
 
@@ -15,6 +15,9 @@ init =
     , uploadMsg = "Waiting..."
     , selected = []
     , contents = []
+    --Encryption
+    , encrypted = ""
+    , decrypted = ""
     --Login
     , email = ""
     , password = ""
@@ -47,6 +50,19 @@ update msg model =
     PostResult (Err err) ->
       { model | uploadMsg = toString err } ! []
 
+    --Encryption
+    Encrypt ->
+        ( model, encrypt model.encrypted )
+
+    Encrypted encryptedWord ->
+        ({model | encrypted = encryptedWord}, Cmd.none)
+
+    Decrypt ->
+      ( model, decrypt model.encrypted )
+
+    Decrypted decryptedWord ->
+        ({model | decrypted = decryptedWord}, Cmd.none)
+
     --Login
     Email email ->
       ({model | email = email, showFeedback = False}, Cmd.none)
@@ -65,10 +81,17 @@ update msg model =
         _ ->
           ({model | loginMsg = message}, Cmd.none)
 
+port encrypt : String -> Cmd msg
+port decrypt : String -> Cmd msg
+port encrypted : (String -> msg) -> Sub msg
+port decrypted : (String -> msg) -> Sub msg
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
   Sub.batch
-    [ WebSocket.listen "ws://localhost:5000/ws" Message ]
+    [ WebSocket.listen "ws://localhost:5000/ws" Message
+    , encrypted Encrypted
+    , decrypted Decrypted]
 
 --Upload
 sendFileToServer : NativeFile -> Cmd Msg
