@@ -53,7 +53,12 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
+<<<<<<< 48f626c63698070af143d6b004f54ef1ed47c7ec:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 					{ctor: '[]'});
+=======
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+				};
+>>>>>>> elm-stuff:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 			case 'ShowUpload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -210,7 +215,7 @@ var _user$project$State$update = F2(
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
 								{loginMsg: _p3, view: _user$project$Types$UploadView}),
-							_1: _elm_lang$core$Platform_Cmd$none
+							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 						};
 					case 'False':
 						return {
