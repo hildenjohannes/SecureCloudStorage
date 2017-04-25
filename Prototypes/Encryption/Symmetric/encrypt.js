@@ -7941,6 +7941,12 @@ var _user$project$Encrypt$update = F2(
 					_0: A3(_user$project$Encrypt$Model, _p0._0, model.encrypted, model.decrypted),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'Change2':
+				return {
+					ctor: '_Tuple2',
+					_0: A3(_user$project$Encrypt$Model, model.word, _p0._0, model.decrypted),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'Encrypt':
 				return {
 					ctor: '_Tuple2',
@@ -7987,6 +7993,9 @@ var _user$project$Encrypt$subscriptions = function (model) {
 		});
 };
 var _user$project$Encrypt$Encrypt = {ctor: 'Encrypt'};
+var _user$project$Encrypt$Change2 = function (a) {
+	return {ctor: 'Change2', _0: a};
+};
 var _user$project$Encrypt$Change = function (a) {
 	return {ctor: 'Change', _0: a};
 };
@@ -8007,39 +8016,38 @@ var _user$project$Encrypt$view = function (model) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
+					_elm_lang$html$Html$button,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Basics_ops['++'], 'Text: ', model.word)),
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Encrypt$Encrypt),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Encrypt'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Encrypt$Encrypt),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Encrypt'),
+							_0: _elm_lang$html$Html$text(
+								A2(_elm_lang$core$Basics_ops['++'], 'Encrypted: ', model.encrypted)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
+							_elm_lang$html$Html$input,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'Encrypted: ', model.encrypted)),
+								_0: _elm_lang$html$Html_Events$onInput(_user$project$Encrypt$Change2),
 								_1: {ctor: '[]'}
-							}),
+							},
+							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(

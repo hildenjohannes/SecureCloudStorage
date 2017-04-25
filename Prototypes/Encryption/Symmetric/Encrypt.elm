@@ -28,6 +28,7 @@ init =
 
 type Msg
   = Change String
+  | Change2 String
   | Encrypt
   | Encrypted String
   | Decrypt
@@ -41,6 +42,9 @@ update msg model =
   case msg of
     Change newWord ->
       ( Model newWord model.encrypted model.decrypted, Cmd.none )
+
+    Change2 newEncrypted ->
+      ( Model model.word newEncrypted model.decrypted, Cmd.none )
 
     Encrypt ->
       ( model, encrypt model.word )
@@ -71,9 +75,9 @@ view : Model -> Html Msg
 view model =
   div []
     [ input [ onInput Change ] []
-    , div [] [ text ("Text: " ++ model.word) ]
     , button [ onClick Encrypt ] [ text "Encrypt" ]
     , div [] [ text ("Encrypted: " ++ model.encrypted) ]
+    , input [ onInput Change2 ] []
     , button [ onClick Decrypt ] [ text "Decrypt" ]
     , div [] [ text ("Decrypted: " ++ model.decrypted) ]
     ]
