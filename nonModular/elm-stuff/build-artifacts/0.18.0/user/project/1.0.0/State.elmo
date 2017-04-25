@@ -45,7 +45,7 @@ var _user$project$State$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					_1: _elm_lang$core$Platform_Cmd$none
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
 			case 'ShowUpload':
 				return {
@@ -131,7 +131,7 @@ var _user$project$State$update = F2(
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
 								{loginMsg: _p3, view: _user$project$Types$UploadView}),
-							_1: _elm_lang$core$Platform_Cmd$none
+							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 						};
 					case 'False':
 						return {
