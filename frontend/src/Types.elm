@@ -1,15 +1,11 @@
 module Types exposing (..)
 
-import FileReader exposing (..)
-import Json.Decode as Json exposing (Value)
-import Http exposing (..)
-
 type alias Model =
   { view : View
   --Upload
-  , uploadMsg : String
-  , selected : Files
-  , contents : List String
+  , inputId : String
+  , filename : String
+  , content : String
   --Encryption
   , encrypted : String
   , decrypted : String
@@ -17,19 +13,21 @@ type alias Model =
   , email : String
   , password : String
   , loginMsg : String
-  , showFeedback: Bool}
+  , showFeedback: Bool }
+
+type alias FileData =
+  { filename : String
+  , content : String }
 
 type Msg =
   ShowLogin |   --switch to login view
-  ShowUpload |  --switch to upload view
+  ShowTeam |  --switch to upload view
   --Upload
+  FileSelected |
+  FileRead FileData |
   Upload |
-  FilesSelect Files |
-  PostResult (Result Http.Error Json.Value) |
   --Encryption
-  Encrypt |
   Encrypted String |
-  Decrypt |
   Decrypted String |
   --Login
   Email String |
@@ -40,6 +38,3 @@ type Msg =
 type View =
   LoginView |
   TeamView
-
-type alias Files =
-  List NativeFile

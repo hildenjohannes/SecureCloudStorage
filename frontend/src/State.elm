@@ -2,10 +2,6 @@ module State exposing (init, update, subscriptions)
 
 import Types exposing (..)
 import Ports exposing (..)
-
-import FileReader exposing (..)
-import Http exposing (..)
-import Json.Decode as Json exposing (Value)
 import WebSocket
 
 init : (Model, Cmd Msg)
@@ -13,9 +9,9 @@ init =
   (
     { view = LoginView
     --Upload
-    , uploadMsg = "Waiting..."
-    , selected = []
-    , contents = []
+    , inputId = "FileInputId"
+    , filename = ""
+    , content = ""
     --Encryption
     , encrypted = ""
     , decrypted = ""
@@ -33,33 +29,23 @@ update msg model =
     ShowLogin ->
       {model | view = LoginView} ! []
 
-    ShowUpload ->
+    ShowTeam ->
       {model | view = TeamView} ! []
 
     --Upload
+    FileSelected ->
+      model ! [fileSelected model.inputId]
+
+    FileRead data ->
+      {model | filename = data.filename, content = data.content} ! [encrypt model.content]
+
     Upload ->
-      model ! List.map sendFileToServer model.selected
-
-    FilesSelect fileInstances ->
-      { model
-      | selected = fileInstances
-      , uploadMsg = "Something selected" } ! []
-
-    PostResult (Ok msg) ->
-      { model | uploadMsg = toString msg } ! []
-
-    PostResult (Err err) ->
-      { model | uploadMsg = toString err } ! []
+      (model, WebSocket.send "ws://localhost:5000/ws"
+      ("upload|" ++ model.filename ++ "|" ++ model.encrypted))
 
     --Encryption
-    Encrypt ->
-      model ! [ encrypt model.encrypted ]
-
     Encrypted encryptedWord ->
       {model | encrypted = encryptedWord} ! []
-
-    Decrypt ->
-      model ! [ decrypt model.encrypted ]
 
     Decrypted decryptedWord ->
       {model | decrypted = decryptedWord} ! []
@@ -89,15 +75,5 @@ subscriptions model =
   Sub.batch
     [ WebSocket.listen "ws://localhost:5000/ws" Message
     , encrypted Encrypted
-    , decrypted Decrypted ]
-
---Upload
-sendFileToServer : NativeFile -> Cmd Msg
-sendFileToServer buf =
-  let
-    body =
-      Http.multipartBody
-        [ FileReader.filePart "simtest" buf ]
-  in
-    Http.post "http://localhost:5000/upload" body Json.value
-      |> Http.send PostResult
+    , decrypted Decrypted
+    , fileRead FileRead ]

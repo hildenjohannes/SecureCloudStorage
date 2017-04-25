@@ -1,15 +1,3 @@
-var _user$project$State$sendFileToServer = function (buf) {
-	var body = _elm_lang$http$Http$multipartBody(
-		{
-			ctor: '::',
-			_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
-			_1: {ctor: '[]'}
-		});
-	return A2(
-		_elm_lang$http$Http$send,
-		_user$project$Types$PostResult,
-		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
-};
 var _user$project$State$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -21,7 +9,11 @@ var _user$project$State$subscriptions = function (model) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ports$decrypted(_user$project$Types$Decrypted),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ports$fileRead(_user$project$Types$FileRead),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
@@ -37,54 +29,49 @@ var _user$project$State$update = F2(
 						model,
 						{view: _user$project$Types$LoginView}),
 					{ctor: '[]'});
-			case 'ShowUpload':
+			case 'ShowTeam':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
 					{ctor: '[]'});
-			case 'Upload':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					A2(_elm_lang$core$List$map, _user$project$State$sendFileToServer, model.selected));
-			case 'FilesSelect':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{selected: _p0._0, uploadMsg: 'Something selected'}),
-					{ctor: '[]'});
-			case 'PostResult':
-				if (_p0._0.ctor === 'Ok') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
-						{ctor: '[]'});
-				}
-			case 'Encrypt':
+			case 'FileSelected':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					model,
 					{
 						ctor: '::',
-						_0: _user$project$Ports$encrypt(model.encrypted),
+						_0: _user$project$Ports$fileSelected(model.inputId),
 						_1: {ctor: '[]'}
 					});
+			case 'FileRead':
+				var _p1 = _p0._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{filename: _p1.filename, content: _p1.content}),
+					{
+						ctor: '::',
+						_0: _user$project$Ports$encrypt(model.content),
+						_1: {ctor: '[]'}
+					});
+			case 'Upload':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:5000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'upload|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.filename,
+								A2(_elm_lang$core$Basics_ops['++'], '|', model.encrypted))))
+				};
 			case 'Encrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -92,15 +79,6 @@ var _user$project$State$update = F2(
 						model,
 						{encrypted: _p0._0}),
 					{ctor: '[]'});
-			case 'Decrypt':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{
-						ctor: '::',
-						_0: _user$project$Ports$decrypt(model.encrypted),
-						_1: {ctor: '[]'}
-					});
 			case 'Decrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -143,38 +121,27 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-				var _p2 = _p0._0;
-				var _p1 = _p2;
-				if (_p1 === 'True') {
+				var _p3 = _p0._0;
+				var _p2 = _p3;
+				if (_p2 === 'True') {
 					return A2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2, view: _user$project$Types$TeamView}),
+							{loginMsg: _p3, view: _user$project$Types$TeamView}),
 						{ctor: '[]'});
 				} else {
 					return A2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2}),
+							{loginMsg: _p3}),
 						{ctor: '[]'});
 				}
 		}
 	});
 var _user$project$State$init = {
 	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		uploadMsg: 'Waiting...',
-		selected: {ctor: '[]'},
-		contents: {ctor: '[]'},
-		encrypted: '',
-		decrypted: '',
-		email: '',
-		password: '',
-		loginMsg: '',
-		showFeedback: false
-	},
+	_0: {view: _user$project$Types$LoginView, inputId: 'FileInputId', filename: '', content: '', encrypted: '', decrypted: '', email: '', password: '', loginMsg: '', showFeedback: false},
 	_1: _elm_lang$core$Platform_Cmd$none
 };

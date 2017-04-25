@@ -3168,220 +3168,6 @@ var _elm_lang$core$Platform$Task = {ctor: 'Task'};
 var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
 var _elm_lang$core$Platform$Router = {ctor: 'Router'};
 
-var _danyx23$elm_mimetype$MimeType$toString = function (mimeType) {
-	var _p0 = mimeType;
-	switch (_p0.ctor) {
-		case 'Image':
-			var _p1 = _p0._0;
-			switch (_p1.ctor) {
-				case 'Jpeg':
-					return 'image/jpeg';
-				case 'Png':
-					return 'image/png';
-				case 'Gif':
-					return 'image/gif';
-				default:
-					return 'image/other';
-			}
-		case 'Audio':
-			var _p2 = _p0._0;
-			switch (_p2.ctor) {
-				case 'Mp3':
-					return 'audio/mp3';
-				case 'Wav':
-					return 'audio/wav';
-				case 'Ogg':
-					return 'audio/ogg';
-				default:
-					return 'audio/other';
-			}
-		case 'Video':
-			var _p3 = _p0._0;
-			switch (_p3.ctor) {
-				case 'Mp4':
-					return 'video/mp4';
-				case 'Mpeg':
-					return 'video/mpeg';
-				case 'Quicktime':
-					return 'video/quicktime';
-				case 'Avi':
-					return 'video/avi';
-				case 'Webm':
-					return 'video/webm';
-				default:
-					return 'video/other';
-			}
-		case 'Text':
-			var _p4 = _p0._0;
-			switch (_p4.ctor) {
-				case 'PlainText':
-					return 'text/plain';
-				case 'Html':
-					return 'text/html';
-				case 'Css':
-					return 'text/css';
-				case 'Xml':
-					return 'text/xml';
-				case 'Json':
-					return 'application/json';
-				default:
-					return 'text/other';
-			}
-		case 'App':
-			var _p5 = _p0._0;
-			switch (_p5.ctor) {
-				case 'Word':
-					return 'application/msword';
-				case 'WordXml':
-					return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-				case 'Excel':
-					return 'application/vnd.ms-excel';
-				case 'ExcelXml':
-					return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-				case 'PowerPoint':
-					return 'application/vnd.ms-powerpoint';
-				case 'PowerPointXml':
-					return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
-				case 'Pdf':
-					return 'application/pdf';
-				default:
-					return 'application/other';
-			}
-		default:
-			return 'other/other';
-	}
-};
-var _danyx23$elm_mimetype$MimeType$OtherImage = {ctor: 'OtherImage'};
-var _danyx23$elm_mimetype$MimeType$Gif = {ctor: 'Gif'};
-var _danyx23$elm_mimetype$MimeType$Png = {ctor: 'Png'};
-var _danyx23$elm_mimetype$MimeType$Jpeg = {ctor: 'Jpeg'};
-var _danyx23$elm_mimetype$MimeType$OtherAudio = {ctor: 'OtherAudio'};
-var _danyx23$elm_mimetype$MimeType$Wav = {ctor: 'Wav'};
-var _danyx23$elm_mimetype$MimeType$Ogg = {ctor: 'Ogg'};
-var _danyx23$elm_mimetype$MimeType$Mp3 = {ctor: 'Mp3'};
-var _danyx23$elm_mimetype$MimeType$OtherVideo = {ctor: 'OtherVideo'};
-var _danyx23$elm_mimetype$MimeType$Webm = {ctor: 'Webm'};
-var _danyx23$elm_mimetype$MimeType$Avi = {ctor: 'Avi'};
-var _danyx23$elm_mimetype$MimeType$Quicktime = {ctor: 'Quicktime'};
-var _danyx23$elm_mimetype$MimeType$Mpeg = {ctor: 'Mpeg'};
-var _danyx23$elm_mimetype$MimeType$Mp4 = {ctor: 'Mp4'};
-var _danyx23$elm_mimetype$MimeType$OtherText = {ctor: 'OtherText'};
-var _danyx23$elm_mimetype$MimeType$Json = {ctor: 'Json'};
-var _danyx23$elm_mimetype$MimeType$Xml = {ctor: 'Xml'};
-var _danyx23$elm_mimetype$MimeType$Css = {ctor: 'Css'};
-var _danyx23$elm_mimetype$MimeType$Html = {ctor: 'Html'};
-var _danyx23$elm_mimetype$MimeType$PlainText = {ctor: 'PlainText'};
-var _danyx23$elm_mimetype$MimeType$OtherApp = {ctor: 'OtherApp'};
-var _danyx23$elm_mimetype$MimeType$Pdf = {ctor: 'Pdf'};
-var _danyx23$elm_mimetype$MimeType$PowerPointXml = {ctor: 'PowerPointXml'};
-var _danyx23$elm_mimetype$MimeType$PowerPoint = {ctor: 'PowerPoint'};
-var _danyx23$elm_mimetype$MimeType$ExcelXml = {ctor: 'ExcelXml'};
-var _danyx23$elm_mimetype$MimeType$Excel = {ctor: 'Excel'};
-var _danyx23$elm_mimetype$MimeType$WordXml = {ctor: 'WordXml'};
-var _danyx23$elm_mimetype$MimeType$Word = {ctor: 'Word'};
-var _danyx23$elm_mimetype$MimeType$OtherMimeType = {ctor: 'OtherMimeType'};
-var _danyx23$elm_mimetype$MimeType$App = function (a) {
-	return {ctor: 'App', _0: a};
-};
-var _danyx23$elm_mimetype$MimeType$Text = function (a) {
-	return {ctor: 'Text', _0: a};
-};
-var _danyx23$elm_mimetype$MimeType$Video = function (a) {
-	return {ctor: 'Video', _0: a};
-};
-var _danyx23$elm_mimetype$MimeType$Audio = function (a) {
-	return {ctor: 'Audio', _0: a};
-};
-var _danyx23$elm_mimetype$MimeType$Image = function (a) {
-	return {ctor: 'Image', _0: a};
-};
-var _danyx23$elm_mimetype$MimeType$parseMimeType = function (mimeString) {
-	var _p6 = _elm_lang$core$String$toLower(mimeString);
-	switch (_p6) {
-		case '':
-			return _elm_lang$core$Maybe$Nothing;
-		case 'image/jpeg':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Image(_danyx23$elm_mimetype$MimeType$Jpeg));
-		case 'image/png':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Image(_danyx23$elm_mimetype$MimeType$Png));
-		case 'image/gif':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Image(_danyx23$elm_mimetype$MimeType$Gif));
-		case 'audio/mp3':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Audio(_danyx23$elm_mimetype$MimeType$Mp3));
-		case 'audio/mpeg':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Audio(_danyx23$elm_mimetype$MimeType$Mp3));
-		case 'audio/wav':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Audio(_danyx23$elm_mimetype$MimeType$Wav));
-		case 'audio/ogg':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Audio(_danyx23$elm_mimetype$MimeType$Ogg));
-		case 'video/mp4':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$Mp4));
-		case 'video/mpeg':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$Mpeg));
-		case 'video/quicktime':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$Quicktime));
-		case 'video/avi':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$Avi));
-		case 'video/webm':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$Webm));
-		case 'text/plain':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$PlainText));
-		case 'text/html':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$Html));
-		case 'text/css':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$Css));
-		case 'text/xml':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$Xml));
-		case 'application/json':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$Json));
-		case 'application/msword':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$Word));
-		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$WordXml));
-		case 'application/vnd.ms-excel':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$Excel));
-		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$ExcelXml));
-		case 'application/vnd.ms-powerpoint':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$PowerPoint));
-		case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$PowerPointXml));
-		case 'application/pdf':
-			return _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$App(_danyx23$elm_mimetype$MimeType$Pdf));
-		default:
-			var _p7 = _p6;
-			return A2(_elm_lang$core$String$startsWith, 'image/', _p7) ? _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Image(_danyx23$elm_mimetype$MimeType$OtherImage)) : (A2(_elm_lang$core$String$startsWith, 'audio/', _p7) ? _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Audio(_danyx23$elm_mimetype$MimeType$OtherAudio)) : (A2(_elm_lang$core$String$startsWith, 'video/', _p7) ? _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Video(_danyx23$elm_mimetype$MimeType$OtherVideo)) : (A2(_elm_lang$core$String$startsWith, 'text/', _p7) ? _elm_lang$core$Maybe$Just(
-				_danyx23$elm_mimetype$MimeType$Text(_danyx23$elm_mimetype$MimeType$OtherText)) : _elm_lang$core$Maybe$Just(_danyx23$elm_mimetype$MimeType$OtherMimeType))));
-	}
-};
-
 //import Native.List //
 
 var _elm_lang$core$Native_Array = function() {
@@ -8890,367 +8676,6 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _elm_lang$http$Native_Http = function() {
-
-
-// ENCODING AND DECODING
-
-function encodeUri(string)
-{
-	return encodeURIComponent(string);
-}
-
-function decodeUri(string)
-{
-	try
-	{
-		return _elm_lang$core$Maybe$Just(decodeURIComponent(string));
-	}
-	catch(e)
-	{
-		return _elm_lang$core$Maybe$Nothing;
-	}
-}
-
-
-// SEND REQUEST
-
-function toTask(request, maybeProgress)
-{
-	return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
-	{
-		var xhr = new XMLHttpRequest();
-
-		configureProgress(xhr, maybeProgress);
-
-		xhr.addEventListener('error', function() {
-			callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'NetworkError' }));
-		});
-		xhr.addEventListener('timeout', function() {
-			callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'Timeout' }));
-		});
-		xhr.addEventListener('load', function() {
-			callback(handleResponse(xhr, request.expect.responseToResult));
-		});
-
-		try
-		{
-			xhr.open(request.method, request.url, true);
-		}
-		catch (e)
-		{
-			return callback(_elm_lang$core$Native_Scheduler.fail({ ctor: 'BadUrl', _0: request.url }));
-		}
-
-		configureRequest(xhr, request);
-		send(xhr, request.body);
-
-		return function() { xhr.abort(); };
-	});
-}
-
-function configureProgress(xhr, maybeProgress)
-{
-	if (maybeProgress.ctor === 'Nothing')
-	{
-		return;
-	}
-
-	xhr.addEventListener('progress', function(event) {
-		if (!event.lengthComputable)
-		{
-			return;
-		}
-		_elm_lang$core$Native_Scheduler.rawSpawn(maybeProgress._0({
-			bytes: event.loaded,
-			bytesExpected: event.total
-		}));
-	});
-}
-
-function configureRequest(xhr, request)
-{
-	function setHeader(pair)
-	{
-		xhr.setRequestHeader(pair._0, pair._1);
-	}
-
-	A2(_elm_lang$core$List$map, setHeader, request.headers);
-	xhr.responseType = request.expect.responseType;
-	xhr.withCredentials = request.withCredentials;
-
-	if (request.timeout.ctor === 'Just')
-	{
-		xhr.timeout = request.timeout._0;
-	}
-}
-
-function send(xhr, body)
-{
-	switch (body.ctor)
-	{
-		case 'EmptyBody':
-			xhr.send();
-			return;
-
-		case 'StringBody':
-			xhr.setRequestHeader('Content-Type', body._0);
-			xhr.send(body._1);
-			return;
-
-		case 'FormDataBody':
-			xhr.send(body._0);
-			return;
-	}
-}
-
-
-// RESPONSES
-
-function handleResponse(xhr, responseToResult)
-{
-	var response = toResponse(xhr);
-
-	if (xhr.status < 200 || 300 <= xhr.status)
-	{
-		response.body = xhr.responseText;
-		return _elm_lang$core$Native_Scheduler.fail({
-			ctor: 'BadStatus',
-			_0: response
-		});
-	}
-
-	var result = responseToResult(response);
-
-	if (result.ctor === 'Ok')
-	{
-		return _elm_lang$core$Native_Scheduler.succeed(result._0);
-	}
-	else
-	{
-		response.body = xhr.responseText;
-		return _elm_lang$core$Native_Scheduler.fail({
-			ctor: 'BadPayload',
-			_0: result._0,
-			_1: response
-		});
-	}
-}
-
-function toResponse(xhr)
-{
-	return {
-		status: { code: xhr.status, message: xhr.statusText },
-		headers: parseHeaders(xhr.getAllResponseHeaders()),
-		url: xhr.responseURL,
-		body: xhr.response
-	};
-}
-
-function parseHeaders(rawHeaders)
-{
-	var headers = _elm_lang$core$Dict$empty;
-
-	if (!rawHeaders)
-	{
-		return headers;
-	}
-
-	var headerPairs = rawHeaders.split('\u000d\u000a');
-	for (var i = headerPairs.length; i--; )
-	{
-		var headerPair = headerPairs[i];
-		var index = headerPair.indexOf('\u003a\u0020');
-		if (index > 0)
-		{
-			var key = headerPair.substring(0, index);
-			var value = headerPair.substring(index + 2);
-
-			headers = A3(_elm_lang$core$Dict$update, key, function(oldValue) {
-				if (oldValue.ctor === 'Just')
-				{
-					return _elm_lang$core$Maybe$Just(value + ', ' + oldValue._0);
-				}
-				return _elm_lang$core$Maybe$Just(value);
-			}, headers);
-		}
-	}
-
-	return headers;
-}
-
-
-// EXPECTORS
-
-function expectStringResponse(responseToResult)
-{
-	return {
-		responseType: 'text',
-		responseToResult: responseToResult
-	};
-}
-
-function mapExpect(func, expect)
-{
-	return {
-		responseType: expect.responseType,
-		responseToResult: function(response) {
-			var convertedResponse = expect.responseToResult(response);
-			return A2(_elm_lang$core$Result$map, func, convertedResponse);
-		}
-	};
-}
-
-
-// BODY
-
-function multipart(parts)
-{
-	var formData = new FormData();
-
-	while (parts.ctor !== '[]')
-	{
-		var part = parts._0;
-		formData.append(part._0, part._1);
-		parts = parts._1;
-	}
-
-	return { ctor: 'FormDataBody', _0: formData };
-}
-
-return {
-	toTask: F2(toTask),
-	expectStringResponse: expectStringResponse,
-	mapExpect: F2(mapExpect),
-	multipart: multipart,
-	encodeUri: encodeUri,
-	decodeUri: decodeUri
-};
-
-}();
-
-var _elm_lang$http$Http_Internal$map = F2(
-	function (func, request) {
-		return _elm_lang$core$Native_Utils.update(
-			request,
-			{
-				expect: A2(_elm_lang$http$Native_Http.mapExpect, func, request.expect)
-			});
-	});
-var _elm_lang$http$Http_Internal$RawRequest = F7(
-	function (a, b, c, d, e, f, g) {
-		return {method: a, headers: b, url: c, body: d, expect: e, timeout: f, withCredentials: g};
-	});
-var _elm_lang$http$Http_Internal$Request = function (a) {
-	return {ctor: 'Request', _0: a};
-};
-var _elm_lang$http$Http_Internal$Expect = {ctor: 'Expect'};
-var _elm_lang$http$Http_Internal$FormDataBody = {ctor: 'FormDataBody'};
-var _elm_lang$http$Http_Internal$StringBody = F2(
-	function (a, b) {
-		return {ctor: 'StringBody', _0: a, _1: b};
-	});
-var _elm_lang$http$Http_Internal$EmptyBody = {ctor: 'EmptyBody'};
-var _elm_lang$http$Http_Internal$Header = F2(
-	function (a, b) {
-		return {ctor: 'Header', _0: a, _1: b};
-	});
-
-var _elm_lang$http$Http$decodeUri = _elm_lang$http$Native_Http.decodeUri;
-var _elm_lang$http$Http$encodeUri = _elm_lang$http$Native_Http.encodeUri;
-var _elm_lang$http$Http$expectStringResponse = _elm_lang$http$Native_Http.expectStringResponse;
-var _elm_lang$http$Http$expectJson = function (decoder) {
-	return _elm_lang$http$Http$expectStringResponse(
-		function (response) {
-			return A2(_elm_lang$core$Json_Decode$decodeString, decoder, response.body);
-		});
-};
-var _elm_lang$http$Http$expectString = _elm_lang$http$Http$expectStringResponse(
-	function (response) {
-		return _elm_lang$core$Result$Ok(response.body);
-	});
-var _elm_lang$http$Http$multipartBody = _elm_lang$http$Native_Http.multipart;
-var _elm_lang$http$Http$stringBody = _elm_lang$http$Http_Internal$StringBody;
-var _elm_lang$http$Http$jsonBody = function (value) {
-	return A2(
-		_elm_lang$http$Http_Internal$StringBody,
-		'application/json',
-		A2(_elm_lang$core$Json_Encode$encode, 0, value));
-};
-var _elm_lang$http$Http$emptyBody = _elm_lang$http$Http_Internal$EmptyBody;
-var _elm_lang$http$Http$header = _elm_lang$http$Http_Internal$Header;
-var _elm_lang$http$Http$request = _elm_lang$http$Http_Internal$Request;
-var _elm_lang$http$Http$post = F3(
-	function (url, body, decoder) {
-		return _elm_lang$http$Http$request(
-			{
-				method: 'POST',
-				headers: {ctor: '[]'},
-				url: url,
-				body: body,
-				expect: _elm_lang$http$Http$expectJson(decoder),
-				timeout: _elm_lang$core$Maybe$Nothing,
-				withCredentials: false
-			});
-	});
-var _elm_lang$http$Http$get = F2(
-	function (url, decoder) {
-		return _elm_lang$http$Http$request(
-			{
-				method: 'GET',
-				headers: {ctor: '[]'},
-				url: url,
-				body: _elm_lang$http$Http$emptyBody,
-				expect: _elm_lang$http$Http$expectJson(decoder),
-				timeout: _elm_lang$core$Maybe$Nothing,
-				withCredentials: false
-			});
-	});
-var _elm_lang$http$Http$getString = function (url) {
-	return _elm_lang$http$Http$request(
-		{
-			method: 'GET',
-			headers: {ctor: '[]'},
-			url: url,
-			body: _elm_lang$http$Http$emptyBody,
-			expect: _elm_lang$http$Http$expectString,
-			timeout: _elm_lang$core$Maybe$Nothing,
-			withCredentials: false
-		});
-};
-var _elm_lang$http$Http$toTask = function (_p0) {
-	var _p1 = _p0;
-	return A2(_elm_lang$http$Native_Http.toTask, _p1._0, _elm_lang$core$Maybe$Nothing);
-};
-var _elm_lang$http$Http$send = F2(
-	function (resultToMessage, request) {
-		return A2(
-			_elm_lang$core$Task$attempt,
-			resultToMessage,
-			_elm_lang$http$Http$toTask(request));
-	});
-var _elm_lang$http$Http$Response = F4(
-	function (a, b, c, d) {
-		return {url: a, status: b, headers: c, body: d};
-	});
-var _elm_lang$http$Http$BadPayload = F2(
-	function (a, b) {
-		return {ctor: 'BadPayload', _0: a, _1: b};
-	});
-var _elm_lang$http$Http$BadStatus = function (a) {
-	return {ctor: 'BadStatus', _0: a};
-};
-var _elm_lang$http$Http$NetworkError = {ctor: 'NetworkError'};
-var _elm_lang$http$Http$Timeout = {ctor: 'Timeout'};
-var _elm_lang$http$Http$BadUrl = function (a) {
-	return {ctor: 'BadUrl', _0: a};
-};
-var _elm_lang$http$Http$StringPart = F2(
-	function (a, b) {
-		return {ctor: 'StringPart', _0: a, _1: b};
-	});
-var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
-
 var _elm_lang$websocket$Native_WebSocket = function() {
 
 function open(url, settings)
@@ -9786,147 +9211,6 @@ var _elm_lang$websocket$WebSocket$onSelfMsg = F3(
 	});
 _elm_lang$core$Native_Platform.effectManagers['WebSocket'] = {pkg: 'elm-lang/websocket', init: _elm_lang$websocket$WebSocket$init, onEffects: _elm_lang$websocket$WebSocket$onEffects, onSelfMsg: _elm_lang$websocket$WebSocket$onSelfMsg, tag: 'fx', cmdMap: _elm_lang$websocket$WebSocket$cmdMap, subMap: _elm_lang$websocket$WebSocket$subMap};
 
-// var _user$project$Native_FileReader = function() {
-var _simonh1000$file_reader$Native_FileReader = function() {
-
-    var scheduler = _elm_lang$core$Native_Scheduler;
-
-    function useReader(method, fileObjectToRead) {
-        return scheduler.nativeBinding(function(callback){
-
-            /*
-             * Test for existence of FileRader using
-             * if(window.FileReader) { ...
-             * http://caniuse.com/#search=filereader
-             * main gap is IE10 and 11 which do not support readAsBinaryFile
-             * but we do not use this API either as it is deprecated
-             */
-            var reader = new FileReader();
-
-            reader.onload = function(evt) {
-                return callback(scheduler.succeed(evt.target.result));
-            };
-
-            reader.onerror = function() {
-                return callback(scheduler.fail({ctor : 'ReadFail'}));
-            };
-
-            // Error if not passed an objectToRead or if it is not a Blob
-            if (!fileObjectToRead || !(fileObjectToRead instanceof Blob)) {
-                return callback(scheduler.fail({ctor : 'NoValidBlob'}));
-            }
-
-            return reader[method](fileObjectToRead);
-        });
-    }
-
-    // readAsTextFile : Value -> Task error String
-    var readAsTextFile = function(fileObjectToRead){
-        return useReader("readAsText", fileObjectToRead);
-    };
-
-    // readAsArrayBuffer : Value -> Task error String
-    var readAsArrayBuffer = function(fileObjectToRead){
-        return useReader("readAsArrayBuffer", fileObjectToRead);
-    };
-
-    // readAsDataUrl : Value -> Task error String
-    var readAsDataUrl = function(fileObjectToRead){
-        return useReader("readAsDataURL", fileObjectToRead);
-    };
-
-    var filePart = function(name, blob) {
-        return {
-            _0: name,
-            _1: blob
-        }
-    };
-
-    return {
-        readAsTextFile : readAsTextFile,
-        readAsArrayBuffer : readAsArrayBuffer,
-        readAsDataUrl: readAsDataUrl,
-        filePart: F2(filePart)
-    };
-}();
-
-var _simonh1000$file_reader$FileReader$mtypeDecoder = A2(
-	_elm_lang$core$Json_Decode$map,
-	_danyx23$elm_mimetype$MimeType$parseMimeType,
-	A2(_elm_lang$core$Json_Decode$field, 'type', _elm_lang$core$Json_Decode$string));
-var _simonh1000$file_reader$FileReader$isTextFile = function (fileRef) {
-	var _p0 = A2(_elm_lang$core$Json_Decode$decodeValue, _simonh1000$file_reader$FileReader$mtypeDecoder, fileRef);
-	if (_p0.ctor === 'Ok') {
-		var _p1 = _p0._0;
-		if (_p1.ctor === 'Just') {
-			var _p2 = _p1._0;
-			if (_p2.ctor === 'Text') {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return true;
-		}
-	} else {
-		return false;
-	}
-};
-var _simonh1000$file_reader$FileReader$prettyPrint = function (err) {
-	var _p3 = err;
-	switch (_p3.ctor) {
-		case 'ReadFail':
-			return 'File reading error';
-		case 'NoValidBlob':
-			return 'Blob was not valid';
-		default:
-			return 'Not a text file';
-	}
-};
-var _simonh1000$file_reader$FileReader$filePart = F2(
-	function (name, nf) {
-		return A2(_simonh1000$file_reader$Native_FileReader.filePart, name, nf.blob);
-	});
-var _simonh1000$file_reader$FileReader$readAsDataUrl = _simonh1000$file_reader$Native_FileReader.readAsDataUrl;
-var _simonh1000$file_reader$FileReader$readAsArrayBuffer = _simonh1000$file_reader$Native_FileReader.readAsArrayBuffer;
-var _simonh1000$file_reader$FileReader$NativeFile = F4(
-	function (a, b, c, d) {
-		return {name: a, size: b, mimeType: c, blob: d};
-	});
-var _simonh1000$file_reader$FileReader$nativeFileDecoder = A5(
-	_elm_lang$core$Json_Decode$map4,
-	_simonh1000$file_reader$FileReader$NativeFile,
-	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'size', _elm_lang$core$Json_Decode$int),
-	_simonh1000$file_reader$FileReader$mtypeDecoder,
-	_elm_lang$core$Json_Decode$value);
-var _simonh1000$file_reader$FileReader$fileParser = function (fieldName) {
-	return A2(
-		_elm_lang$core$Json_Decode$at,
-		{
-			ctor: '::',
-			_0: fieldName,
-			_1: {
-				ctor: '::',
-				_0: 'files',
-				_1: {ctor: '[]'}
-			}
-		},
-		A2(
-			_elm_lang$core$Json_Decode$map,
-			_elm_lang$core$List$filterMap(_elm_lang$core$Tuple$second),
-			_elm_lang$core$Json_Decode$keyValuePairs(
-				_elm_lang$core$Json_Decode$maybe(_simonh1000$file_reader$FileReader$nativeFileDecoder))));
-};
-var _simonh1000$file_reader$FileReader$parseSelectedFiles = _simonh1000$file_reader$FileReader$fileParser('target');
-var _simonh1000$file_reader$FileReader$parseDroppedFiles = _simonh1000$file_reader$FileReader$fileParser('dataTransfer');
-var _simonh1000$file_reader$FileReader$NotTextFile = {ctor: 'NotTextFile'};
-var _simonh1000$file_reader$FileReader$readAsTextFile = function (fileRef) {
-	return _simonh1000$file_reader$FileReader$isTextFile(fileRef) ? _simonh1000$file_reader$Native_FileReader.readAsTextFile(fileRef) : _elm_lang$core$Task$fail(_simonh1000$file_reader$FileReader$NotTextFile);
-};
-var _simonh1000$file_reader$FileReader$ReadFail = {ctor: 'ReadFail'};
-var _simonh1000$file_reader$FileReader$NoValidBlob = {ctor: 'NoValidBlob'};
-
 var _user$project$Types$Model = function (a) {
 	return function (b) {
 		return function (c) {
@@ -9937,7 +9221,7 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, uploadMsg: b, selected: c, contents: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
+										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
 									};
 								};
 							};
@@ -9948,6 +9232,10 @@ var _user$project$Types$Model = function (a) {
 		};
 	};
 };
+var _user$project$Types$FileData = F2(
+	function (a, b) {
+		return {filename: a, content: b};
+	});
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
@@ -9961,19 +9249,15 @@ var _user$project$Types$Email = function (a) {
 var _user$project$Types$Decrypted = function (a) {
 	return {ctor: 'Decrypted', _0: a};
 };
-var _user$project$Types$Decrypt = {ctor: 'Decrypt'};
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
-var _user$project$Types$Encrypt = {ctor: 'Encrypt'};
-var _user$project$Types$PostResult = function (a) {
-	return {ctor: 'PostResult', _0: a};
-};
-var _user$project$Types$FilesSelect = function (a) {
-	return {ctor: 'FilesSelect', _0: a};
-};
 var _user$project$Types$Upload = {ctor: 'Upload'};
-var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
+var _user$project$Types$FileRead = function (a) {
+	return {ctor: 'FileRead', _0: a};
+};
+var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
+var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};
@@ -9983,26 +9267,33 @@ var _user$project$Ports$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return v;
 	});
+var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	'decrypt',
 	function (v) {
 		return v;
 	});
-var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Ports$fileSelected = _elm_lang$core$Native_Platform.outgoingPort(
+	'fileSelected',
+	function (v) {
+		return v;
+	});
+var _user$project$Ports$fileRead = _elm_lang$core$Native_Platform.incomingPort(
+	'fileRead',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (filename) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (content) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{filename: filename, content: content});
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'content', _elm_lang$core$Json_Decode$string));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'filename', _elm_lang$core$Json_Decode$string)));
 
-var _user$project$State$sendFileToServer = function (buf) {
-	var body = _elm_lang$http$Http$multipartBody(
-		{
-			ctor: '::',
-			_0: A2(_simonh1000$file_reader$FileReader$filePart, 'simtest', buf),
-			_1: {ctor: '[]'}
-		});
-	return A2(
-		_elm_lang$http$Http$send,
-		_user$project$Types$PostResult,
-		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
-};
 var _user$project$State$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -10014,7 +9305,11 @@ var _user$project$State$subscriptions = function (model) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ports$decrypted(_user$project$Types$Decrypted),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ports$fileRead(_user$project$Types$FileRead),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
@@ -10030,54 +9325,49 @@ var _user$project$State$update = F2(
 						model,
 						{view: _user$project$Types$LoginView}),
 					{ctor: '[]'});
-			case 'ShowUpload':
+			case 'ShowTeam':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
 					{ctor: '[]'});
-			case 'Upload':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					A2(_elm_lang$core$List$map, _user$project$State$sendFileToServer, model.selected));
-			case 'FilesSelect':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{selected: _p0._0, uploadMsg: 'Something selected'}),
-					{ctor: '[]'});
-			case 'PostResult':
-				if (_p0._0.ctor === 'Ok') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
-						{ctor: '[]'});
-				}
-			case 'Encrypt':
+			case 'FileSelected':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					model,
 					{
 						ctor: '::',
-						_0: _user$project$Ports$encrypt(model.encrypted),
+						_0: _user$project$Ports$fileSelected(model.inputId),
 						_1: {ctor: '[]'}
 					});
+			case 'FileRead':
+				var _p1 = _p0._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{filename: _p1.filename, content: _p1.content}),
+					{
+						ctor: '::',
+						_0: _user$project$Ports$encrypt(model.content),
+						_1: {ctor: '[]'}
+					});
+			case 'Upload':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:5000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'upload|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.filename,
+								A2(_elm_lang$core$Basics_ops['++'], '|', model.encrypted))))
+				};
 			case 'Encrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10085,15 +9375,6 @@ var _user$project$State$update = F2(
 						model,
 						{encrypted: _p0._0}),
 					{ctor: '[]'});
-			case 'Decrypt':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{
-						ctor: '::',
-						_0: _user$project$Ports$decrypt(model.encrypted),
-						_1: {ctor: '[]'}
-					});
 			case 'Decrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10136,39 +9417,28 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-				var _p2 = _p0._0;
-				var _p1 = _p2;
-				if (_p1 === 'True') {
+				var _p3 = _p0._0;
+				var _p2 = _p3;
+				if (_p2 === 'True') {
 					return A2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2, view: _user$project$Types$TeamView}),
+							{loginMsg: _p3, view: _user$project$Types$TeamView}),
 						{ctor: '[]'});
 				} else {
 					return A2(
 						_elm_lang$core$Platform_Cmd_ops['!'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2}),
+							{loginMsg: _p3}),
 						{ctor: '[]'});
 				}
 		}
 	});
 var _user$project$State$init = {
 	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		uploadMsg: 'Waiting...',
-		selected: {ctor: '[]'},
-		contents: {ctor: '[]'},
-		encrypted: '',
-		decrypted: '',
-		email: '',
-		password: '',
-		loginMsg: '',
-		showFeedback: false
-	},
+	_0: {view: _user$project$Types$LoginView, inputId: 'FileInputId', filename: '', content: '', encrypted: '', decrypted: '', email: '', password: '', loginMsg: '', showFeedback: false},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 
@@ -10497,6 +9767,148 @@ var _user$project$View_TeamView$center = A2(
 			_1: {ctor: '[]'}
 		}
 	});
+var _user$project$View_TeamView$fileNav = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('row'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '6%'},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('pull-left'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Single file select'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('file'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id(model.inputId),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html_Events$on,
+											'change',
+											_elm_lang$core$Json_Decode$succeed(_user$project$Types$FileSelected)),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('pull-right'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Manage Team'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Upload),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Upload file'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Download file'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$ShowLogin),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Log out'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$View_TeamView$sidebar = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -10790,12 +10202,6 @@ var _user$project$View_TeamView$navigationbar = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View_TeamView$onchange = function (action) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'change',
-		A2(_elm_lang$core$Json_Decode$map, action, _simonh1000$file_reader$FileReader$parseSelectedFiles));
-};
 var _user$project$View_TeamView$commaSeperate = function (lst) {
 	return A3(
 		_elm_lang$core$List$foldl,
@@ -10806,221 +10212,24 @@ var _user$project$View_TeamView$commaSeperate = function (lst) {
 		'',
 		A2(_elm_lang$core$List$intersperse, ', ', lst));
 };
-var _user$project$View_TeamView$fileNav = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
+var _user$project$View_TeamView$stylesheet = function () {
+	var children = {ctor: '[]'};
+	var attrs = {
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
+		_1: {
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('row'),
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$style(
-					{
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '6%'},
-						_1: {ctor: '[]'}
-					}),
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
 				_1: {ctor: '[]'}
 			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pull-left'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$h1,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Single file select'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$input,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$type_('file'),
-								_1: {
-									ctor: '::',
-									_0: _user$project$View_TeamView$onchange(_user$project$Types$FilesSelect),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Upload),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Upload'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('center'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h1,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Results'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											'Files: ',
-											_user$project$View_TeamView$commaSeperate(
-												A2(
-													_elm_lang$core$List$map,
-													function (_) {
-														return _.name;
-													},
-													model.selected)))),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$p,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'Contents: ',
-												_user$project$View_TeamView$commaSeperate(model.contents))),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(model.uploadMsg),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('pull-right'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Manage Team'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-warning'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Upload file'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Download file'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$button,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$ShowLogin),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Log out'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
+		}
+	};
+	var tag = 'link';
+	return A3(_elm_lang$html$Html$node, tag, attrs, children);
+}();
 var _user$project$View_TeamView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -11063,7 +10272,7 @@ var _user$project$View_TeamView$view = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View_Stylesheet$stylesheet,
+					_0: _user$project$View_TeamView$stylesheet,
 					_1: {ctor: '[]'}
 				}
 			}

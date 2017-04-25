@@ -8,7 +8,7 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, uploadMsg: b, selected: c, contents: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
+										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
 									};
 								};
 							};
@@ -19,6 +19,10 @@ var _user$project$Types$Model = function (a) {
 		};
 	};
 };
+var _user$project$Types$FileData = F2(
+	function (a, b) {
+		return {filename: a, content: b};
+	});
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
@@ -32,19 +36,15 @@ var _user$project$Types$Email = function (a) {
 var _user$project$Types$Decrypted = function (a) {
 	return {ctor: 'Decrypted', _0: a};
 };
-var _user$project$Types$Decrypt = {ctor: 'Decrypt'};
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
-var _user$project$Types$Encrypt = {ctor: 'Encrypt'};
-var _user$project$Types$PostResult = function (a) {
-	return {ctor: 'PostResult', _0: a};
-};
-var _user$project$Types$FilesSelect = function (a) {
-	return {ctor: 'FilesSelect', _0: a};
-};
 var _user$project$Types$Upload = {ctor: 'Upload'};
-var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
+var _user$project$Types$FileRead = function (a) {
+	return {ctor: 'FileRead', _0: a};
+};
+var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
+var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};

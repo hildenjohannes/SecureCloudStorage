@@ -1,47 +1,10 @@
 module View.TeamView exposing (view)
 
 import Types exposing (..)
-import View.Stylesheet exposing (stylesheet)
-
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Json.Decode as Json exposing (Value)
-import FileReader exposing (..)
-
-{--uploadView : Model -> Html Msg
-uploadView model =
-  div [ containerStyles ]
-    [ div []
-      [ h1 [] [ text "Single file select + Upload separate" ]
-      , input
-        [ type_ "file"
-        , onchange FilesSelect ] []
-        , button [ onClick Upload ] [ text "Read file" ]
-      ]
-    , div []
-      [ h1 [] [ text "Results" ]
-      , p []
-        [ text <| "Files: " ++ commaSeperate (List.map .name model.selected) ]
-      , p []
-        [ text <| "Contents: " ++ commaSeperate model.contents ]
-      , div [] [ text model.uploadMsg ]
-      ]
-    ]-}
-
-commaSeperate : List String -> String
-commaSeperate lst =
-  List.foldl (++) "" (List.intersperse ", " lst)
-
-onchange action =
-  on
-    "change"
-    (Json.map action parseSelectedFiles)
-
-{-containerStyles =
-  style [ ( "padding", "20px" ) ]
--}
-
+import Json.Decode as Json
 
 view : Model -> Html Msg
 view model = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out!"]]
@@ -59,6 +22,32 @@ view model = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out
           ],
          stylesheet
       ]
+
+stylesheet : Html Msg
+stylesheet =
+    let
+        tag =
+            "link"
+
+        attrs =
+            [ attribute "Rel" "stylesheet"
+            , attribute "property" "stylesheet"
+            , attribute "href" "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            --, attribute "href" "css/bootstrap.min.css"
+            ]
+
+        children =
+            []
+    in
+        node tag attrs children
+
+commaSeperate : List String -> String
+commaSeperate lst =
+  List.foldl (++) "" (List.intersperse ", " lst)
+
+{-containerStyles =
+  style [ ( "padding", "20px" ) ]
+-}
 
 navigationbar : Html Msg
 navigationbar =
@@ -100,24 +89,14 @@ fileNav model =
      div [class "pull-left"]
       [
        h1 [] [text "Single file select"]
-       , input [type_ "file", onchange FilesSelect] []
-       , button [onClick Upload] [text "Upload"]
-      ]
-    , div [class "center"]
-      [
-      h1 [] [text "Results"]
-      , p []
-        [ text <| "Files: " ++ commaSeperate (List.map .name model.selected) ]
-      , p []
-        [ text <| "Contents: " ++ commaSeperate model.contents ]
-      , div [] [ text model.uploadMsg ]
+       , input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected)] []
       ]
     , div [class "pull-right"]
       [
       button [class "btn btn-info"] [text "Manage Team"],
-      button [class "btn btn-warning"] [text "Upload file"],
-      button [class "btn btn-info"] [text "Download file"]
-      , button [class "btn btn-info", onClick ShowLogin] [text "Log out"]
+      button [class "btn btn-info", onClick Upload] [text "Upload file"],
+      button [class "btn btn-info"] [text "Download file"],
+      button [class "btn btn-info", onClick ShowLogin] [text "Log out"]
       ]
     ]
 
