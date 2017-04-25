@@ -4,8 +4,8 @@ from tornadostreamform.multipart_streamer import MultiPartStreamer, StreamedPart
 import json
 #from requests_toolbelt.multipart import decoder
 
-json = '{"jsonKey": "Blaha", "jsonKey2": "Jaha"}'
-
+#json = '{"jsonKey": "Blaha", "jsonKey2": "Jaha"}'
+json = '["asd","asd2"]'
 
 MB = 1024*1024
 GB = 1024*MB

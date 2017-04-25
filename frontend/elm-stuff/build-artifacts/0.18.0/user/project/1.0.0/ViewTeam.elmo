@@ -47,7 +47,15 @@ var _user$project$View$tbList = function (model) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(model.files),
+						_0: _elm_lang$html$Html$text(
+							_user$project$View$maybeToString(
+								A2(
+									F2(
+										function (x, y) {
+											return A2(_user$project$View_ops['!!'], x, y);
+										}),
+									0,
+									model.files))),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
