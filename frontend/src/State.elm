@@ -1,6 +1,7 @@
-port module State exposing (init, update, subscriptions)
+module State exposing (init, update, subscriptions)
 
 import Types exposing (..)
+import Ports exposing (..)
 
 import FileReader exposing (..)
 import Http exposing (..)
@@ -30,10 +31,10 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     ShowLogin ->
-      ({model | view = LoginView}, Cmd.none)
+      {model | view = LoginView} ! []
 
     ShowUpload ->
-      ({model | view = UploadView}, Cmd.none)
+      {model | view = TeamView} ! []
 
     --Upload
     Upload ->
@@ -52,39 +53,36 @@ update msg model =
 
     --Encryption
     Encrypt ->
-        ( model, encrypt model.encrypted )
+      model ! [ encrypt model.encrypted ]
 
     Encrypted encryptedWord ->
-        ({model | encrypted = encryptedWord}, Cmd.none)
+      {model | encrypted = encryptedWord} ! []
 
     Decrypt ->
-      ( model, decrypt model.encrypted )
+      model ! [ decrypt model.encrypted ]
 
     Decrypted decryptedWord ->
-        ({model | decrypted = decryptedWord}, Cmd.none)
+      {model | decrypted = decryptedWord} ! []
 
     --Login
     Email email ->
-      ({model | email = email, showFeedback = False}, Cmd.none)
+      {model | email = email, showFeedback = False} ! []
 
     Password password ->
-      ({model | password = password, showFeedback = False}, Cmd.none)
+      {model | password = password, showFeedback = False} ! []
 
     Login ->
-      ({model | showFeedback = True}, WebSocket.send "ws://localhost:5000/ws"
-      ("login|" ++ model.email ++ "|" ++ model.password))
+      {model | showFeedback = True} !
+      [ WebSocket.send "ws://localhost:5000/ws"
+      ("login|" ++ model.email ++ "|" ++ model.password)
+      ]
 
     Message message ->
       case message of
         "True" ->
-          ({model | loginMsg = message, view = UploadView}, Cmd.none)
+          {model | loginMsg = message, view = TeamView} ! []
         _ ->
-          ({model | loginMsg = message}, Cmd.none)
-
-port encrypt : String -> Cmd msg
-port decrypt : String -> Cmd msg
-port encrypted : (String -> msg) -> Sub msg
-port decrypted : (String -> msg) -> Sub msg
+          {model | loginMsg = message} ! []
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

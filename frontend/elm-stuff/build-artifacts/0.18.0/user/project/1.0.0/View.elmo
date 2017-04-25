@@ -1,0 +1,8 @@
+var _user$project$View$view = function (model) {
+	var _p0 = model.view;
+	if (_p0.ctor === 'LoginView') {
+		return _user$project$View_LoginView$view(model);
+	} else {
+		return _user$project$View_TeamView$view(model);
+	}
+};
