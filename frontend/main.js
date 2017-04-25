@@ -10024,21 +10024,19 @@ var _user$project$State$update = F2(
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'ShowLogin':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'ShowUpload':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'Upload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10072,85 +10070,88 @@ var _user$project$State$update = F2(
 						{ctor: '[]'});
 				}
 			case 'Encrypt':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Ports$encrypt(model.encrypted)
-				};
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: _user$project$Ports$encrypt(model.encrypted),
+						_1: {ctor: '[]'}
+					});
 			case 'Encrypted':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{encrypted: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'Decrypt':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Ports$decrypt(model.encrypted)
-				};
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: _user$project$Ports$decrypt(model.encrypted),
+						_1: {ctor: '[]'}
+					});
 			case 'Decrypted':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{decrypted: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'Email':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{email: _p0._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'Password':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{password: _p0._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+					{ctor: '[]'});
 			case 'Login':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{showFeedback: true}),
-					_1: A2(
-						_elm_lang$websocket$WebSocket$send,
-						'ws://localhost:5000/ws',
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							'login|',
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$websocket$WebSocket$send,
+							'ws://localhost:5000/ws',
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								model.email,
-								A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))
-				};
+								'login|',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									model.email,
+									A2(_elm_lang$core$Basics_ops['++'], '|', model.password)))),
+						_1: {ctor: '[]'}
+					});
 			default:
 				var _p2 = _p0._0;
 				var _p1 = _p2;
 				if (_p1 === 'True') {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{loginMsg: _p2, view: _user$project$Types$TeamView}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						{ctor: '[]'});
 				} else {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{loginMsg: _p2}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						{ctor: '[]'});
 				}
 		}
 	});
