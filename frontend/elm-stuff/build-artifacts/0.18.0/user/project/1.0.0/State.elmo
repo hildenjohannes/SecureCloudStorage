@@ -26,24 +26,43 @@ var _user$project$State$subscriptions = function (model) {
 			}
 		});
 };
+var _user$project$State$result = function (result) {
+	var _p0 = result;
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return {
+			ctor: '::',
+			_0: _p0._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _user$project$State$stringsDecoder = _elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string);
+var _user$project$State$parseJsonFiles = function (jsonString) {
+	return _user$project$State$result(
+		A2(_elm_lang$core$Json_Decode$decodeString, _user$project$State$stringsDecoder, jsonString));
+};
 var _user$project$State$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
 			case 'ShowLogin':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					{ctor: '[]'});
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+				};
 			case 'ShowUpload':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
-					{ctor: '[]'});
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+				};
 			case 'Upload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -54,27 +73,28 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{selected: _p0._0, uploadMsg: 'Something selected'}),
+						{selected: _p1._0, uploadMsg: 'Something selected'}),
 					{ctor: '[]'});
 			case 'PostResult':
-				if (_p0._0.ctor === 'Ok') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
+				if (_p1._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
+								uploadMsg: _elm_lang$core$Basics$toString(_p1._0._0),
+								view: _user$project$Types$TeamView
 							}),
-						{ctor: '[]'});
+						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+					};
 				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
-							}),
-						{ctor: '[]'});
+							{uploadMsg: 'Ok', view: _user$project$Types$TeamView}),
+						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+					};
 				}
 			case 'Encrypt':
 				return A2(
@@ -90,7 +110,7 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p0._0}),
+						{encrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Decrypt':
 				return A2(
@@ -106,21 +126,21 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{decrypted: _p0._0}),
+						{decrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Email':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{email: _p0._0, showFeedback: false}),
+						{email: _p1._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Password':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{password: _p0._0, showFeedback: false}),
+						{password: _p1._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Login':
 				return A2(
@@ -143,22 +163,36 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-				var _p2 = _p0._0;
-				var _p1 = _p2;
-				if (_p1 === 'True') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2, view: _user$project$Types$TeamView}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2}),
-						{ctor: '[]'});
+				var _p3 = _p1._0;
+				var _p2 = _p3;
+				switch (_p2) {
+					case 'True':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p3, view: _user$project$Types$TeamView}),
+							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+						};
+					case 'False':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p3}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									files: _user$project$State$parseJsonFiles(_p3),
+									view: _user$project$Types$TeamView
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 				}
 		}
 	});
@@ -174,7 +208,8 @@ var _user$project$State$init = {
 		email: '',
 		password: '',
 		loginMsg: '',
-		showFeedback: false
+		showFeedback: false,
+		files: {ctor: '[]'}
 	},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
