@@ -35,7 +35,7 @@ var _user$project$View$tbList = function (model) {
 										function (x, y) {
 											return A2(_user$project$View_ops['!!'], x, y);
 										}),
-									0,
+									1,
 									model.files))),
 						_1: {ctor: '[]'}
 					}),
