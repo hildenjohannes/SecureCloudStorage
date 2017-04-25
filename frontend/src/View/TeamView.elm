@@ -17,7 +17,7 @@ view model = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out
           [fileNav model,
           div [class "row"]--, style [("margin-top","1%")]]
             [
-            sidebar, center
+            sidebar, (center model)
             ]
           ],
          stylesheet
@@ -100,8 +100,8 @@ fileNav model =
       ]
     ]
 
-center : Html Msg
-center =
+center : Model -> Html Msg
+center model =
   div [class "col-sm-9 col-md-10 main"]
     [ --"col-sm-9 col-md-9"
     h1 [class "page-header"] [text "Files"],
@@ -110,7 +110,7 @@ center =
         [thead []
           [tr [] thList
           ],--!thead
-          tbody [] tbList
+          tbody [] (tbList model)
         ]--!table
       ]--! table-responsive
     ]
@@ -123,13 +123,47 @@ thList =             [
   th [] [text "Upload date"]
   ]
 
-tbList : List (Html Msg)
-tbList =
-  [tr [] --onClick
+tbList : Model -> List (Html Msg)
+tbList model = listF model.files
+{-  [tr [] --onClick
     [
-    td [] [text "File1"],
+    td [] [text (maybeToString ((!!) 1 model.files))],
+    --td [] [text model.files],
     td [] [text "Rebecka"],
     td [] [text "1 KB"],
     td [] [text "1 April 2017"]
     ]
-  ]
+  ] -}
+
+
+listF : List String -> List (Html Msg)
+listF list =
+ case list of
+    [] -> []
+    x::xs ->  (listF xs ) ++
+              [tr [] --onClick
+              [
+                td [] [text x],
+                --td [] [text model.files],
+                td [] [text "Rebecka"],
+                td [] [text "1 KB"],
+                td [] [text "1 April 2017"]
+              ]]
+
+
+maybeToString : Maybe String -> String
+maybeToString s =
+  case s of
+    (Just s) -> s
+    Nothing -> "Error"
+
+(!!): Int -> List a -> Maybe a
+(!!) index list =                          -- 3 [ 1, 2, 3, 4, 5, 6 ]
+
+  if  (List.length list) >= index then
+
+       List.take index list               -- [ 1, 2, 3 ]
+       |> List.reverse                    -- [ 3, 2, 1 ]
+       |> List.head                       -- Just 3
+  else
+     Nothing

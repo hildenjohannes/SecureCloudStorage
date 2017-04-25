@@ -9221,7 +9221,9 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
+										return function (k) {
+											return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, files: j, showFeedback: k};
+										};
 									};
 								};
 							};
@@ -9314,17 +9316,35 @@ var _user$project$State$subscriptions = function (model) {
 			}
 		});
 };
+var _user$project$State$result = function (result) {
+	var _p0 = result;
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return {
+			ctor: '::',
+			_0: _p0._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _user$project$State$stringsDecoder = _elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string);
+var _user$project$State$parseJsonFiles = function (jsonString) {
+	return _user$project$State$result(
+		A2(_elm_lang$core$Json_Decode$decodeString, _user$project$State$stringsDecoder, jsonString));
+};
 var _user$project$State$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
 			case 'ShowLogin':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					{ctor: '[]'});
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+				};
 			case 'ShowTeam':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9339,18 +9359,6 @@ var _user$project$State$update = F2(
 					{
 						ctor: '::',
 						_0: _user$project$Ports$fileSelected(model.inputId),
-						_1: {ctor: '[]'}
-					});
-			case 'FileRead':
-				var _p1 = _p0._0;
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{filename: _p1.filename, content: _p1.content}),
-					{
-						ctor: '::',
-						_0: _user$project$Ports$encrypt(model.content),
 						_1: {ctor: '[]'}
 					});
 			case 'Upload':
@@ -9368,33 +9376,45 @@ var _user$project$State$update = F2(
 								model.filename,
 								A2(_elm_lang$core$Basics_ops['++'], '|', model.encrypted))))
 				};
+			case 'FileRead':
+				var _p2 = _p1._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{filename: _p2.filename, content: _p2.content}),
+					{
+						ctor: '::',
+						_0: _user$project$Ports$encrypt(model.content),
+						_1: {ctor: '[]'}
+					});
 			case 'Encrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p0._0}),
+						{encrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Decrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{decrypted: _p0._0}),
+						{decrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Email':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{email: _p0._0, showFeedback: false}),
+						{email: _p1._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Password':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{password: _p0._0, showFeedback: false}),
+						{password: _p1._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Login':
 				return A2(
@@ -9417,28 +9437,54 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-				var _p3 = _p0._0;
-				var _p2 = _p3;
-				if (_p2 === 'True') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p3, view: _user$project$Types$TeamView}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p3}),
-						{ctor: '[]'});
+				var _p4 = _p1._0;
+				var _p3 = _p4;
+				switch (_p3) {
+					case 'True':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p4, view: _user$project$Types$TeamView}),
+							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+						};
+					case 'False':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p4}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									files: _user$project$State$parseJsonFiles(_p4),
+									view: _user$project$Types$TeamView
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 				}
 		}
 	});
 var _user$project$State$init = {
 	ctor: '_Tuple2',
-	_0: {view: _user$project$Types$LoginView, inputId: 'FileInputId', filename: '', content: '', encrypted: '', decrypted: '', email: '', password: '', loginMsg: '', showFeedback: false},
+	_0: {
+		view: _user$project$Types$LoginView,
+		inputId: 'FileInputId',
+		filename: '',
+		content: '',
+		encrypted: '',
+		decrypted: '',
+		email: '',
+		password: '',
+		loginMsg: '',
+		showFeedback: false,
+		files: {ctor: '[]'}
+	},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 
@@ -9604,57 +9650,87 @@ var _user$project$View_LoginView$view = function (model) {
 		});
 };
 
-var _user$project$View_TeamView$tbList = {
-	ctor: '::',
-	_0: A2(
-		_elm_lang$html$Html$tr,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$td,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('File1'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
+var _user$project$View_TeamView_ops = _user$project$View_TeamView_ops || {};
+_user$project$View_TeamView_ops['!!'] = F2(
+	function (index, list) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(list),
+			index) > -1) ? _elm_lang$core$List$head(
+			_elm_lang$core$List$reverse(
+				A2(_elm_lang$core$List$take, index, list))) : _elm_lang$core$Maybe$Nothing;
+	});
+var _user$project$View_TeamView$maybeToString = function (s) {
+	var _p0 = s;
+	if (_p0.ctor === 'Just') {
+		return _p0._0;
+	} else {
+		return 'Error';
+	}
+};
+var _user$project$View_TeamView$listF = function (list) {
+	var _p1 = list;
+	if (_p1.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$View_TeamView$listF(_p1._1),
+			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$td,
+					_elm_lang$html$Html$tr,
 					{ctor: '[]'},
 					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Rebecka'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$td,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('1 KB'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$td,
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('1 April 2017'),
+								_0: _elm_lang$html$Html$text(_p1._0),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		}),
-	_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$td,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Rebecka'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$td,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('1 KB'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$td,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('1 April 2017'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$View_TeamView$tbList = function (model) {
+	return _user$project$View_TeamView$listF(model.files);
 };
 var _user$project$View_TeamView$thList = {
 	ctor: '::',
@@ -9701,72 +9777,74 @@ var _user$project$View_TeamView$thList = {
 		}
 	}
 };
-var _user$project$View_TeamView$center = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('col-sm-9 col-md-10 main'),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$h1,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('page-header'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Files'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
+var _user$project$View_TeamView$center = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('col-sm-9 col-md-10 main'),
+			_1: {ctor: '[]'}
+		},
+		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$h1,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('table-responsive'),
+					_0: _elm_lang$html$Html_Attributes$class('page-header'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$table,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('table table-striped'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$thead,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$tr,
-										{ctor: '[]'},
-										_user$project$View_TeamView$thList),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$tbody,
-									{ctor: '[]'},
-									_user$project$View_TeamView$tbList),
-								_1: {ctor: '[]'}
-							}
-						}),
+					_0: _elm_lang$html$Html$text('Files'),
 					_1: {ctor: '[]'}
 				}),
-			_1: {ctor: '[]'}
-		}
-	});
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('table-responsive'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$table,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('table table-striped'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$thead,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$tr,
+											{ctor: '[]'},
+											_user$project$View_TeamView$thList),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$tbody,
+										{ctor: '[]'},
+										_user$project$View_TeamView$tbList(model)),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$View_TeamView$fileNav = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10263,7 +10341,7 @@ var _user$project$View_TeamView$view = function (model) {
 									_0: _user$project$View_TeamView$sidebar,
 									_1: {
 										ctor: '::',
-										_0: _user$project$View_TeamView$center,
+										_0: _user$project$View_TeamView$center(model),
 										_1: {ctor: '[]'}
 									}
 								}),

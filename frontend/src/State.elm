@@ -2,6 +2,8 @@ module State exposing (init, update, subscriptions)
 
 import Types exposing (..)
 import Ports exposing (..)
+
+import Json.Decode as Json exposing (..)
 import WebSocket
 
 init : (Model, Cmd Msg)
@@ -19,15 +21,17 @@ init =
     , email = ""
     , password = ""
     , loginMsg = ""
-    , showFeedback = False }
-    , Cmd.none
+    , showFeedback = False
+    , files = []
+    }, Cmd.none
   )
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     ShowLogin ->
-      {model | view = LoginView} ! []
+      ({model | view = LoginView},  WebSocket.send "ws://localhost:5000/ws"
+      ("listFiles|"))
 
     ShowTeam ->
       {model | view = TeamView} ! []
@@ -36,12 +40,12 @@ update msg model =
     FileSelected ->
       model ! [fileSelected model.inputId]
 
-    FileRead data ->
-      {model | filename = data.filename, content = data.content} ! [encrypt model.content]
-
     Upload ->
       (model, WebSocket.send "ws://localhost:5000/ws"
       ("upload|" ++ model.filename ++ "|" ++ model.encrypted))
+
+    FileRead data ->
+      {model | filename = data.filename, content = data.content} ! [encrypt model.content]
 
     --Encryption
     Encrypted encryptedWord ->
@@ -63,12 +67,33 @@ update msg model =
       ("login|" ++ model.email ++ "|" ++ model.password)
       ]
 
+    --TODO: split into several messages
+
+    --websocket responses
     Message message ->
       case message of
         "True" ->
-          {model | loginMsg = message, view = TeamView} ! []
+          ({model | loginMsg = message, view = TeamView}, WebSocket.send "ws://localhost:5000/ws"
+          ("listFiles|"))
+        "False" ->
+          ({model | loginMsg = message}, Cmd.none)
         _ ->
-          {model | loginMsg = message} ! []
+          ({model | files = (parseJsonFiles message), view = TeamView}, Cmd.none) --message}, Cmd.none)
+
+--decoder for json parser
+stringsDecoder : Decoder (List String)
+stringsDecoder = list string
+
+parseJsonFiles : String -> (List String)
+parseJsonFiles jsonString = result (decodeString stringsDecoder jsonString)
+
+result result =
+  case result of
+    Ok payload ->
+      payload
+    Err errorString ->
+      [errorString]
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

@@ -12,11 +12,11 @@ class SocketHandler(websocket.WebSocketHandler):
         method = params.pop(0)
         if method == "login":
             self.write_message(str(self.login(params)))
-
         elif method == "upload":
             print(params[0])
             print(params[1])
-
+        elif method == "listFiles":
+            self.write_message(json) # TODO: get actual files
         else:
             self.write_message("Invalid argument")
 

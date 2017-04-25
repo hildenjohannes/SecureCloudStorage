@@ -1,54 +1,84 @@
-var _user$project$View_TeamView$tbList = {
-	ctor: '::',
-	_0: A2(
-		_elm_lang$html$Html$tr,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$td,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('File1'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
+var _user$project$View_TeamView_ops = _user$project$View_TeamView_ops || {};
+_user$project$View_TeamView_ops['!!'] = F2(
+	function (index, list) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(list),
+			index) > -1) ? _elm_lang$core$List$head(
+			_elm_lang$core$List$reverse(
+				A2(_elm_lang$core$List$take, index, list))) : _elm_lang$core$Maybe$Nothing;
+	});
+var _user$project$View_TeamView$maybeToString = function (s) {
+	var _p0 = s;
+	if (_p0.ctor === 'Just') {
+		return _p0._0;
+	} else {
+		return 'Error';
+	}
+};
+var _user$project$View_TeamView$listF = function (list) {
+	var _p1 = list;
+	if (_p1.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$View_TeamView$listF(_p1._1),
+			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$td,
+					_elm_lang$html$Html$tr,
 					{ctor: '[]'},
 					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Rebecka'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$td,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('1 KB'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$td,
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('1 April 2017'),
+								_0: _elm_lang$html$Html$text(_p1._0),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		}),
-	_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$td,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Rebecka'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$td,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('1 KB'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$td,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('1 April 2017'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$View_TeamView$tbList = function (model) {
+	return _user$project$View_TeamView$listF(model.files);
 };
 var _user$project$View_TeamView$thList = {
 	ctor: '::',
@@ -95,72 +125,74 @@ var _user$project$View_TeamView$thList = {
 		}
 	}
 };
-var _user$project$View_TeamView$center = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('col-sm-9 col-md-10 main'),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$h1,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('page-header'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Files'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
+var _user$project$View_TeamView$center = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('col-sm-9 col-md-10 main'),
+			_1: {ctor: '[]'}
+		},
+		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$h1,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('table-responsive'),
+					_0: _elm_lang$html$Html_Attributes$class('page-header'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$table,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('table table-striped'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$thead,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$tr,
-										{ctor: '[]'},
-										_user$project$View_TeamView$thList),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$tbody,
-									{ctor: '[]'},
-									_user$project$View_TeamView$tbList),
-								_1: {ctor: '[]'}
-							}
-						}),
+					_0: _elm_lang$html$Html$text('Files'),
 					_1: {ctor: '[]'}
 				}),
-			_1: {ctor: '[]'}
-		}
-	});
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('table-responsive'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$table,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('table table-striped'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$thead,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$tr,
+											{ctor: '[]'},
+											_user$project$View_TeamView$thList),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$tbody,
+										{ctor: '[]'},
+										_user$project$View_TeamView$tbList(model)),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$View_TeamView$fileNav = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -657,7 +689,7 @@ var _user$project$View_TeamView$view = function (model) {
 									_0: _user$project$View_TeamView$sidebar,
 									_1: {
 										ctor: '::',
-										_0: _user$project$View_TeamView$center,
+										_0: _user$project$View_TeamView$center(model),
 										_1: {ctor: '[]'}
 									}
 								}),

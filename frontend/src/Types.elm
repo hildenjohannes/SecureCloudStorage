@@ -13,6 +13,7 @@ type alias Model =
   , email : String
   , password : String
   , loginMsg : String
+  , files: List String
   , showFeedback: Bool }
 
 type alias FileData =
