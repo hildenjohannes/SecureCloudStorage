@@ -10450,49 +10450,28 @@ var _user$project$View$maybeToString = function (s) {
 		return 'Error';
 	}
 };
-var _user$project$View$tbList = function (model) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$tr,
-			{ctor: '[]'},
+var _user$project$View$listF = function (list) {
+	var _p1 = list;
+	if (_p1.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$View$listF(_p1._1),
 			{
 >>>>>>> index file:nonModular/index.html
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$td,
+					_elm_lang$html$Html$tr,
 					{ctor: '[]'},
 					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							_user$project$View$maybeToString(
-								A2(
-									F2(
-										function (x, y) {
-											return A2(_user$project$View_ops['!!'], x, y);
-										}),
-									1,
-									model.files))),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$td,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Rebecka'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$td,
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('1 KB'),
+								_0: _elm_lang$html$Html$text(_p1._0),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -10502,16 +10481,40 @@ var _user$project$View$tbList = function (model) {
 								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('1 April 2017'),
+									_0: _elm_lang$html$Html$text('Rebecka'),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$td,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('1 KB'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$td,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('1 April 2017'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
 						}
-					}
-				}
-			}),
-		_1: {ctor: '[]'}
-	};
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$View$tbList = function (model) {
+	return _user$project$View$listF(model.files);
 };
 var _user$project$View_TeamView$thList = {
 	ctor: '::',
@@ -11254,6 +11257,7 @@ var _user$project$View_TeamView$view = function (model) {
 };
 
 var _user$project$View$view = function (model) {
+<<<<<<< a580d2f53aea2fc2c6ac29ee7fe2c797a8e7a448:frontend/main.js
 <<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
 	var _p0 = model.view;
 	if (_p0.ctor === 'LoginView') {
@@ -11261,6 +11265,10 @@ var _user$project$View$view = function (model) {
 =======
 	var _p1 = model.view;
 	if (_p1.ctor === 'LoginView') {
+=======
+	var _p2 = model.view;
+	if (_p2.ctor === 'LoginView') {
+>>>>>>> index file:nonModular/index.html
 		return _user$project$View$loginView(model);
 >>>>>>> index file:nonModular/index.html
 	} else {
