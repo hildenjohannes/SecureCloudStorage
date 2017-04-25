@@ -1,4 +1,4 @@
-var _user$project$View$tbList = {
+var _user$project$View_TeamView$tbList = {
 	ctor: '::',
 	_0: A2(
 		_elm_lang$html$Html$tr,
@@ -50,7 +50,7 @@ var _user$project$View$tbList = {
 		}),
 	_1: {ctor: '[]'}
 };
-var _user$project$View$thList = {
+var _user$project$View_TeamView$thList = {
 	ctor: '::',
 	_0: A2(
 		_elm_lang$html$Html$th,
@@ -95,7 +95,7 @@ var _user$project$View$thList = {
 		}
 	}
 };
-var _user$project$View$center = A2(
+var _user$project$View_TeamView$center = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -144,7 +144,7 @@ var _user$project$View$center = A2(
 									_0: A2(
 										_elm_lang$html$Html$tr,
 										{ctor: '[]'},
-										_user$project$View$thList),
+										_user$project$View_TeamView$thList),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -152,7 +152,7 @@ var _user$project$View$center = A2(
 								_0: A2(
 									_elm_lang$html$Html$tbody,
 									{ctor: '[]'},
-									_user$project$View$tbList),
+									_user$project$View_TeamView$tbList),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -161,7 +161,7 @@ var _user$project$View$center = A2(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$View$sidebar = A2(
+var _user$project$View_TeamView$sidebar = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -309,7 +309,7 @@ var _user$project$View$sidebar = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$navigationbar = A2(
+var _user$project$View_TeamView$navigationbar = A2(
 	_elm_lang$html$Html$nav,
 	{
 		ctor: '::',
@@ -454,13 +454,13 @@ var _user$project$View$navigationbar = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$onchange = function (action) {
+var _user$project$View_TeamView$onchange = function (action) {
 	return A2(
 		_elm_lang$html$Html_Events$on,
 		'change',
 		A2(_elm_lang$core$Json_Decode$map, action, _simonh1000$file_reader$FileReader$parseSelectedFiles));
 };
-var _user$project$View$commaSeperate = function (lst) {
+var _user$project$View_TeamView$commaSeperate = function (lst) {
 	return A3(
 		_elm_lang$core$List$foldl,
 		F2(
@@ -470,7 +470,7 @@ var _user$project$View$commaSeperate = function (lst) {
 		'',
 		A2(_elm_lang$core$List$intersperse, ', ', lst));
 };
-var _user$project$View$fileNav = function (model) {
+var _user$project$View_TeamView$fileNav = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -515,7 +515,7 @@ var _user$project$View$fileNav = function (model) {
 								_0: _elm_lang$html$Html_Attributes$type_('file'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$View$onchange(_user$project$Types$FilesSelect),
+									_0: _user$project$View_TeamView$onchange(_user$project$Types$FilesSelect),
 									_1: {ctor: '[]'}
 								}
 							},
@@ -568,7 +568,7 @@ var _user$project$View$fileNav = function (model) {
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											'Files: ',
-											_user$project$View$commaSeperate(
+											_user$project$View_TeamView$commaSeperate(
 												A2(
 													_elm_lang$core$List$map,
 													function (_) {
@@ -588,7 +588,7 @@ var _user$project$View$fileNav = function (model) {
 											A2(
 												_elm_lang$core$Basics_ops['++'],
 												'Contents: ',
-												_user$project$View$commaSeperate(model.contents))),
+												_user$project$View_TeamView$commaSeperate(model.contents))),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -685,173 +685,13 @@ var _user$project$View$fileNav = function (model) {
 			}
 		});
 };
-var _user$project$View$feedback = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$style(
-			{
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html$text('Wrong'),
-		_1: {ctor: '[]'}
-	});
-var _user$project$View$stylesheet = function () {
-	var children = {ctor: '[]'};
-	var attrs = {
-		ctor: '::',
-		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
-		_1: {
-			ctor: '::',
-			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
-				_1: {ctor: '[]'}
-			}
-		}
-	};
-	var tag = 'link';
-	return A3(_elm_lang$html$Html$node, tag, attrs, children);
-}();
-var _user$project$View$loginView = function (model) {
+var _user$project$View_TeamView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'padding-left', _1: '35%'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'padding-right', _1: '35%'},
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$h2,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('form-signin-heading'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Please sign in'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$input,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$type_('email'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('inputEmail'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('form-control'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$placeholder('Email address'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Email),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$input,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$type_('password'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$id('inputPassword'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('form-control'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Password),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary btn-block'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Login),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Sign in'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: model.showFeedback ? _user$project$View$feedback : A2(
-										_elm_lang$html$Html$div,
-										{ctor: '[]'},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _user$project$View$stylesheet,
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$View$teamView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$View$navigationbar,
+			_0: _user$project$View_TeamView$navigationbar,
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -863,7 +703,7 @@ var _user$project$View$teamView = function (model) {
 					},
 					{
 						ctor: '::',
-						_0: _user$project$View$fileNav(model),
+						_0: _user$project$View_TeamView$fileNav(model),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -875,10 +715,10 @@ var _user$project$View$teamView = function (model) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$View$sidebar,
+									_0: _user$project$View_TeamView$sidebar,
 									_1: {
 										ctor: '::',
-										_0: _user$project$View$center,
+										_0: _user$project$View_TeamView$center,
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -887,17 +727,9 @@ var _user$project$View$teamView = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View$stylesheet,
+					_0: _user$project$View_Stylesheet$stylesheet,
 					_1: {ctor: '[]'}
 				}
 			}
 		});
-};
-var _user$project$View$view = function (model) {
-	var _p0 = model.view;
-	if (_p0.ctor === 'LoginView') {
-		return _user$project$View$loginView(model);
-	} else {
-		return _user$project$View$teamView(model);
-	}
 };

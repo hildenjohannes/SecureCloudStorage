@@ -39,7 +39,7 @@ type Msg =
 
 type View =
   LoginView |
-  UploadView
+  TeamView
 
 type alias Files =
   List NativeFile

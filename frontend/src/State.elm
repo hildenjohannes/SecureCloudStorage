@@ -1,6 +1,7 @@
-port module State exposing (init, update, subscriptions)
+module State exposing (init, update, subscriptions)
 
 import Types exposing (..)
+import Ports exposing (..)
 
 import FileReader exposing (..)
 import Http exposing (..)
@@ -33,7 +34,7 @@ update msg model =
       ({model | view = LoginView}, Cmd.none)
 
     ShowUpload ->
-      ({model | view = UploadView}, Cmd.none)
+      ({model | view = TeamView}, Cmd.none)
 
     --Upload
     Upload ->
@@ -77,14 +78,9 @@ update msg model =
     Message message ->
       case message of
         "True" ->
-          ({model | loginMsg = message, view = UploadView}, Cmd.none)
+          ({model | loginMsg = message, view = TeamView}, Cmd.none)
         _ ->
           ({model | loginMsg = message}, Cmd.none)
-
-port encrypt : String -> Cmd msg
-port decrypt : String -> Cmd msg
-port encrypted : (String -> msg) -> Sub msg
-port decrypted : (String -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

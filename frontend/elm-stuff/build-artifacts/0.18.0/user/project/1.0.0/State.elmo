@@ -10,32 +10,22 @@ var _user$project$State$sendFileToServer = function (buf) {
 		_user$project$Types$PostResult,
 		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
 };
-var _user$project$State$init = {
-	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		uploadMsg: 'Waiting...',
-		selected: {ctor: '[]'},
-		contents: {ctor: '[]'},
-		encrypted: '',
-		decrypted: '',
-		email: '',
-		password: '',
-		loginMsg: '',
-		showFeedback: false
-	},
-	_1: _elm_lang$core$Platform_Cmd$none
+var _user$project$State$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Ports$encrypted(_user$project$Types$Encrypted),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ports$decrypted(_user$project$Types$Decrypted),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
-var _user$project$State$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
-	'encrypt',
-	function (v) {
-		return v;
-	});
-var _user$project$State$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
-	'decrypt',
-	function (v) {
-		return v;
-	});
 var _user$project$State$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -53,7 +43,7 @@ var _user$project$State$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{view: _user$project$Types$UploadView}),
+						{view: _user$project$Types$TeamView}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Upload':
@@ -92,7 +82,7 @@ var _user$project$State$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$State$encrypt(model.encrypted)
+					_1: _user$project$Ports$encrypt(model.encrypted)
 				};
 			case 'Encrypted':
 				return {
@@ -106,7 +96,7 @@ var _user$project$State$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$State$decrypt(model.encrypted)
+					_1: _user$project$Ports$decrypt(model.encrypted)
 				};
 			case 'Decrypted':
 				return {
@@ -157,7 +147,7 @@ var _user$project$State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2, view: _user$project$Types$UploadView}),
+							{loginMsg: _p2, view: _user$project$Types$TeamView}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
@@ -171,21 +161,19 @@ var _user$project$State$update = F2(
 				}
 		}
 	});
-var _user$project$State$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
-var _user$project$State$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
-var _user$project$State$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
-			ctor: '::',
-			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
-			_1: {
-				ctor: '::',
-				_0: _user$project$State$encrypted(_user$project$Types$Encrypted),
-				_1: {
-					ctor: '::',
-					_0: _user$project$State$decrypted(_user$project$Types$Decrypted),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
+var _user$project$State$init = {
+	ctor: '_Tuple2',
+	_0: {
+		view: _user$project$Types$LoginView,
+		uploadMsg: 'Waiting...',
+		selected: {ctor: '[]'},
+		contents: {ctor: '[]'},
+		encrypted: '',
+		decrypted: '',
+		email: '',
+		password: '',
+		loginMsg: '',
+		showFeedback: false
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
 };

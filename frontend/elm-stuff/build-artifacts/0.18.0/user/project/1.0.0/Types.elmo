@@ -46,5 +46,5 @@ var _user$project$Types$FilesSelect = function (a) {
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
-var _user$project$Types$UploadView = {ctor: 'UploadView'};
+var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};

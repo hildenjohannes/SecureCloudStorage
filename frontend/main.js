@@ -9975,8 +9975,21 @@ var _user$project$Types$FilesSelect = function (a) {
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$ShowUpload = {ctor: 'ShowUpload'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
-var _user$project$Types$UploadView = {ctor: 'UploadView'};
+var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};
+
+var _user$project$Ports$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'encrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$Ports$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
+	'decrypt',
+	function (v) {
+		return v;
+	});
+var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
 
 var _user$project$State$sendFileToServer = function (buf) {
 	var body = _elm_lang$http$Http$multipartBody(
@@ -9990,32 +10003,22 @@ var _user$project$State$sendFileToServer = function (buf) {
 		_user$project$Types$PostResult,
 		A3(_elm_lang$http$Http$post, 'http://localhost:5000/upload', body, _elm_lang$core$Json_Decode$value));
 };
-var _user$project$State$init = {
-	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		uploadMsg: 'Waiting...',
-		selected: {ctor: '[]'},
-		contents: {ctor: '[]'},
-		encrypted: '',
-		decrypted: '',
-		email: '',
-		password: '',
-		loginMsg: '',
-		showFeedback: false
-	},
-	_1: _elm_lang$core$Platform_Cmd$none
+var _user$project$State$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Ports$encrypted(_user$project$Types$Encrypted),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ports$decrypted(_user$project$Types$Decrypted),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
-var _user$project$State$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
-	'encrypt',
-	function (v) {
-		return v;
-	});
-var _user$project$State$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
-	'decrypt',
-	function (v) {
-		return v;
-	});
 var _user$project$State$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -10033,7 +10036,7 @@ var _user$project$State$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{view: _user$project$Types$UploadView}),
+						{view: _user$project$Types$TeamView}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Upload':
@@ -10072,7 +10075,7 @@ var _user$project$State$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$State$encrypt(model.encrypted)
+					_1: _user$project$Ports$encrypt(model.encrypted)
 				};
 			case 'Encrypted':
 				return {
@@ -10086,7 +10089,7 @@ var _user$project$State$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$State$decrypt(model.encrypted)
+					_1: _user$project$Ports$decrypt(model.encrypted)
 				};
 			case 'Decrypted':
 				return {
@@ -10137,7 +10140,7 @@ var _user$project$State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{loginMsg: _p2, view: _user$project$Types$UploadView}),
+							{loginMsg: _p2, view: _user$project$Types$TeamView}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
@@ -10151,26 +10154,186 @@ var _user$project$State$update = F2(
 				}
 		}
 	});
-var _user$project$State$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
-var _user$project$State$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
-var _user$project$State$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
+var _user$project$State$init = {
+	ctor: '_Tuple2',
+	_0: {
+		view: _user$project$Types$LoginView,
+		uploadMsg: 'Waiting...',
+		selected: {ctor: '[]'},
+		contents: {ctor: '[]'},
+		encrypted: '',
+		decrypted: '',
+		email: '',
+		password: '',
+		loginMsg: '',
+		showFeedback: false
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+
+var _user$project$View_Stylesheet$stylesheet = function () {
+	var children = {ctor: '[]'};
+	var attrs = {
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
+		_1: {
 			ctor: '::',
-			_0: A2(_elm_lang$websocket$WebSocket$listen, 'ws://localhost:5000/ws', _user$project$Types$Message),
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
 			_1: {
 				ctor: '::',
-				_0: _user$project$State$encrypted(_user$project$Types$Encrypted),
-				_1: {
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var tag = 'link';
+	return A3(_elm_lang$html$Html$node, tag, attrs, children);
+}();
+
+var _user$project$View_LoginView$feedback = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Wrong'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$View_LoginView$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
 					ctor: '::',
-					_0: _user$project$State$decrypted(_user$project$Types$Decrypted),
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'padding-left', _1: '35%'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'padding-right', _1: '35%'},
+								_1: {ctor: '[]'}
+							}
+						}),
 					_1: {ctor: '[]'}
-				}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h2,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('form-signin-heading'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Please sign in'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('email'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id('inputEmail'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('form-control'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$placeholder('Email address'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Email),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('password'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id('inputPassword'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('form-control'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Password),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary btn-block'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Login),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Sign in'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: model.showFeedback ? _user$project$View_LoginView$feedback : A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View_Stylesheet$stylesheet,
+				_1: {ctor: '[]'}
 			}
 		});
 };
 
-var _user$project$View$tbList = {
+var _user$project$View_TeamView$tbList = {
 	ctor: '::',
 	_0: A2(
 		_elm_lang$html$Html$tr,
@@ -10222,7 +10385,7 @@ var _user$project$View$tbList = {
 		}),
 	_1: {ctor: '[]'}
 };
-var _user$project$View$thList = {
+var _user$project$View_TeamView$thList = {
 	ctor: '::',
 	_0: A2(
 		_elm_lang$html$Html$th,
@@ -10267,7 +10430,7 @@ var _user$project$View$thList = {
 		}
 	}
 };
-var _user$project$View$center = A2(
+var _user$project$View_TeamView$center = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -10316,7 +10479,7 @@ var _user$project$View$center = A2(
 									_0: A2(
 										_elm_lang$html$Html$tr,
 										{ctor: '[]'},
-										_user$project$View$thList),
+										_user$project$View_TeamView$thList),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -10324,7 +10487,7 @@ var _user$project$View$center = A2(
 								_0: A2(
 									_elm_lang$html$Html$tbody,
 									{ctor: '[]'},
-									_user$project$View$tbList),
+									_user$project$View_TeamView$tbList),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -10333,7 +10496,7 @@ var _user$project$View$center = A2(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$View$sidebar = A2(
+var _user$project$View_TeamView$sidebar = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -10481,7 +10644,7 @@ var _user$project$View$sidebar = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$navigationbar = A2(
+var _user$project$View_TeamView$navigationbar = A2(
 	_elm_lang$html$Html$nav,
 	{
 		ctor: '::',
@@ -10626,13 +10789,13 @@ var _user$project$View$navigationbar = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$onchange = function (action) {
+var _user$project$View_TeamView$onchange = function (action) {
 	return A2(
 		_elm_lang$html$Html_Events$on,
 		'change',
 		A2(_elm_lang$core$Json_Decode$map, action, _simonh1000$file_reader$FileReader$parseSelectedFiles));
 };
-var _user$project$View$commaSeperate = function (lst) {
+var _user$project$View_TeamView$commaSeperate = function (lst) {
 	return A3(
 		_elm_lang$core$List$foldl,
 		F2(
@@ -10642,7 +10805,7 @@ var _user$project$View$commaSeperate = function (lst) {
 		'',
 		A2(_elm_lang$core$List$intersperse, ', ', lst));
 };
-var _user$project$View$fileNav = function (model) {
+var _user$project$View_TeamView$fileNav = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10687,7 +10850,7 @@ var _user$project$View$fileNav = function (model) {
 								_0: _elm_lang$html$Html_Attributes$type_('file'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$View$onchange(_user$project$Types$FilesSelect),
+									_0: _user$project$View_TeamView$onchange(_user$project$Types$FilesSelect),
 									_1: {ctor: '[]'}
 								}
 							},
@@ -10740,7 +10903,7 @@ var _user$project$View$fileNav = function (model) {
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											'Files: ',
-											_user$project$View$commaSeperate(
+											_user$project$View_TeamView$commaSeperate(
 												A2(
 													_elm_lang$core$List$map,
 													function (_) {
@@ -10760,7 +10923,7 @@ var _user$project$View$fileNav = function (model) {
 											A2(
 												_elm_lang$core$Basics_ops['++'],
 												'Contents: ',
-												_user$project$View$commaSeperate(model.contents))),
+												_user$project$View_TeamView$commaSeperate(model.contents))),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -10857,173 +11020,13 @@ var _user$project$View$fileNav = function (model) {
 			}
 		});
 };
-var _user$project$View$feedback = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$style(
-			{
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html$text('Wrong'),
-		_1: {ctor: '[]'}
-	});
-var _user$project$View$stylesheet = function () {
-	var children = {ctor: '[]'};
-	var attrs = {
-		ctor: '::',
-		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
-		_1: {
-			ctor: '::',
-			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
-				_1: {ctor: '[]'}
-			}
-		}
-	};
-	var tag = 'link';
-	return A3(_elm_lang$html$Html$node, tag, attrs, children);
-}();
-var _user$project$View$loginView = function (model) {
+var _user$project$View_TeamView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'padding-left', _1: '35%'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'padding-right', _1: '35%'},
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$h2,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('form-signin-heading'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Please sign in'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$input,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$type_('email'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('inputEmail'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('form-control'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$placeholder('Email address'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Email),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$input,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$type_('password'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$id('inputPassword'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('form-control'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Password),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary btn-block'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Login),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Sign in'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: model.showFeedback ? _user$project$View$feedback : A2(
-										_elm_lang$html$Html$div,
-										{ctor: '[]'},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _user$project$View$stylesheet,
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$View$teamView = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$View$navigationbar,
+			_0: _user$project$View_TeamView$navigationbar,
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -11035,7 +11038,7 @@ var _user$project$View$teamView = function (model) {
 					},
 					{
 						ctor: '::',
-						_0: _user$project$View$fileNav(model),
+						_0: _user$project$View_TeamView$fileNav(model),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -11047,10 +11050,10 @@ var _user$project$View$teamView = function (model) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$View$sidebar,
+									_0: _user$project$View_TeamView$sidebar,
 									_1: {
 										ctor: '::',
-										_0: _user$project$View$center,
+										_0: _user$project$View_TeamView$center,
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -11059,18 +11062,19 @@ var _user$project$View$teamView = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View$stylesheet,
+					_0: _user$project$View_Stylesheet$stylesheet,
 					_1: {ctor: '[]'}
 				}
 			}
 		});
 };
+
 var _user$project$View$view = function (model) {
 	var _p0 = model.view;
 	if (_p0.ctor === 'LoginView') {
-		return _user$project$View$loginView(model);
+		return _user$project$View_LoginView$view(model);
 	} else {
-		return _user$project$View$teamView(model);
+		return _user$project$View_TeamView$view(model);
 	}
 };
 
