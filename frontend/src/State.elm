@@ -89,7 +89,7 @@ subscriptions model =
   Sub.batch
     [ WebSocket.listen "ws://localhost:5000/ws" Message
     , encrypted Encrypted
-    , decrypted Decrypted]
+    , decrypted Decrypted ]
 
 --Upload
 sendFileToServer : NativeFile -> Cmd Msg
