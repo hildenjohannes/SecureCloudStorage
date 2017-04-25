@@ -8,19 +8,8 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Json.Decode as Json exposing (Value)
 import FileReader exposing (..)
-<<<<<<< 8d2349cfa7f44f1ef6633f6197a2d1449409a7c7:frontend/src/View/TeamView.elm
-=======
 import Types exposing (..)
 import List
-
-view : Model -> Html Msg
-view model =
-  case model.view of
-    LoginView ->
-      loginView model
-
-    UploadView ->
-      teamView model
 
 stylesheet : Html Msg
 stylesheet =
@@ -40,36 +29,10 @@ stylesheet =
     in
         node tag attrs children
 
-loginView : Model -> Html Msg
-loginView model =
-    {--div [style [("padding-left", "35%"), ("padding-right", "35%")]]
-      [Html.form [] [  h2 [class "form-signin-heading"] [text "Please sign in"]
-        , input [ class ".input-lg", type_ "text", placeholder "Email", onInput Email ] []
-        , input [ class "input-sm", type_ "password", placeholder "Password", onInput Password ] []
-        , button [ onClick Login ] [ text "Login" ]
-        , if model.showFeedback then feedback else div [] [] ]
-      ]-}
-
- div []--class "container"
-      [
-      div [style [ ("padding-left", "35%"), ("padding-right", "35%")]] [
-        --Html.form [class "form-signin"]--style [("width", "50%")]
-          h2 [class "form-signin-heading"] [text "Please sign in"]
-          --, label [for "inputEmail", class "sr-only"] [text "Email address"]
-          , input [type_ "email", id "inputEmail", class "form-control", placeholder "Email address", onInput Email] []
-        --  , label [for "inputPassword", class "sr-only"] [text "Password"]
-          , input [type_ "password", id "inputPassword", class "form-control", placeholder "Password", onInput Password] []
-          , button [class "btn btn-lg btn-primary btn-block", onClick Login] [text "Sign in"]
-          , if model.showFeedback then feedback else div [] []
-        ]
-        ,stylesheet
-      ]
 
 feedback : Html Msg
 feedback =
   div [ style [("color", "red")] ] [ text "Wrong" ]
-
->>>>>>> some old prototype code and start of functionality which lists file in team/upload view:nonModular/View.elm
 
 {--uploadView : Model -> Html Msg
 uploadView model =
@@ -163,11 +126,7 @@ fileNav model =
       [
        h1 [] [text "Single file select"]
        , input [type_ "file", onchange FilesSelect] []
-<<<<<<< 8d2349cfa7f44f1ef6633f6197a2d1449409a7c7:frontend/src/View/TeamView.elm
-       , button [onClick Upload] [text "Upload"]
-=======
        , button [onClick Upload] [text "Upload file"]
->>>>>>> some old prototype code and start of functionality which lists file in team/upload view:nonModular/View.elm
       ]
     , div [class "center"]
       [
@@ -214,7 +173,8 @@ tbList : Model -> List (Html Msg)
 tbList model =
   [tr [] --onClick
     [
-    td [] [text (maybeToString ((!!) 0 model.files))],
+    --td [] [text (maybeToString ((!!) 0 model.files))],
+    td [] [text model.files],
     td [] [text "Rebecka"],
     td [] [text "1 KB"],
     td [] [text "1 April 2017"]
