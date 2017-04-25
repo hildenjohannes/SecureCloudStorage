@@ -204,8 +204,8 @@ tbList : Model -> List (Html Msg)
 tbList model =
   [tr [] --onClick
     [
-    --td [] [text (maybeToString ((!!) 0 model.files))],
-    td [] [text model.files],
+    td [] [text (maybeToString ((!!) 0 model.files))],
+    --td [] [text model.files],
     td [] [text "Rebecka"],
     td [] [text "1 KB"],
     td [] [text "1 April 2017"]

@@ -21,8 +21,8 @@ init =
     , loginMsg = ""
     , showFeedback = False
     --listFiles
-    --, files = []
-    , files = ""
+    , files = []
+    --, files = ""
 
     }, Cmd.none
     )
@@ -52,7 +52,7 @@ update msg model =
 
     PostResult (Err err) ->
       ({ model | uploadMsg =  "Ok",  view = UploadView}, WebSocket.send "ws://localhost:5000/ws"
-      ("listFiles|")) --toString err } ! []
+      ("listFiles|")) --toString err } ! [] --TODO change packege code in fileReader to be able to recive lager answernumbers then 200
 
     --Login
     Email email ->
@@ -72,25 +72,37 @@ update msg model =
         "False"->
           ({model | loginMsg = message}, Cmd.none)
         _ ->
-          ({model | files = (parseFiles message)}, Cmd.none) --message}, Cmd.none)
+          ({model | files = (parseJsonFiles message)}, Cmd.none) --message}, Cmd.none)
 
 
 
     --Download
 
 --decoder for json parser
---string : Decoder String
+stringsDecoder : Decoder (List String)
+stringsDecoder = list string
 
-parseFiles : String -> {-List-} String
-parseFiles s =  -- TODO result can retunera "error" och har nått gått fel... vi kompenserar inte för detta just nu
-  let files = (decodeString ({-list-} string) s) in --(field "name" list string) s) in
+parseJsonFiles : String -> (List String)
+parseJsonFiles jsonString = result (decodeString stringsDecoder jsonString)
+
+result result =
+  case result of
+    Ok payload ->
+      payload
+    Err errorString ->
+      [errorString]
+
+{-
+
+  let files = (decodeString stringDecoder s) in --(field "name" list string) s) in
   getStringList files
   --let files = decodeString (field "name" list string) s in
   --createList files
 
-getStringList : (Result {-List-} String) -> ({-List-} String)
-getStringList (Ok ls) = ls
-getSrtingList (Err ls) = "Error in the decoder/parser"
+getStringList : (Result List String) -> (List String)
+getStringList (Result.Ok ls) = ls
+getSrtingList (Result.Err ls) = "Error in the decoder/parser"
+-}
 
 {- exemple json
 - {
