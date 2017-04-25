@@ -36,7 +36,7 @@ var _user$project$State$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$UploadView}),
-					_1: _elm_lang$core$Platform_Cmd$none
+					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
 			case 'Upload':
 				return A2(
@@ -52,21 +52,24 @@ var _user$project$State$update = F2(
 					{ctor: '[]'});
 			case 'PostResult':
 				if (_p0._0.ctor === 'Ok') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0)
+								uploadMsg: _elm_lang$core$Basics$toString(_p0._0._0),
+								view: _user$project$Types$UploadView
 							}),
-						{ctor: '[]'});
+						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+					};
 				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{uploadMsg: 'Ok'}),
-						{ctor: '[]'});
+							{uploadMsg: 'Ok', view: _user$project$Types$UploadView}),
+						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
+					};
 				}
 			case 'Email':
 				return {
@@ -104,22 +107,31 @@ var _user$project$State$update = F2(
 			default:
 				var _p2 = _p0._0;
 				var _p1 = _p2;
-				if (_p1 === 'True') {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2, view: _user$project$Types$UploadView}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				} else {
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+				switch (_p1) {
+					case 'True':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p2, view: _user$project$Types$UploadView}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case 'False':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{loginMsg: _p2}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{files: _p2}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 				}
 		}
 	});
@@ -133,7 +145,8 @@ var _user$project$State$init = {
 		email: '',
 		password: '',
 		loginMsg: '',
-		showFeedback: false
+		showFeedback: false,
+		files: ''
 	},
 	_1: _elm_lang$core$Platform_Cmd$none
 };

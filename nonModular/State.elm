@@ -21,7 +21,8 @@ init =
     , loginMsg = ""
     , showFeedback = False
     --listFiles
-    , files = []
+    --, files = []
+    , files = ""
 
     }, Cmd.none
     )
@@ -34,7 +35,7 @@ update msg model =
 
     ShowUpload -> -- also lists files
       ({model | view = UploadView}, WebSocket.send "ws://localhost:5000/ws"
-      ("listFiles|" ++ model.email))
+      ("listFiles|"))
 
     --Upload+
     Upload ->
@@ -46,10 +47,12 @@ update msg model =
       , uploadMsg = "Something selected" } ! []
 
     PostResult (Ok msg) ->
-      { model | uploadMsg = toString msg } ! []
+      ({ model | uploadMsg = toString msg, view = UploadView}, WebSocket.send "ws://localhost:5000/ws"
+      ("listFiles|")) --! []
 
     PostResult (Err err) ->
-      { model | uploadMsg =  "Ok" } ! [] --toString err } ! []
+      ({ model | uploadMsg =  "Ok",  view = UploadView}, WebSocket.send "ws://localhost:5000/ws"
+      ("listFiles|")) --toString err } ! []
 
     --Login
     Email email ->
@@ -69,7 +72,8 @@ update msg model =
         "False"->
           ({model | loginMsg = message}, Cmd.none)
         _ ->
-          (({model | files = (parseFiles message)}, Cmd.none))
+          ({model | files = (parseFiles message)}, Cmd.none) --message}, Cmd.none)
+
 
 
     --Download
@@ -77,15 +81,16 @@ update msg model =
 --decoder for json parser
 --string : Decoder String
 
-parseFiles : String -> List String
+parseFiles : String -> {-List-} String
 parseFiles s =  -- TODO result can retunera "error" och har nått gått fel... vi kompenserar inte för detta just nu
-  let files = (decodeString (field "name" list string) s) in
+  let files = (decodeString ({-list-} string) s) in --(field "name" list string) s) in
   getStringList files
   --let files = decodeString (field "name" list string) s in
   --createList files
 
-getStringList : (Result List String) -> (List String)
-getStringList  = 
+getStringList : (Result {-List-} String) -> ({-List-} String)
+getStringList (Ok ls) = ls
+getSrtingList (Err ls) = "Error in the decoder/parser"
 
 {- exemple json
 - {
@@ -109,3 +114,6 @@ sendFileToServer buf =
   in
     Http.post "http://localhost:5000/upload" body Json.value
       |> Http.send PostResult
+
+--listFiles
+--listFiles :
