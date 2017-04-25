@@ -35,7 +35,8 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     ShowLogin ->
-      {model | view = LoginView} ! []
+      ({model | view = LoginView},  WebSocket.send "ws://localhost:5000/ws"
+      ("listFiles|"))
 
     ShowUpload ->
       ({model | view = TeamView}, WebSocket.send "ws://localhost:5000/ws"
@@ -83,10 +84,14 @@ update msg model =
       ("login|" ++ model.email ++ "|" ++ model.password)
       ]
 
+    --TODO: split into several messages
+
+    --websocket responses
     Message message ->
       case message of
         "True" ->
-          ({model | loginMsg = message, view = TeamView}, Cmd.none)
+          ({model | loginMsg = message, view = TeamView}, WebSocket.send "ws://localhost:5000/ws"
+          ("listFiles|"))
         "False"->
           ({model | loginMsg = message}, Cmd.none)
         _ ->
