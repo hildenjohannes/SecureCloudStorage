@@ -9926,7 +9926,6 @@ var _simonh1000$file_reader$FileReader$readAsTextFile = function (fileRef) {
 };
 var _simonh1000$file_reader$FileReader$ReadFail = {ctor: 'ReadFail'};
 var _simonh1000$file_reader$FileReader$NoValidBlob = {ctor: 'NoValidBlob'};
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
 
 var _user$project$Types$Model = function (a) {
 	return function (b) {
@@ -9938,7 +9937,9 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, uploadMsg: b, selected: c, contents: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j};
+										return function (k) {
+											return {view: a, uploadMsg: b, selected: c, contents: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, showFeedback: j, files: k};
+										};
 									};
 								};
 							};
@@ -9949,12 +9950,6 @@ var _user$project$Types$Model = function (a) {
 		};
 	};
 };
-=======
-var _user$project$Types$Model = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {view: a, uploadMsg: b, selected: c, contents: d, email: e, password: f, loginMsg: g, showFeedback: h, files: i};
-	});
->>>>>>> index file:nonModular/index.html
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
@@ -10048,30 +10043,21 @@ var _user$project$State$update = F2(
 		var _p1 = msg;
 		switch (_p1.ctor) {
 			case 'ShowLogin':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-					{ctor: '[]'});
-=======
 					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
->>>>>>> index file:nonModular/index.html
 			case 'ShowUpload':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
 						{view: _user$project$Types$TeamView}),
-					{ctor: '[]'});
-=======
-						{view: _user$project$Types$UploadView}),
 					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
->>>>>>> index file:nonModular/index.html
 			case 'Upload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10092,7 +10078,7 @@ var _user$project$State$update = F2(
 							model,
 							{
 								uploadMsg: _elm_lang$core$Basics$toString(_p1._0._0),
-								view: _user$project$Types$UploadView
+								view: _user$project$Types$TeamView
 							}),
 						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 					};
@@ -10101,7 +10087,7 @@ var _user$project$State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{uploadMsg: 'Ok', view: _user$project$Types$UploadView}),
+							{uploadMsg: 'Ok', view: _user$project$Types$TeamView}),
 						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 					};
 				}
@@ -10119,7 +10105,7 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p0._0}),
+						{encrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Decrypt':
 				return A2(
@@ -10135,34 +10121,22 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{decrypted: _p0._0}),
+						{decrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Email':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-						{email: _p0._0, showFeedback: false}),
-					{ctor: '[]'});
-=======
 						{email: _p1._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
->>>>>>> index file:nonModular/index.html
+					{ctor: '[]'});
 			case 'Password':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-						{password: _p0._0, showFeedback: false}),
-					{ctor: '[]'});
-=======
 						{password: _p1._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
->>>>>>> index file:nonModular/index.html
+					{ctor: '[]'});
 			case 'Login':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10184,24 +10158,6 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-				var _p2 = _p0._0;
-				var _p1 = _p2;
-				if (_p1 === 'True') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2, view: _user$project$Types$TeamView}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2}),
-						{ctor: '[]'});
-=======
 				var _p3 = _p1._0;
 				var _p2 = _p3;
 				switch (_p2) {
@@ -10210,7 +10166,7 @@ var _user$project$State$update = F2(
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
-								{loginMsg: _p3, view: _user$project$Types$UploadView}),
+								{loginMsg: _p3, view: _user$project$Types$TeamView}),
 							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 						};
 					case 'False':
@@ -10227,11 +10183,11 @@ var _user$project$State$update = F2(
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									files: _user$project$State$parseJsonFiles(_p3)
+									files: _user$project$State$parseJsonFiles(_p3),
+									view: _user$project$Types$TeamView
 								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
->>>>>>> index file:nonModular/index.html
 				}
 		}
 	});
@@ -10252,7 +10208,6 @@ var _user$project$State$init = {
 	},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
 
 var _user$project$View_Stylesheet$stylesheet = function () {
 	var children = {ctor: '[]'};
@@ -10416,25 +10371,8 @@ var _user$project$View_LoginView$view = function (model) {
 		});
 };
 
-var _user$project$View_TeamView$tbList = {
-	ctor: '::',
-	_0: A2(
-		_elm_lang$html$Html$tr,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$td,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('File1'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-=======
-var _user$project$View_ops = _user$project$View_ops || {};
-_user$project$View_ops['!!'] = F2(
+var _user$project$View_TeamView_ops = _user$project$View_TeamView_ops || {};
+_user$project$View_TeamView_ops['!!'] = F2(
 	function (index, list) {
 		return (_elm_lang$core$Native_Utils.cmp(
 			_elm_lang$core$List$length(list),
@@ -10442,7 +10380,7 @@ _user$project$View_ops['!!'] = F2(
 			_elm_lang$core$List$reverse(
 				A2(_elm_lang$core$List$take, index, list))) : _elm_lang$core$Maybe$Nothing;
 	});
-var _user$project$View$maybeToString = function (s) {
+var _user$project$View_TeamView$maybeToString = function (s) {
 	var _p0 = s;
 	if (_p0.ctor === 'Just') {
 		return _p0._0;
@@ -10450,16 +10388,15 @@ var _user$project$View$maybeToString = function (s) {
 		return 'Error';
 	}
 };
-var _user$project$View$listF = function (list) {
+var _user$project$View_TeamView$listF = function (list) {
 	var _p1 = list;
 	if (_p1.ctor === '[]') {
 		return {ctor: '[]'};
 	} else {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
-			_user$project$View$listF(_p1._1),
+			_user$project$View_TeamView$listF(_p1._1),
 			{
->>>>>>> index file:nonModular/index.html
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$tr,
@@ -10513,8 +10450,8 @@ var _user$project$View$listF = function (list) {
 			});
 	}
 };
-var _user$project$View$tbList = function (model) {
-	return _user$project$View$listF(model.files);
+var _user$project$View_TeamView$tbList = function (model) {
+	return _user$project$View_TeamView$listF(model.files);
 };
 var _user$project$View_TeamView$thList = {
 	ctor: '::',
@@ -10561,31 +10498,7 @@ var _user$project$View_TeamView$thList = {
 		}
 	}
 };
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-var _user$project$View_TeamView$center = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('col-sm-9 col-md-10 main'),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$h1,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('page-header'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Files'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-=======
-var _user$project$View$center = function (model) {
+var _user$project$View_TeamView$center = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10594,7 +10507,6 @@ var _user$project$View$center = function (model) {
 			_1: {ctor: '[]'}
 		},
 		{
->>>>>>> index file:nonModular/index.html
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$h1,
@@ -10636,7 +10548,7 @@ var _user$project$View$center = function (model) {
 										_0: A2(
 											_elm_lang$html$Html$tr,
 											{ctor: '[]'},
-											_user$project$View$thList),
+											_user$project$View_TeamView$thList),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -10644,27 +10556,7 @@ var _user$project$View$center = function (model) {
 									_0: A2(
 										_elm_lang$html$Html$tbody,
 										{ctor: '[]'},
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-										_user$project$View_TeamView$thList),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$tbody,
-									{ctor: '[]'},
-									_user$project$View_TeamView$tbList),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	});
-var _user$project$View_TeamView$sidebar = A2(
-=======
-										_user$project$View$tbList(model)),
+										_user$project$View_TeamView$tbList(model)),
 									_1: {ctor: '[]'}
 								}
 							}),
@@ -10674,8 +10566,7 @@ var _user$project$View_TeamView$sidebar = A2(
 			}
 		});
 };
-var _user$project$View$sidebar = A2(
->>>>>>> index file:nonModular/index.html
+var _user$project$View_TeamView$sidebar = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -11045,11 +10936,7 @@ var _user$project$View_TeamView$fileNav = function (model) {
 								},
 								{
 									ctor: '::',
-<<<<<<< 8d2349cfa7f44f1ef6633f6197a2d1449409a7c7:frontend/main.js
-									_0: _elm_lang$html$Html$text('Upload'),
-=======
 									_0: _elm_lang$html$Html$text('Upload file'),
->>>>>>> some old prototype code and start of functionality which lists file in team/upload view:nonModular/index.html
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -11203,6 +11090,41 @@ var _user$project$View_TeamView$fileNav = function (model) {
 			}
 		});
 };
+var _user$project$View_TeamView$feedback = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Wrong'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$View_TeamView$stylesheet = function () {
+	var children = {ctor: '[]'};
+	var attrs = {
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'Rel', 'stylesheet'),
+		_1: {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'property', 'stylesheet'),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var tag = 'link';
+	return A3(_elm_lang$html$Html$node, tag, attrs, children);
+}();
 var _user$project$View_TeamView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -11236,11 +11158,7 @@ var _user$project$View_TeamView$view = function (model) {
 									_0: _user$project$View_TeamView$sidebar,
 									_1: {
 										ctor: '::',
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
-										_0: _user$project$View_TeamView$center,
-=======
-										_0: _user$project$View$center(model),
->>>>>>> index file:nonModular/index.html
+										_0: _user$project$View_TeamView$center(model),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -11249,7 +11167,7 @@ var _user$project$View_TeamView$view = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View_Stylesheet$stylesheet,
+					_0: _user$project$View_TeamView$stylesheet,
 					_1: {ctor: '[]'}
 				}
 			}
@@ -11257,20 +11175,9 @@ var _user$project$View_TeamView$view = function (model) {
 };
 
 var _user$project$View$view = function (model) {
-<<<<<<< a580d2f53aea2fc2c6ac29ee7fe2c797a8e7a448:frontend/main.js
-<<<<<<< 8f55f3a3a0b508b45c09ea7db6d8c248188ffeee:frontend/main.js
 	var _p0 = model.view;
 	if (_p0.ctor === 'LoginView') {
 		return _user$project$View_LoginView$view(model);
-=======
-	var _p1 = model.view;
-	if (_p1.ctor === 'LoginView') {
-=======
-	var _p2 = model.view;
-	if (_p2.ctor === 'LoginView') {
->>>>>>> index file:nonModular/index.html
-		return _user$project$View$loginView(model);
->>>>>>> index file:nonModular/index.html
 	} else {
 		return _user$project$View_TeamView$view(model);
 	}

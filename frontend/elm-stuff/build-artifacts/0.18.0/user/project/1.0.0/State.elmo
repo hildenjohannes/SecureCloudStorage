@@ -48,30 +48,21 @@ var _user$project$State$update = F2(
 		var _p1 = msg;
 		switch (_p1.ctor) {
 			case 'ShowLogin':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-<<<<<<< 48f626c63698070af143d6b004f54ef1ed47c7ec:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
-					{ctor: '[]'});
-=======
 					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
->>>>>>> elm-stuff:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 			case 'ShowUpload':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 7ffc65bd579a60d166a24443119a06aa77ec5d86:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 						{view: _user$project$Types$TeamView}),
-					{ctor: '[]'});
-=======
-						{view: _user$project$Types$UploadView}),
 					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 				};
->>>>>>> names are will be fetched from the backend and shown in the frontend:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 			case 'Upload':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -92,7 +83,7 @@ var _user$project$State$update = F2(
 							model,
 							{
 								uploadMsg: _elm_lang$core$Basics$toString(_p1._0._0),
-								view: _user$project$Types$UploadView
+								view: _user$project$Types$TeamView
 							}),
 						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 					};
@@ -101,7 +92,7 @@ var _user$project$State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{uploadMsg: 'Ok', view: _user$project$Types$UploadView}),
+							{uploadMsg: 'Ok', view: _user$project$Types$TeamView}),
 						_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 					};
 				}
@@ -119,7 +110,7 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p0._0}),
+						{encrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Decrypt':
 				return A2(
@@ -135,34 +126,22 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{decrypted: _p0._0}),
+						{decrypted: _p1._0}),
 					{ctor: '[]'});
 			case 'Email':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 42902214a7cc9ab9189ac4c7c7d018f2471c47fb:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
-						{email: _p0._0, showFeedback: false}),
-					{ctor: '[]'});
-=======
 						{email: _p1._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
->>>>>>> json readings are done from the backend to frontedn though we get error meseage from the deocder:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
+					{ctor: '[]'});
 			case 'Password':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-<<<<<<< 42902214a7cc9ab9189ac4c7c7d018f2471c47fb:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
-						{password: _p0._0, showFeedback: false}),
-					{ctor: '[]'});
-=======
 						{password: _p1._0, showFeedback: false}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
->>>>>>> json readings are done from the backend to frontedn though we get error meseage from the deocder:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
+					{ctor: '[]'});
 			case 'Login':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -184,37 +163,15 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-<<<<<<< 42902214a7cc9ab9189ac4c7c7d018f2471c47fb:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
-				var _p2 = _p0._0;
-				var _p1 = _p2;
-<<<<<<< 7ffc65bd579a60d166a24443119a06aa77ec5d86:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
-				if (_p1 === 'True') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2, view: _user$project$Types$TeamView}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{loginMsg: _p2}),
-						{ctor: '[]'});
-=======
-				switch (_p1) {
-=======
 				var _p3 = _p1._0;
 				var _p2 = _p3;
 				switch (_p2) {
->>>>>>> json readings are done from the backend to frontedn though we get error meseage from the deocder:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 					case 'True':
 						return {
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
-								{loginMsg: _p3, view: _user$project$Types$UploadView}),
+								{loginMsg: _p3, view: _user$project$Types$TeamView}),
 							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
 						};
 					case 'False':
@@ -231,11 +188,11 @@ var _user$project$State$update = F2(
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									files: _user$project$State$parseJsonFiles(_p3)
+									files: _user$project$State$parseJsonFiles(_p3),
+									view: _user$project$Types$TeamView
 								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
->>>>>>> names are will be fetched from the backend and shown in the frontend:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/State.elmo
 				}
 		}
 	});

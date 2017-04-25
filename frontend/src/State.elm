@@ -92,14 +92,10 @@ update msg model =
         "True" ->
           ({model | loginMsg = message, view = TeamView}, WebSocket.send "ws://localhost:5000/ws"
           ("listFiles|"))
-        "False"->
+        "False" ->
           ({model | loginMsg = message}, Cmd.none)
         _ ->
-          ({model | files = (parseJsonFiles message)}, Cmd.none) --message}, Cmd.none)
-
-
-
-    --Download
+          ({model | files = (parseJsonFiles message), view = TeamView}, Cmd.none) --message}, Cmd.none)
 
 --decoder for json parser
 stringsDecoder : Decoder (List String)
@@ -115,24 +111,6 @@ result result =
     Err errorString ->
       [errorString]
 
-{-
-
-  let files = (decodeString stringDecoder s) in --(field "name" list string) s) in
-  getStringList files
-  --let files = decodeString (field "name" list string) s in
-  --createList files
-
-getStringList : (Result List String) -> (List String)
-getStringList (Result.Ok ls) = ls
-getSrtingList (Result.Err ls) = "Error in the decoder/parser"
--}
-
-{- exemple json
-- {
--   "name" = ["name1", "name2", "name3"],
--   "size" = [1, 3, 6]
-- }
--}
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
