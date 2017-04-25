@@ -170,8 +170,8 @@ thList =             [
   ]
 
 tbList : Model -> List (Html Msg)
-tbList model =
-  [tr [] --onClick
+tbList model = listF model.files
+{-  [tr [] --onClick
     [
     td [] [text (maybeToString ((!!) 1 model.files))],
     --td [] [text model.files],
@@ -179,7 +179,23 @@ tbList model =
     td [] [text "1 KB"],
     td [] [text "1 April 2017"]
     ]
-  ]
+  ] -}
+
+
+listF : List String -> List (Html Msg)
+listF list =
+ case list of
+    [] -> []
+    x::xs ->  (listF xs ) ++
+              [tr [] --onClick
+              [
+                td [] [text x],
+                --td [] [text model.files],
+                td [] [text "Rebecka"],
+                td [] [text "1 KB"],
+                td [] [text "1 April 2017"]
+              ]]
+
 
 maybeToString : Maybe String -> String
 maybeToString s =
