@@ -33,49 +33,28 @@ var _user$project$View$maybeToString = function (s) {
 		return 'Error';
 	}
 };
-var _user$project$View$tbList = function (model) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$tr,
-			{ctor: '[]'},
+var _user$project$View$listF = function (list) {
+	var _p1 = list;
+	if (_p1.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$View$listF(_p1._1),
 			{
 >>>>>>> some old prototype code and start of functionality which lists file in team/upload view:nonModular/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/View.elmo
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$td,
+					_elm_lang$html$Html$tr,
 					{ctor: '[]'},
 					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							_user$project$View$maybeToString(
-								A2(
-									F2(
-										function (x, y) {
-											return A2(_user$project$View_ops['!!'], x, y);
-										}),
-									1,
-									model.files))),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$td,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Rebecka'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$td,
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('1 KB'),
+								_0: _elm_lang$html$Html$text(_p1._0),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -85,16 +64,40 @@ var _user$project$View$tbList = function (model) {
 								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('1 April 2017'),
+									_0: _elm_lang$html$Html$text('Rebecka'),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$td,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('1 KB'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$td,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('1 April 2017'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
 						}
-					}
-				}
-			}),
-		_1: {ctor: '[]'}
-	};
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$View$tbList = function (model) {
+	return _user$project$View$listF(model.files);
 };
 var _user$project$ViewTeam$thList = {
 	ctor: '::',
@@ -856,8 +859,8 @@ var _user$project$ViewTeam$view = function (model) {
 <<<<<<< 8d2349cfa7f44f1ef6633f6197a2d1449409a7c7:frontend/elm-stuff/build-artifacts/0.18.0/user/project/1.0.0/ViewTeam.elmo
 =======
 var _user$project$View$view = function (model) {
-	var _p1 = model.view;
-	if (_p1.ctor === 'LoginView') {
+	var _p2 = model.view;
+	if (_p2.ctor === 'LoginView') {
 		return _user$project$View$loginView(model);
 	} else {
 		return _user$project$View$teamView(model);
