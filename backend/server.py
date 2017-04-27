@@ -1,5 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
 
+json = '["fakeFile0", "fakeFile1"]'
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
         return True
