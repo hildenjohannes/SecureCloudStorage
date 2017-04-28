@@ -8,9 +8,7 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, files: j, showFeedback: k};
-										};
+										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, files: i, showFeedback: j};
 									};
 								};
 							};
@@ -25,10 +23,10 @@ var _user$project$Types$FileData = F2(
 	function (a, b) {
 		return {filename: a, content: b};
 	});
-var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
 };
+var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Password = function (a) {
 	return {ctor: 'Password', _0: a};
 };

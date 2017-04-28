@@ -6,29 +6,37 @@ class SocketHandler(websocket.WebSocketHandler):
         return True
 
     def open(self):
-        pass
+        self.authenticated = False
 
     def on_message(self, message):
         params = message.split("|")
         method = params.pop(0)
-        if method == "login":
-            self.write_message(str(self.login(params)))
-        elif method == "upload":
+
+        if self.authenticated:
+            self.handleCall(method, params)
+        elif method == "login":
+            self.write_message("login|" + str(self.login(params)))
+        else:
+            self.write_message("error|notAuthenticated")
+
+    def on_close(self):
+        self.authenticated = False
+
+    def handleCall(self, method, params):
+        if method == "upload":
             print(params[0])
             print(params[1])
         elif method == "listFiles":
-            self.write_message(json) # TODO: get actual files
+            self.write_message("listFiles|" + json) # TODO: get actual files
         else:
             self.write_message("Invalid argument")
-
-    def on_close(self):
-        pass
 
     def login(self, params):
         if params[0] != "test@chalmers.se":
             return False
         if params[1] != "qwerty":
             return False
+        self.authenticated = True
         return True
 
 app = web.Application([
