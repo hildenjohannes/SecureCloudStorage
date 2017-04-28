@@ -62,7 +62,7 @@
         decipher.finish();
         var decrypted = decipher.output;
         // transforms to hex
-        var decryptedHex = decrypted.toHex()
+        var decryptedHex = decrypted.toHex();
 
         // transforms to string?
         return forge.util.hexToBytes(decryptedHex);
