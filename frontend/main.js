@@ -9221,9 +9221,7 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, loginMsg: i, files: j, showFeedback: k};
-										};
+										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, files: i, showFeedback: j};
 									};
 								};
 							};
@@ -9238,10 +9236,10 @@ var _user$project$Types$FileData = F2(
 	function (a, b) {
 		return {filename: a, content: b};
 	});
-var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
 };
+var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Password = function (a) {
 	return {ctor: 'Password', _0: a};
 };
@@ -9333,18 +9331,82 @@ var _user$project$State$parseJsonFiles = function (jsonString) {
 	return _user$project$State$result(
 		A2(_elm_lang$core$Json_Decode$decodeString, _user$project$State$stringsDecoder, jsonString));
 };
+var _user$project$State$extract = function (x) {
+	var _p1 = x;
+	if (_p1.ctor === 'Just') {
+		return _p1._0;
+	} else {
+		return 'Nothing';
+	}
+};
+var _user$project$State$websocketMessage = F3(
+	function (model, method, params) {
+		var _p2 = _user$project$State$extract(method);
+		switch (_p2) {
+			case 'login':
+				var _p3 = _user$project$State$extract(
+					_elm_lang$core$List$head(params));
+				if (_p3 === 'True') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{showFeedback: false, view: _user$project$Types$TeamView}),
+						{
+							ctor: '::',
+							_0: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|'),
+							_1: {ctor: '[]'}
+						});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{showFeedback: true}),
+						{
+							ctor: '::',
+							_0: _elm_lang$core$Platform_Cmd$none,
+							_1: {ctor: '[]'}
+						});
+				}
+			case 'listFiles':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							files: _user$project$State$parseJsonFiles(
+								_user$project$State$extract(
+									_elm_lang$core$List$head(params))),
+							view: _user$project$Types$TeamView
+						}),
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Platform_Cmd$none,
+						_1: {ctor: '[]'}
+					});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Platform_Cmd$none,
+						_1: {ctor: '[]'}
+					});
+		}
+	});
 var _user$project$State$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p4 = msg;
+		switch (_p4.ctor) {
 			case 'ShowLogin':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
-				};
+					{ctor: '[]'});
 			case 'ShowTeam':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9362,27 +9424,30 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			case 'Upload':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: A2(
-						_elm_lang$websocket$WebSocket$send,
-						'ws://localhost:5000/ws',
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							'upload|',
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$websocket$WebSocket$send,
+							'ws://localhost:5000/ws',
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								model.filename,
-								A2(_elm_lang$core$Basics_ops['++'], '|', model.encrypted))))
-				};
+								'upload|',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									model.filename,
+									A2(_elm_lang$core$Basics_ops['++'], '|', model.encrypted)))),
+						_1: {ctor: '[]'}
+					});
 			case 'FileRead':
-				var _p2 = _p1._0;
+				var _p5 = _p4._0;
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{filename: _p2.filename, content: _p2.content}),
+						{filename: _p5.filename, content: _p5.content}),
 					{
 						ctor: '::',
 						_0: _user$project$Ports$encrypt(model.content),
@@ -9393,28 +9458,28 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p1._0}),
+						{encrypted: _p4._0}),
 					{ctor: '[]'});
 			case 'Decrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{decrypted: _p1._0}),
+						{decrypted: _p4._0}),
 					{ctor: '[]'});
 			case 'Email':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{email: _p1._0, showFeedback: false}),
+						{email: _p4._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Password':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{password: _p1._0, showFeedback: false}),
+						{password: _p4._0, showFeedback: false}),
 					{ctor: '[]'});
 			case 'Login':
 				return A2(
@@ -9437,37 +9502,10 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			default:
-				var _p4 = _p1._0;
-				var _p3 = _p4;
-				switch (_p3) {
-					case 'True':
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{loginMsg: _p4, view: _user$project$Types$TeamView}),
-							_1: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'listFiles|')
-						};
-					case 'False':
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{loginMsg: _p4}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					default:
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									files: _user$project$State$parseJsonFiles(_p4),
-									view: _user$project$Types$TeamView
-								}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-				}
+				var temp = A2(_elm_lang$core$String$split, '|', _p4._0);
+				var params = A2(_elm_lang$core$List$drop, 1, temp);
+				var method = _elm_lang$core$List$head(temp);
+				return A3(_user$project$State$websocketMessage, model, method, params);
 		}
 	});
 var _user$project$State$init = {
@@ -9481,7 +9519,6 @@ var _user$project$State$init = {
 		decrypted: '',
 		email: '',
 		password: '',
-		loginMsg: '',
 		showFeedback: false,
 		files: {ctor: '[]'}
 	},

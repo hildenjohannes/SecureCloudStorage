@@ -12,7 +12,6 @@ type alias Model =
   --Login
   , email : String
   , password : String
-  , loginMsg : String
   , files: List String
   , showFeedback: Bool }
 
@@ -33,8 +32,9 @@ type Msg =
   --Login
   Email String |
   Password String |
-  Message String | --from server
-  Login            --if the login button has been pressed
+  Login |         --if the login button has been pressed
+  --websocket
+  Message String  --from server
 
 type View =
   LoginView |

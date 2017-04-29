@@ -20,7 +20,6 @@ init =
     --Login
     , email = ""
     , password = ""
-    , loginMsg = ""
     , showFeedback = False
     , files = []
     }, Cmd.none
@@ -30,8 +29,7 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     ShowLogin ->
-      ({model | view = LoginView},  WebSocket.send "ws://localhost:5000/ws"
-      ("listFiles|"))
+      {model | view = LoginView} ! []
 
     ShowTeam ->
       {model | view = TeamView} ! []
@@ -41,11 +39,12 @@ update msg model =
       model ! [fileSelected model.inputId]
 
     Upload ->
-      (model, WebSocket.send "ws://localhost:5000/ws"
-      ("upload|" ++ model.filename ++ "|" ++ model.encrypted))
+      model ! [ WebSocket.send "ws://localhost:5000/ws"
+      ("upload|" ++ model.filename ++ "|" ++ model.encrypted) ]
 
     FileRead data ->
-      {model | filename = data.filename, content = data.content} ! [encrypt model.content]
+      {model | filename = data.filename, content = data.content} !
+      [ encrypt model.content ]
 
     --Encryption
     Encrypted encryptedWord ->
@@ -64,21 +63,38 @@ update msg model =
     Login ->
       {model | showFeedback = True} !
       [ WebSocket.send "ws://localhost:5000/ws"
-      ("login|" ++ model.email ++ "|" ++ model.password)
-      ]
+      ("login|" ++ model.email ++ "|" ++ model.password) ]
 
-    --TODO: split into several messages
-
-    --websocket responses
+    --websocket
     Message message ->
-      case message of
+      let
+        temp = String.split "|" message
+        params = List.drop 1 temp
+        method = List.head temp
+      in
+        websocketMessage model method params
+
+websocketMessage : Model -> Maybe String -> List String -> (Model, Cmd Msg)
+websocketMessage model method params =
+  case extract method of
+    "login" ->
+      case extract (List.head params) of
         "True" ->
-          ({model | loginMsg = message, view = TeamView}, WebSocket.send "ws://localhost:5000/ws"
-          ("listFiles|"))
-        "False" ->
-          ({model | loginMsg = message}, Cmd.none)
+          {model | showFeedback = False, view = TeamView} !
+          [ WebSocket.send "ws://localhost:5000/ws" "listFiles|" ]
         _ ->
-          ({model | files = (parseJsonFiles message), view = TeamView}, Cmd.none) --message}, Cmd.none)
+          {model | showFeedback = True} ! [ Cmd.none ]
+    "listFiles" ->
+      {model | files = (parseJsonFiles (extract (List.head params))), view = TeamView} !
+      [ Cmd.none ]
+    _ ->
+      model ! [ Cmd.none ]
+
+extract : Maybe String -> String
+extract x =
+  case x of
+    Just x -> x
+    Nothing -> "Nothing"
 
 --decoder for json parser
 stringsDecoder : Decoder (List String)
@@ -93,7 +109,6 @@ result result =
       payload
     Err errorString ->
       [errorString]
-
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
