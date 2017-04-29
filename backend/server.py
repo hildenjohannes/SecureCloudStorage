@@ -14,35 +14,6 @@ class SocketHandler(websocket.WebSocketHandler):
         global user
         params = message.split("|")
         method = params.pop(0)
-# <<<<<<< HEAD
-        # if method == "login":
-        #     #self.write_message(str(self.login(params)))
-        #     if (Usermeta.userLogin(params)):
-        #         user = params[0]
-        #         print(user)
-        #         self.write_message('True')
-        #
-        # elif method == "upload":
-        #     print("wooohoo UPLOAD")
-        #     filee = open(params[0], 'w+')
-        #     filee.write(params[1])
-        #     if Filemeta.addFile([params[0],'100',Usermeta.filter(email=user)]):
-        #         print("filemeta added!")
-        #     #print(params[0])
-        #     #print(params[1])
-        # elif method == "register":
-        #     self.write_message(str(Usermeta.userRegister(params)))
-        # elif method == "listFiles":
-        #     mes='['
-        #     for userr in Usermeta.filter(email=user):
-        #         for filee in userr.files:
-        #             mes = mes + '"' + str(filee.name) + '",'
-        #
-        #     mes = mes[:-1] + ']'
-        #     print(mes)
-        #     self.write_message(mes) # TODO: get actual files
-        #     mes=''
-# =======
 
         if self.authenticated:
             self.handleCall(method, params)
@@ -74,8 +45,7 @@ class SocketHandler(websocket.WebSocketHandler):
                 mes = mes[:-1]
             mes = mes + ']'
             print(mes)
-            self.write_message("listFiles|" + mes) # TODO: get actual files
-# >>>>>>> 946fec63fd0be65b0b60f8b8e05d54fa265d334f
+            self.write_message("listFiles|" + mes)
         else:
             self.write_message("Invalid argument")
 
