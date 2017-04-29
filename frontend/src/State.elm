@@ -20,6 +20,8 @@ init =
     --Login
     , email = ""
     , password = ""
+    , firstname = ""
+    , lastname = ""
     , showFeedback = False
     , files = []
     }, Cmd.none
@@ -34,6 +36,8 @@ update msg model =
     ShowTeam ->
       {model | view = TeamView} ! []
 
+    ShowRegister ->
+      {model | view = RegisterView} ! []
     --Upload
     FileSelected ->
       model ! [fileSelected model.inputId]
@@ -64,7 +68,15 @@ update msg model =
       {model | showFeedback = True} !
       [ WebSocket.send "ws://localhost:5000/ws"
       ("login|" ++ model.email ++ "|" ++ model.password) ]
-
+    --Register
+    FirstName firstname ->
+      {model | firstname = firstname} ! []
+    LastName lastname ->
+      {model | lastname = lastname} ! []
+    Register ->
+      (model, WebSocket.send "ws://localhost:5000/ws"
+      ("register|" ++ model.firstname ++ "|" ++ model.lastname ++
+      "|" ++ model.email ++ "|" ++ model.password))
     --websocket
     Message message ->
       let
@@ -87,6 +99,8 @@ websocketMessage model method params =
     "listFiles" ->
       {model | files = (parseJsonFiles (extract (List.head params))), view = TeamView} !
       [ Cmd.none ]
+    "register" ->
+      {model | view = TeamView} ! [Cmd.none]
     _ ->
       model ! [ Cmd.none ]
 

@@ -89,6 +89,17 @@ var _user$project$State$websocketMessage = F3(
 						_0: _elm_lang$core$Platform_Cmd$none,
 						_1: {ctor: '[]'}
 					});
+			case 'register':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$TeamView}),
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Platform_Cmd$none,
+						_1: {ctor: '[]'}
+					});
 			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -117,6 +128,13 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
+					{ctor: '[]'});
+			case 'ShowRegister':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$RegisterView}),
 					{ctor: '[]'});
 			case 'FileSelected':
 				return A2(
@@ -205,6 +223,47 @@ var _user$project$State$update = F2(
 									A2(_elm_lang$core$Basics_ops['++'], '|', model.password)))),
 						_1: {ctor: '[]'}
 					});
+			case 'FirstName':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{firstname: _p4._0}),
+					{ctor: '[]'});
+			case 'LastName':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{lastname: _p4._0}),
+					{ctor: '[]'});
+			case 'Register':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:5000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'register|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.firstname,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'|',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										model.lastname,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'|',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												model.email,
+												A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))))))
+				};
 			default:
 				var temp = A2(_elm_lang$core$String$split, '|', _p4._0);
 				var params = A2(_elm_lang$core$List$drop, 1, temp);
@@ -223,6 +282,8 @@ var _user$project$State$init = {
 		decrypted: '',
 		email: '',
 		password: '',
+		firstname: '',
+		lastname: '',
 		showFeedback: false,
 		files: {ctor: '[]'}
 	},

@@ -8,7 +8,11 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, files: i, showFeedback: j};
+										return function (k) {
+											return function (l) {
+												return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, firstname: i, lastname: j, files: k, showFeedback: l};
+											};
+										};
 									};
 								};
 							};
@@ -25,6 +29,13 @@ var _user$project$Types$FileData = F2(
 	});
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
+};
+var _user$project$Types$Register = {ctor: 'Register'};
+var _user$project$Types$LastName = function (a) {
+	return {ctor: 'LastName', _0: a};
+};
+var _user$project$Types$FirstName = function (a) {
+	return {ctor: 'FirstName', _0: a};
 };
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Password = function (a) {
@@ -44,7 +55,9 @@ var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};
 };
 var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
+var _user$project$Types$ShowRegister = {ctor: 'ShowRegister'};
 var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$RegisterView = {ctor: 'RegisterView'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};

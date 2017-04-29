@@ -27,6 +27,7 @@ view model =
         --  , label [for "inputPassword", class "sr-only"] [text "Password"]
           , input [type_ "password", id "inputPassword", class "form-control", placeholder "Password", onInput Password] []
           , button [class "btn btn-lg btn-primary btn-block", onClick Login] [text "Sign in"]
+          , button [class "btn btn-lg btn-primary btn-block", onClick ShowRegister] [text "Register"]
           , if model.showFeedback then feedback else div [] []
         ]
         ,stylesheet

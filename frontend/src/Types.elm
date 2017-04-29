@@ -12,6 +12,9 @@ type alias Model =
   --Login
   , email : String
   , password : String
+  --Register
+  , firstname : String
+  , lastname : String
   , files: List String
   , showFeedback: Bool }
 
@@ -22,6 +25,7 @@ type alias FileData =
 type Msg =
   ShowLogin |   --switch to login view
   ShowTeam |  --switch to upload view
+  ShowRegister | -- switch to regiserview
   --Upload
   FileSelected |
   FileRead FileData |
@@ -33,9 +37,14 @@ type Msg =
   Email String |
   Password String |
   Login |         --if the login button has been pressed
-  --websocket
+  --Register
+  FirstName String |
+  LastName String |
+  Register |
+      --websocket
   Message String  --from server
 
 type View =
   LoginView |
-  TeamView
+  TeamView  |
+  RegisterView

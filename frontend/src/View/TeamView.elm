@@ -86,14 +86,16 @@ fileNav : Model -> Html Msg
 fileNav model =
   div [class "row", style [("margin-top","6%")]]
     [
-     div [class "pull-left"]
+    --  div [class "pull-left"]
+    --   [
+    --    h1 [] [text "Single file select"]
+    --    , input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected)] []
+    --   ]
+    div [class "pull-right"]
       [
-       h1 [] [text "Single file select"]
-       , input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected)] []
-      ]
-    , div [class "pull-right"]
-      [
+
       button [class "btn btn-info"] [text "Manage Team"],
+      input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected), class "btn btn-info"] [],
       button [class "btn btn-info", onClick Upload] [text "Upload file"],
       button [class "btn btn-info"] [text "Download file"],
       button [class "btn btn-info", onClick ShowLogin] [text "Log out"]

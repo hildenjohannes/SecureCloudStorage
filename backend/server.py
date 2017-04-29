@@ -28,6 +28,7 @@ class SocketHandler(websocket.WebSocketHandler):
         self.authenticated = False
 
     def handleCall(self, method, params):
+        global user
         if method == "upload":
             print("wooohoo UPLOAD")
             filee = open(params[0], 'w+')
@@ -36,6 +37,7 @@ class SocketHandler(websocket.WebSocketHandler):
                 print("filemeta added!")
             print(params[0])
             print(params[1])
+            self.handleCall("listFiles", [])
         elif method == "listFiles":
             mes='['
             for userr in Usermeta.filter(email=user):

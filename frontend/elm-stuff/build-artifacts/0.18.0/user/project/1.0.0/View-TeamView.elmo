@@ -216,17 +216,21 @@ var _user$project$View_TeamView$fileNav = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pull-left'),
+					_0: _elm_lang$html$Html_Attributes$class('pull-right'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$h1,
-						{ctor: '[]'},
+						_elm_lang$html$Html$button,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Single file select'),
+							_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Manage Team'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -245,37 +249,15 @@ var _user$project$View_TeamView$fileNav = function (model) {
 											_elm_lang$html$Html_Events$on,
 											'change',
 											_elm_lang$core$Json_Decode$succeed(_user$project$Types$FileSelected)),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							},
 							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('pull-right'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Manage Team'),
-								_1: {ctor: '[]'}
-							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -330,9 +312,9 @@ var _user$project$View_TeamView$fileNav = function (model) {
 								}
 							}
 						}
-					}),
-				_1: {ctor: '[]'}
-			}
+					}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 var _user$project$View_TeamView$sidebar = A2(

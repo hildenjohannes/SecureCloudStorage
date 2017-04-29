@@ -9221,7 +9221,11 @@ var _user$project$Types$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, files: i, showFeedback: j};
+										return function (k) {
+											return function (l) {
+												return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, firstname: i, lastname: j, files: k, showFeedback: l};
+											};
+										};
 									};
 								};
 							};
@@ -9238,6 +9242,13 @@ var _user$project$Types$FileData = F2(
 	});
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
+};
+var _user$project$Types$Register = {ctor: 'Register'};
+var _user$project$Types$LastName = function (a) {
+	return {ctor: 'LastName', _0: a};
+};
+var _user$project$Types$FirstName = function (a) {
+	return {ctor: 'FirstName', _0: a};
 };
 var _user$project$Types$Login = {ctor: 'Login'};
 var _user$project$Types$Password = function (a) {
@@ -9257,8 +9268,10 @@ var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};
 };
 var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
+var _user$project$Types$ShowRegister = {ctor: 'ShowRegister'};
 var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
 var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$RegisterView = {ctor: 'RegisterView'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};
 
@@ -9385,6 +9398,17 @@ var _user$project$State$websocketMessage = F3(
 						_0: _elm_lang$core$Platform_Cmd$none,
 						_1: {ctor: '[]'}
 					});
+			case 'register':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$TeamView}),
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Platform_Cmd$none,
+						_1: {ctor: '[]'}
+					});
 			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9413,6 +9437,13 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$TeamView}),
+					{ctor: '[]'});
+			case 'ShowRegister':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{view: _user$project$Types$RegisterView}),
 					{ctor: '[]'});
 			case 'FileSelected':
 				return A2(
@@ -9501,6 +9532,47 @@ var _user$project$State$update = F2(
 									A2(_elm_lang$core$Basics_ops['++'], '|', model.password)))),
 						_1: {ctor: '[]'}
 					});
+			case 'FirstName':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{firstname: _p4._0}),
+					{ctor: '[]'});
+			case 'LastName':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{lastname: _p4._0}),
+					{ctor: '[]'});
+			case 'Register':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$websocket$WebSocket$send,
+						'ws://localhost:5000/ws',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'register|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.firstname,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'|',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										model.lastname,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'|',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												model.email,
+												A2(_elm_lang$core$Basics_ops['++'], '|', model.password))))))))
+				};
 			default:
 				var temp = A2(_elm_lang$core$String$split, '|', _p4._0);
 				var params = A2(_elm_lang$core$List$drop, 1, temp);
@@ -9519,6 +9591,8 @@ var _user$project$State$init = {
 		decrypted: '',
 		email: '',
 		password: '',
+		firstname: '',
+		lastname: '',
 		showFeedback: false,
 		files: {ctor: '[]'}
 	},
@@ -9669,11 +9743,30 @@ var _user$project$View_LoginView$view = function (model) {
 									}),
 								_1: {
 									ctor: '::',
-									_0: model.showFeedback ? _user$project$View_LoginView$feedback : A2(
-										_elm_lang$html$Html$div,
-										{ctor: '[]'},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary btn-block'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$ShowRegister),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Register'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: model.showFeedback ? _user$project$View_LoginView$feedback : A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -9905,17 +9998,21 @@ var _user$project$View_TeamView$fileNav = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pull-left'),
+					_0: _elm_lang$html$Html_Attributes$class('pull-right'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$h1,
-						{ctor: '[]'},
+						_elm_lang$html$Html$button,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Single file select'),
+							_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Manage Team'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -9934,37 +10031,15 @@ var _user$project$View_TeamView$fileNav = function (model) {
 											_elm_lang$html$Html_Events$on,
 											'change',
 											_elm_lang$core$Json_Decode$succeed(_user$project$Types$FileSelected)),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							},
 							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('pull-right'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Manage Team'),
-								_1: {ctor: '[]'}
-							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -10019,9 +10094,9 @@ var _user$project$View_TeamView$fileNav = function (model) {
 								}
 							}
 						}
-					}),
-				_1: {ctor: '[]'}
-			}
+					}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 var _user$project$View_TeamView$sidebar = A2(
@@ -10394,12 +10469,180 @@ var _user$project$View_TeamView$view = function (model) {
 		});
 };
 
+var _user$project$View_RegisterView$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'padding-left', _1: '35%'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'padding-right', _1: '35%'},
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h2,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('form-signin-heading'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Please sign in'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('email'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id('inputEmail'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('form-control'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$placeholder('Email address'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Email),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('password'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id('inputPassword'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('form-control'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$placeholder('Password'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$Password),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('text'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('form-control'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$placeholder('First name'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$FirstName),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$type_('text'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form-control'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$placeholder('Last name'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(_user$project$Types$LastName),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$button,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary btn-block'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Register),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Register'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View_Stylesheet$stylesheet,
+				_1: {ctor: '[]'}
+			}
+		});
+};
+
 var _user$project$View$view = function (model) {
 	var _p0 = model.view;
-	if (_p0.ctor === 'LoginView') {
-		return _user$project$View_LoginView$view(model);
-	} else {
-		return _user$project$View_TeamView$view(model);
+	switch (_p0.ctor) {
+		case 'LoginView':
+			return _user$project$View_LoginView$view(model);
+		case 'TeamView':
+			return _user$project$View_TeamView$view(model);
+		default:
+			return _user$project$View_RegisterView$view(model);
 	}
 };
 
