@@ -33,7 +33,7 @@ class SocketHandler(websocket.WebSocketHandler):
             print("wooohoo UPLOAD")
             filee = open(params[0], 'w+')
             filee.write(params[1])
-            if Filemeta.addFile([params[0],'100',Usermeta.filter(email=user)]):
+            if Filemeta.addFile([params[0],'100',Usermeta.filter(email = self.user)]):
                 print("filemeta added!")
             self.handleCall("listFiles", [])
         elif method == "listFiles":
