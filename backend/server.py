@@ -3,15 +3,14 @@ from tornado import httpserver, websocket, web, ioloop
 from database import Usermeta, Filemeta
 json='["fakeFile0", "fakeFile1"]'
 class SocketHandler(websocket.WebSocketHandler):
-    user = ""
     def check_origin(self, origin):
         return True
 
     def open(self):
         self.authenticated = False
+        self.user = ""
 
     def on_message(self, message):
-        global user
         params = message.split("|")
         method = params.pop(0)
 
@@ -28,19 +27,18 @@ class SocketHandler(websocket.WebSocketHandler):
         self.authenticated = False
 
     def handleCall(self, method, params):
-        global user
         if method == "upload":
+            print(params[0])
+            print(params[1])
             print("wooohoo UPLOAD")
             filee = open(params[0], 'w+')
             filee.write(params[1])
             if Filemeta.addFile([params[0],'100',Usermeta.filter(email=user)]):
                 print("filemeta added!")
-            print(params[0])
-            print(params[1])
             self.handleCall("listFiles", [])
         elif method == "listFiles":
             mes='['
-            for userr in Usermeta.filter(email=user):
+            for userr in Usermeta.filter(email = self.user):
                 for filee in userr.files:
                     mes = mes + '"' + str(filee.name) + '",'
             if len(mes)>1:
@@ -54,19 +52,14 @@ class SocketHandler(websocket.WebSocketHandler):
     def login(self, params):
         if Usermeta.userLogin(params):
             self.authenticated = True
-            global user
-            user=params[0]
-            return True
-        else:
-            return False
+            self.user = params[0]
+        return self.authenticated
+
     def register(self, params):
         if Usermeta.userRegister(params):
             self.authenticated = True
-            global user
             self.user=params[2]
-            return True
-        else:
-            return False
+        return self.authenticated
 
 app = web.Application([
     (r'/ws', SocketHandler),

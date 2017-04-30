@@ -36,14 +36,13 @@
         // FileReader API is event based. Once a file is selected
         // it fires events. We hook into the `onload` event for our reader.
         reader.onload = (function(event) {
-          // The event carries the `target`. The `target` is the file
-          // that was selected. The result is base64 encoded contents of the file.
-          var base64encoded = event.target.result;
-          // We build up the `ImagePortData` object here that will be passed to our Elm
-          // runtime through the `fileContentRead` subscription.
+          var arrayBuffer = reader.result;
+          var bytes = new Uint8Array(arrayBuffer);
+          var string = new TextDecoder("utf-8").decode(bytes);
+          //var uint8array = new TextEncoder("utf-8").encode(string);
           var portData = {
             filename: file.name,
-            content: base64encoded
+            content: string
           };
 
           // We call the `fileContentRead` port with the file data

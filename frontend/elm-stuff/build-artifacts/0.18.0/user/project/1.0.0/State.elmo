@@ -180,7 +180,9 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{encrypted: _p4._0}),
+						{
+							encrypted: A2(_elm_lang$core$Basics_ops['++'], model.encrypted, _p4._0)
+						}),
 					{ctor: '[]'});
 			case 'Decrypted':
 				return A2(
