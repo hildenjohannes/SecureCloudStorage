@@ -9481,7 +9481,7 @@ var _user$project$State$update = F2(
 						{filename: _p5.filename, content: _p5.content}),
 					{
 						ctor: '::',
-						_0: _user$project$Ports$encrypt(model.content),
+						_0: _user$project$Ports$encrypt(_p5.content),
 						_1: {ctor: '[]'}
 					});
 			case 'Encrypted':
@@ -9489,9 +9489,7 @@ var _user$project$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{
-							encrypted: A2(_elm_lang$core$Basics_ops['++'], model.encrypted, _p4._0)
-						}),
+						{encrypted: _p4._0}),
 					{ctor: '[]'});
 			case 'Decrypted':
 				return A2(

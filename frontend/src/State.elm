@@ -48,7 +48,7 @@ update msg model =
 
     FileRead data ->
       {model | filename = data.filename, content = data.content} !
-      [ encrypt model.content ]
+      [ encrypt data.content ]
 
     --Encryption
     Encrypted encryptedWord ->
