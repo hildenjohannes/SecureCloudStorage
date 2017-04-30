@@ -15,6 +15,17 @@ CREATE USER 'scs'@'localhost' IDENTIFIED BY 'scs123';
 GRANT ALL PRIVILEGES ON *.* TO 'scs'@'localhost' WITH GRANT OPTION;
 
 Now a user, scs, with password scs123 is created.
+
+Now exit mysql environment with:
+exit
+
+then go into mysql as scs user with:
+mysql -u scs -p
+lösenordet är scs123
+
+create a database called scsdb with:
+
+CREATE DATABASE scsdb;
  
 Now install PyMySQL which is a interface between python and mysql:
 sudo pip3 install PyMySQL
