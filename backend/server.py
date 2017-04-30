@@ -25,6 +25,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
     def on_close(self):
         self.authenticated = False
+        self.user = ""
 
     def handleCall(self, method, params):
         if method == "upload":
