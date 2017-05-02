@@ -1,7 +1,6 @@
 from tornado import httpserver, websocket, web, ioloop
-
 from database import Usermeta, Filemeta
-json='["fakeFile0", "fakeFile1"]'
+
 class SocketHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
         return True
@@ -29,26 +28,29 @@ class SocketHandler(websocket.WebSocketHandler):
 
     def handleCall(self, method, params):
         if method == "upload":
-            print(params[0])
-            print(params[1])
-            print("wooohoo UPLOAD")
-            filee = open(params[0], 'w+')
-            filee.write(params[1])
-            if Filemeta.addFile([params[0],'100',Usermeta.filter(email = self.user)]):
-                print("filemeta added!")
-            self.handleCall("listFiles", [])
+            if self.writeFile(params[0], params[1]):
+                self.write_message("listFiles|" + self.listFiles())
+            else:
+                self.write_message("error|fileNotSaved")
         elif method == "listFiles":
-            mes='['
-            for userr in Usermeta.filter(email = self.user):
-                for filee in userr.files:
-                    mes = mes + '"' + str(filee.name) + '",'
-            if len(mes)>1:
-                mes = mes[:-1]
-            mes = mes + ']'
-            print(mes)
-            self.write_message("listFiles|" + mes)
+            self.write_message("listFiles|" + self.listFiles())
         else:
             self.write_message("Invalid argument")
+
+    def writeFile(self, filename, content):
+        filee = open(filename, 'w+')
+        filee.write(content)
+        return Filemeta.addFile([filename, '100', Usermeta.filter(email = self.user)])
+
+    def listFiles(self):
+        mes='['
+        for userr in Usermeta.filter(email = self.user):
+            for filee in userr.files:
+                mes = mes + '"' + str(filee.name) + '",'
+        if len(mes)>1:
+            mes = mes[:-1]
+        mes = mes + ']'
+        return mes
 
     def login(self, params):
         if Usermeta.userLogin(params):

@@ -38,6 +38,7 @@ update msg model =
 
     ShowRegister ->
       {model | view = RegisterView} ! []
+
     --Upload
     FileSelected ->
       model ! [fileSelected model.inputId]
@@ -68,6 +69,7 @@ update msg model =
       {model | showFeedback = True} !
       [ WebSocket.send "ws://localhost:5000/ws"
       ("login|" ++ model.email ++ "|" ++ model.password) ]
+
     --Register
     FirstName firstname ->
       {model | firstname = firstname} ! []
@@ -77,6 +79,7 @@ update msg model =
       (model, WebSocket.send "ws://localhost:5000/ws"
       ("register|" ++ model.firstname ++ "|" ++ model.lastname ++
       "|" ++ model.email ++ "|" ++ model.password))
+
     --websocket
     Message message ->
       let
