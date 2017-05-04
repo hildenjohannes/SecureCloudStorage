@@ -51,6 +51,11 @@ update msg model =
       {model | filename = data.filename, content = data.content} !
       [ encrypt data.content ]
 
+    --Download
+    Download filename ->
+      model ! [ WebSocket.send "ws://localhost:5000/ws"
+      ("download|" ++ filename) ]
+
     --Encryption
     Encrypted encryptedWord ->
       {model | encrypted = encryptedWord} ! []
@@ -104,6 +109,8 @@ websocketMessage model method params =
       [ Cmd.none ]
     "register" ->
       {model | view = TeamView} ! [Cmd.none]
+    "download" ->
+      model ! [ download [extract (List.head params), extract (List.head (List.drop 1 params)) ] ]
     _ ->
       model ! [ Cmd.none ]
 

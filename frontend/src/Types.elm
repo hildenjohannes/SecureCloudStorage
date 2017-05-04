@@ -30,6 +30,8 @@ type Msg =
   FileSelected |
   FileRead FileData |
   Upload |
+  --Download
+  Download String |
   --Encryption
   Encrypted String |
   Decrypted String |

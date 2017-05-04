@@ -3,18 +3,26 @@ var _user$project$Ports$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return v;
 	});
-var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	'decrypt',
 	function (v) {
 		return v;
 	});
-var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$fileSelected = _elm_lang$core$Native_Platform.outgoingPort(
 	'fileSelected',
 	function (v) {
 		return v;
 	});
+var _user$project$Ports$download = _elm_lang$core$Native_Platform.outgoingPort(
+	'download',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$fileRead = _elm_lang$core$Native_Platform.incomingPort(
 	'fileRead',
 	A2(

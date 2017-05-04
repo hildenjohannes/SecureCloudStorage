@@ -100,6 +100,27 @@ var _user$project$State$websocketMessage = F3(
 						_0: _elm_lang$core$Platform_Cmd$none,
 						_1: {ctor: '[]'}
 					});
+			case 'download':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: _user$project$Ports$download(
+							{
+								ctor: '::',
+								_0: _user$project$State$extract(
+									_elm_lang$core$List$head(params)),
+								_1: {
+									ctor: '::',
+									_0: _user$project$State$extract(
+										_elm_lang$core$List$head(
+											A2(_elm_lang$core$List$drop, 1, params))),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					});
 			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -173,6 +194,18 @@ var _user$project$State$update = F2(
 					{
 						ctor: '::',
 						_0: _user$project$Ports$encrypt(_p5.content),
+						_1: {ctor: '[]'}
+					});
+			case 'Download':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$websocket$WebSocket$send,
+							'ws://localhost:5000/ws',
+							A2(_elm_lang$core$Basics_ops['++'], 'download|', _p4._0)),
 						_1: {ctor: '[]'}
 					});
 			case 'Encrypted':

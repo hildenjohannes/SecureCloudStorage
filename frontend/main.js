@@ -9263,6 +9263,9 @@ var _user$project$Types$Decrypted = function (a) {
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
+var _user$project$Types$Download = function (a) {
+	return {ctor: 'Download', _0: a};
+};
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};
@@ -9280,18 +9283,26 @@ var _user$project$Ports$encrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return v;
 	});
-var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$decrypt = _elm_lang$core$Native_Platform.outgoingPort(
 	'decrypt',
 	function (v) {
 		return v;
 	});
-var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$fileSelected = _elm_lang$core$Native_Platform.outgoingPort(
 	'fileSelected',
 	function (v) {
 		return v;
 	});
+var _user$project$Ports$download = _elm_lang$core$Native_Platform.outgoingPort(
+	'download',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$Ports$encrypted = _elm_lang$core$Native_Platform.incomingPort('encrypted', _elm_lang$core$Json_Decode$string);
+var _user$project$Ports$decrypted = _elm_lang$core$Native_Platform.incomingPort('decrypted', _elm_lang$core$Json_Decode$string);
 var _user$project$Ports$fileRead = _elm_lang$core$Native_Platform.incomingPort(
 	'fileRead',
 	A2(
@@ -9409,6 +9420,27 @@ var _user$project$State$websocketMessage = F3(
 						_0: _elm_lang$core$Platform_Cmd$none,
 						_1: {ctor: '[]'}
 					});
+			case 'download':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: _user$project$Ports$download(
+							{
+								ctor: '::',
+								_0: _user$project$State$extract(
+									_elm_lang$core$List$head(params)),
+								_1: {
+									ctor: '::',
+									_0: _user$project$State$extract(
+										_elm_lang$core$List$head(
+											A2(_elm_lang$core$List$drop, 1, params))),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					});
 			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9482,6 +9514,18 @@ var _user$project$State$update = F2(
 					{
 						ctor: '::',
 						_0: _user$project$Ports$encrypt(_p5.content),
+						_1: {ctor: '[]'}
+					});
+			case 'Download':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$websocket$WebSocket$send,
+							'ws://localhost:5000/ws',
+							A2(_elm_lang$core$Basics_ops['++'], 'download|', _p4._0)),
 						_1: {ctor: '[]'}
 					});
 			case 'Encrypted':

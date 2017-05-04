@@ -50,6 +50,9 @@ var _user$project$Types$Decrypted = function (a) {
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
+var _user$project$Types$Download = function (a) {
+	return {ctor: 'Download', _0: a};
+};
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};

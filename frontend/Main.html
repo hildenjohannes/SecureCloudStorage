@@ -22,7 +22,7 @@
         app.ports.decrypted.send(decrypted);
       });
 
-      app.ports.fileSelected.subscribe(function (id) {
+      app.ports.fileSelected.subscribe(function(id) {
         var node = document.getElementById(id);
         if (node === null) {
           return;
@@ -39,7 +39,6 @@
           var arrayBuffer = reader.result;
           var bytes = new Uint8Array(arrayBuffer);
           var string = new TextDecoder("utf-8").decode(bytes);
-          //var uint8array = new TextEncoder("utf-8").encode(string);
           var portData = {
             filename: file.name,
             content: string
@@ -52,6 +51,21 @@
 
         // Connect our FileReader with the file that was selected in our `input` node.
         reader.readAsArrayBuffer(file);
+      });
+
+      app.ports.download.subscribe(function(data) {
+        var filename = data[0];
+        var content = data[1];
+        var bytes = new TextEncoder("utf-8").encode(decrypt(content));
+
+        var a = window.document.createElement('a');
+
+        a.href = window.URL.createObjectURL(new Blob([bytes], { type: 'application/octet-stream' }));
+        a.download = filename;
+
+        document.body.appendChild(a)
+        a.click();
+        document.body.removeChild(a)
       });
 
       var key;
