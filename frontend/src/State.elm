@@ -24,6 +24,9 @@ init =
     , lastname = ""
     , showFeedback = False
     , files = []
+    , chosenFile = ""
+    , rowActive = "info"
+    , rowInactive = ""
     }, Cmd.none
   )
 
@@ -94,6 +97,9 @@ update msg model =
       in
         websocketMessage model method params
 
+    UpdateChosenFile file ->
+      ({model | chosenFile = file}, Cmd.none)
+
 websocketMessage : Model -> Maybe String -> List String -> (Model, Cmd Msg)
 websocketMessage model method params =
   case extract method of
@@ -127,6 +133,7 @@ stringsDecoder = list string
 parseJsonFiles : String -> (List String)
 parseJsonFiles jsonString = result (decodeString stringsDecoder jsonString)
 
+result : Result a (List a) -> (List a)
 result result =
   case result of
     Ok payload ->
