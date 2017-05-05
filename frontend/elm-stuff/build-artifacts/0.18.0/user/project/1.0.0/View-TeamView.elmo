@@ -15,37 +15,38 @@ var _user$project$View_TeamView$maybeToString = function (s) {
 		return 'Error';
 	}
 };
-var _user$project$View_TeamView$listF = function (list) {
-	var _p1 = list;
-	if (_p1.ctor === '[]') {
-		return {ctor: '[]'};
-	} else {
-		return A2(
-			_elm_lang$core$Basics_ops['++'],
-			_user$project$View_TeamView$listF(_p1._1),
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$tr,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$td,
-							{ctor: '[]'},
-							{
+var _user$project$View_TeamView$listFiles = F2(
+	function (model, list) {
+		var _p1 = list;
+		if (_p1.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var _p2 = _p1._0;
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(_user$project$View_TeamView$listFiles, model, _p1._1),
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$tr,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$Types$UpdateChosenFile(_p2)),
+							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(_p1._0),
+								_0: _elm_lang$core$Native_Utils.eq(_p2, model.chosenFile) ? _elm_lang$html$Html_Attributes$class(model.rowActive) : _elm_lang$html$Html_Attributes$class(model.rowInactive),
 								_1: {ctor: '[]'}
-							}),
-						_1: {
+							}
+						},
+						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$td,
 								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Rebecka'),
+									_0: _elm_lang$html$Html$text(_p2),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -55,7 +56,7 @@ var _user$project$View_TeamView$listF = function (list) {
 									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('1 KB'),
+										_0: _elm_lang$html$Html$text('You'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -65,20 +66,30 @@ var _user$project$View_TeamView$listF = function (list) {
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('1 April 2017'),
+											_0: _elm_lang$html$Html$text('x KB'),
 											_1: {ctor: '[]'}
 										}),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$td,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('xx-xx-xxxx'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			});
-	}
-};
+						}),
+					_1: {ctor: '[]'}
+				});
+		}
+	});
 var _user$project$View_TeamView$tbList = function (model) {
-	return _user$project$View_TeamView$listF(model.files);
+	return A2(_user$project$View_TeamView$listFiles, model, model.files);
 };
 var _user$project$View_TeamView$thList = {
 	ctor: '::',

@@ -10,7 +10,13 @@ var _user$project$Types$Model = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, firstname: i, lastname: j, files: k, showFeedback: l};
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return {view: a, inputId: b, filename: c, content: d, encrypted: e, decrypted: f, email: g, password: h, firstname: i, lastname: j, files: k, showFeedback: l, chosenFile: m, rowActive: n, rowInactive: o};
+														};
+													};
+												};
 											};
 										};
 									};
@@ -27,6 +33,9 @@ var _user$project$Types$FileData = F2(
 	function (a, b) {
 		return {filename: a, content: b};
 	});
+var _user$project$Types$UpdateChosenFile = function (a) {
+	return {ctor: 'UpdateChosenFile', _0: a};
+};
 var _user$project$Types$Message = function (a) {
 	return {ctor: 'Message', _0: a};
 };
