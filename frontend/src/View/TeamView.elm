@@ -126,30 +126,19 @@ thList =             [
   ]
 
 tbList : Model -> List (Html Msg)
-tbList model = listF model.files
-{-  [tr [] --onClick
-    [
-    td [] [text (maybeToString ((!!) 1 model.files))],
-    --td [] [text model.files],
-    td [] [text "Rebecka"],
-    td [] [text "1 KB"],
-    td [] [text "1 April 2017"]
-    ]
-  ] -}
+tbList model = listFiles model model.files
 
-
-listF : List String -> List (Html Msg)
-listF list =
+listFiles : Model -> (List String) -> List (Html Msg)
+listFiles model list =
  case list of
     [] -> []
-    x::xs ->  (listF xs ) ++
-              [tr [] --onClick
+    x::xs ->  (listFiles model xs ) ++
+              [tr [onClick <| UpdateChosenFile x, if (x==model.chosenFile) then class model.rowActive else class model.rowInactive]
               [
                 td [] [text x],
-                --td [] [text model.files],
-                td [] [text "Rebecka"],
-                td [] [text "1 KB"],
-                td [] [text "1 April 2017"]
+                td [] [text "You"],
+                td [] [text "x KB"],
+                td [] [text "xx-xx-xxxx"]
               ]]
 
 
