@@ -16,7 +16,10 @@ type alias Model =
   , firstname : String
   , lastname : String
   , files: List String
-  , showFeedback: Bool }
+  , showFeedback: Bool
+  , chosenFile : String
+  ,rowActive : String
+  ,rowInactive : String}
 
 type alias FileData =
   { filename : String
@@ -44,7 +47,9 @@ type Msg =
   LastName String |
   Register |
       --websocket
-  Message String  --from server
+  Message String  | --from server
+
+  UpdateChosenFile String
 
 type View =
   LoginView |
