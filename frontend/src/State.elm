@@ -23,8 +23,10 @@ init =
     , firstname = ""
     , lastname = ""
     , showFeedback = False
+    --Files
     , files = []
     , chosenFile = ""
+    --CSS Classes
     , rowActive = "info"
     , rowInactive = ""
     }, Cmd.none
@@ -97,6 +99,7 @@ update msg model =
       in
         websocketMessage model method params
 
+    --when a file is clicked on
     UpdateChosenFile file ->
       ({model | chosenFile = file}, Cmd.none)
 

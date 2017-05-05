@@ -3,7 +3,6 @@ module View.Stylesheet exposing (stylesheet)
 import Types exposing (..)
 
 import Html exposing (..)
-import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 
 stylesheet : Html Msg

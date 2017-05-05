@@ -1,53 +1,53 @@
 module Types exposing (..)
 
 type alias Model =
-  { view : View
+  { view      : View
   --Upload
-  , inputId : String
-  , filename : String
-  , content : String
+  , inputId   : String
+  , filename  : String
+  , content   : String
   --Encryption
   , encrypted : String
   , decrypted : String
   --Login
-  , email : String
-  , password : String
+  , email     : String
+  , password  : String
   --Register
   , firstname : String
-  , lastname : String
-  , files: List String
-  , showFeedback: Bool
-  , chosenFile : String
-  ,rowActive : String
-  ,rowInactive : String}
+  , lastname  : String
+  , files     : List String
+  , showFeedback  : Bool
+  , chosenFile    : String
+  ,rowActive      : String
+  ,rowInactive    : String}
 
 type alias FileData =
-  { filename : String
-  , content : String }
+  { filename      : String
+  , content       : String }
 
 type Msg =
-  ShowLogin |   --switch to login view
-  ShowTeam |  --switch to upload view
-  ShowRegister | -- switch to regiserview
+  ShowLogin         |   --switch to login view
+  ShowTeam          |  --switch to upload view
+  ShowRegister      | -- switch to regiserview
   --Upload
-  FileSelected |
+  FileSelected      |
   FileRead FileData |
   Upload |
   --Download
-  Download String |
+  Download String   |
   --Encryption
-  Encrypted String |
-  Decrypted String |
+  Encrypted String  |
+  Decrypted String  |
   --Login
-  Email String |
-  Password String |
-  Login |         --if the login button has been pressed
+  Email String      |
+  Password String   |
+  Login             |         --if the login button has been pressed
   --Register
-  FirstName String |
-  LastName String |
-  Register |
-      --websocket
-  Message String  | --from server
+  FirstName String  |
+  LastName String   |
+  Register          |
+  --websocket
+  Message String    | 
 
   UpdateChosenFile String
 

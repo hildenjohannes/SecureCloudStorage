@@ -7,7 +7,7 @@ import Html.Attributes exposing (..)
 import Json.Decode as Json
 
 view : Model -> Html Msg
-view model = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out!"]]
+view model =
   div []
       [
         --NAVIGATION
@@ -15,7 +15,7 @@ view model = --div [] [text "Logged in!", button [onClick LogOut] [text "Log out
          --MAIN CONTENT
          div [class "container-fluid"]
           [fileNav model,
-          div [class "row"]--, style [("margin-top","1%")]]
+          div [class "row"]
             [
             sidebar, (center model)
             ]
@@ -44,10 +44,6 @@ stylesheet =
 commaSeperate : List String -> String
 commaSeperate lst =
   List.foldl (++) "" (List.intersperse ", " lst)
-
-{-containerStyles =
-  style [ ( "padding", "20px" ) ]
--}
 
 navigationbar : Html Msg
 navigationbar =
@@ -86,11 +82,6 @@ fileNav : Model -> Html Msg
 fileNav model =
   div [class "row", style [("margin-top","6%")]]
     [
-    --  div [class "pull-left"]
-    --   [
-    --    h1 [] [text "Single file select"]
-    --    , input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected)] []
-    --   ]
     div [class "pull-right"]
       [
 
@@ -105,7 +96,7 @@ fileNav model =
 center : Model -> Html Msg
 center model =
   div [class "col-sm-9 col-md-10 main"]
-    [ --"col-sm-9 col-md-9"
+    [
     h1 [class "page-header"] [text "Files"],
     div [class "table-responsive"]
       [table [class "table table-striped"]
@@ -149,12 +140,12 @@ maybeToString s =
     Nothing -> "Error"
 
 (!!): Int -> List a -> Maybe a
-(!!) index list =                          -- 3 [ 1, 2, 3, 4, 5, 6 ]
+(!!) index list =
 
   if  (List.length list) >= index then
 
-       List.take index list               -- [ 1, 2, 3 ]
-       |> List.reverse                    -- [ 3, 2, 1 ]
-       |> List.head                       -- Just 3
+       List.take index list
+       |> List.reverse
+       |> List.head                       
   else
      Nothing
