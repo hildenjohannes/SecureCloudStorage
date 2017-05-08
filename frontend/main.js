@@ -9272,9 +9272,7 @@ var _user$project$Types$Decrypted = function (a) {
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
-var _user$project$Types$Download = function (a) {
-	return {ctor: 'Download', _0: a};
-};
+var _user$project$Types$Download = {ctor: 'Download'};
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};
@@ -9282,7 +9280,7 @@ var _user$project$Types$FileRead = function (a) {
 var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
 var _user$project$Types$ShowRegister = {ctor: 'ShowRegister'};
 var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
-var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$Logout = {ctor: 'Logout'};
 var _user$project$Types$RegisterView = {ctor: 'RegisterView'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};
@@ -9372,6 +9370,27 @@ var _user$project$State$extract = function (x) {
 		return 'Nothing';
 	}
 };
+var _user$project$State$init = {
+	ctor: '_Tuple2',
+	_0: {
+		view: _user$project$Types$LoginView,
+		inputId: 'FileInputId',
+		filename: '',
+		content: '',
+		encrypted: '',
+		decrypted: '',
+		email: '',
+		password: '',
+		firstname: '',
+		lastname: '',
+		showFeedback: false,
+		files: {ctor: '[]'},
+		chosenFile: '',
+		rowActive: 'info',
+		rowInactive: ''
+	},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
 var _user$project$State$websocketMessage = F3(
 	function (model, method, params) {
 		var _p2 = _user$project$State$extract(method);
@@ -9438,18 +9457,17 @@ var _user$project$State$websocketMessage = F3(
 						_0: _user$project$Ports$download(
 							{
 								ctor: '::',
-								_0: _user$project$State$extract(
-									_elm_lang$core$List$head(params)),
+								_0: 'eriiii.hs',
 								_1: {
 									ctor: '::',
-									_0: _user$project$State$extract(
-										_elm_lang$core$List$head(
-											A2(_elm_lang$core$List$drop, 1, params))),
+									_0: '2341abf653',
 									_1: {ctor: '[]'}
 								}
 							}),
 						_1: {ctor: '[]'}
 					});
+			case 'logout':
+				return _user$project$State$init;
 			default:
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9465,13 +9483,17 @@ var _user$project$State$update = F2(
 	function (msg, model) {
 		var _p4 = msg;
 		switch (_p4.ctor) {
-			case 'ShowLogin':
+			case 'Logout':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{view: _user$project$Types$LoginView}),
-					{ctor: '[]'});
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$websocket$WebSocket$send, 'ws://localhost:5000/ws', 'logout|'),
+						_1: {ctor: '[]'}
+					});
 			case 'ShowTeam':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9526,17 +9548,25 @@ var _user$project$State$update = F2(
 						_1: {ctor: '[]'}
 					});
 			case 'Download':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$websocket$WebSocket$send,
-							'ws://localhost:5000/ws',
-							A2(_elm_lang$core$Basics_ops['++'], 'download|', _p4._0)),
-						_1: {ctor: '[]'}
-					});
+				var _p6 = model.chosenFile;
+				if (_p6 === '') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$websocket$WebSocket$send,
+								'ws://localhost:5000/ws',
+								A2(_elm_lang$core$Basics_ops['++'], 'download|', model.chosenFile)),
+							_1: {ctor: '[]'}
+						});
+				}
 			case 'Encrypted':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9641,27 +9671,6 @@ var _user$project$State$update = F2(
 				};
 		}
 	});
-var _user$project$State$init = {
-	ctor: '_Tuple2',
-	_0: {
-		view: _user$project$Types$LoginView,
-		inputId: 'FileInputId',
-		filename: '',
-		content: '',
-		encrypted: '',
-		decrypted: '',
-		email: '',
-		password: '',
-		firstname: '',
-		lastname: '',
-		showFeedback: false,
-		files: {ctor: '[]'},
-		chosenFile: '',
-		rowActive: 'info',
-		rowInactive: ''
-	},
-	_1: _elm_lang$core$Platform_Cmd$none
-};
 
 var _user$project$View_Stylesheet$stylesheet = function () {
 	var children = {ctor: '[]'};
@@ -10140,7 +10149,11 @@ var _user$project$View_TeamView$fileNav = function (model) {
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Download),
+											_1: {ctor: '[]'}
+										}
 									},
 									{
 										ctor: '::',
@@ -10156,7 +10169,7 @@ var _user$project$View_TeamView$fileNav = function (model) {
 											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$ShowLogin),
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
 												_1: {ctor: '[]'}
 											}
 										},

@@ -35,8 +35,9 @@ init =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    ShowLogin ->
-      {model | view = LoginView} ! []
+    Logout ->
+      {model | view = LoginView} ! [WebSocket.send "ws://localhost:5000/ws"
+      "logout|"]
 
     ShowTeam ->
       {model | view = TeamView} ! []
@@ -57,9 +58,11 @@ update msg model =
       [ encrypt data.content ]
 
     --Download
-    Download filename ->
-      model ! [ WebSocket.send "ws://localhost:5000/ws"
-      ("download|" ++ filename) ]
+    Download ->
+      case model.chosenFile of
+        "" -> model ! []
+        _  -> model ! [ WebSocket.send "ws://localhost:5000/ws"
+                       ("download|" ++ model.chosenFile) ]
 
     --Encryption
     Encrypted encryptedWord ->
@@ -119,7 +122,10 @@ websocketMessage model method params =
     "register" ->
       {model | view = TeamView} ! [Cmd.none]
     "download" ->
-      model ! [ download [extract (List.head params), extract (List.head (List.drop 1 params)) ] ]
+        model ! [ download ["eriiii.hs","2341abf653"]]
+      --model ! [ download [extract (List.head params), extract (List.head (List.drop 1 params)) ] ]
+    "logout" ->
+      init
     _ ->
       model ! [ Cmd.none ]
 

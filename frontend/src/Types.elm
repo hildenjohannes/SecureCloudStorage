@@ -26,7 +26,7 @@ type alias FileData =
   , content       : String }
 
 type Msg =
-  ShowLogin         |   --switch to login view
+  Logout         |   --Logout
   ShowTeam          |  --switch to upload view
   ShowRegister      | -- switch to regiserview
   --Upload
@@ -34,7 +34,7 @@ type Msg =
   FileRead FileData |
   Upload |
   --Download
-  Download String   |
+  Download |
   --Encryption
   Encrypted String  |
   Decrypted String  |
@@ -47,7 +47,7 @@ type Msg =
   LastName String   |
   Register          |
   --websocket
-  Message String    | 
+  Message String    |
 
   UpdateChosenFile String
 

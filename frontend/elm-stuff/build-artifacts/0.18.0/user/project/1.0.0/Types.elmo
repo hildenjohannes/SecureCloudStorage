@@ -59,9 +59,7 @@ var _user$project$Types$Decrypted = function (a) {
 var _user$project$Types$Encrypted = function (a) {
 	return {ctor: 'Encrypted', _0: a};
 };
-var _user$project$Types$Download = function (a) {
-	return {ctor: 'Download', _0: a};
-};
+var _user$project$Types$Download = {ctor: 'Download'};
 var _user$project$Types$Upload = {ctor: 'Upload'};
 var _user$project$Types$FileRead = function (a) {
 	return {ctor: 'FileRead', _0: a};
@@ -69,7 +67,7 @@ var _user$project$Types$FileRead = function (a) {
 var _user$project$Types$FileSelected = {ctor: 'FileSelected'};
 var _user$project$Types$ShowRegister = {ctor: 'ShowRegister'};
 var _user$project$Types$ShowTeam = {ctor: 'ShowTeam'};
-var _user$project$Types$ShowLogin = {ctor: 'ShowLogin'};
+var _user$project$Types$Logout = {ctor: 'Logout'};
 var _user$project$Types$RegisterView = {ctor: 'RegisterView'};
 var _user$project$Types$TeamView = {ctor: 'TeamView'};
 var _user$project$Types$LoginView = {ctor: 'LoginView'};

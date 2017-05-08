@@ -88,8 +88,8 @@ fileNav model =
       button [class "btn btn-info"] [text "Manage Team"],
       input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected), class "btn btn-info"] [],
       button [class "btn btn-info", onClick Upload] [text "Upload file"],
-      button [class "btn btn-info"] [text "Download file"],
-      button [class "btn btn-info", onClick ShowLogin] [text "Log out"]
+      button [class "btn btn-info", onClick Download] [text "Download file"],
+      button [class "btn btn-info", onClick Logout] [text "Log out"]
       ]
     ]
 
@@ -146,6 +146,6 @@ maybeToString s =
 
        List.take index list
        |> List.reverse
-       |> List.head                       
+       |> List.head
   else
      Nothing

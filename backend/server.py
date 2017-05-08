@@ -32,8 +32,13 @@ class SocketHandler(websocket.WebSocketHandler):
                 self.write_message("listFiles|" + self.listFiles())
             else:
                 self.write_message("error|fileNotSaved")
+        elif method == "download":
+            a = self.readFile(params[0])
+            self.write_message("download|" + params[0] + "|" + a)
         elif method == "listFiles":
             self.write_message("listFiles|" + self.listFiles())
+        elif method == "logout":
+            self.write_message("logout|" + self.logout())
         else:
             self.write_message("Invalid argument")
 
@@ -41,7 +46,12 @@ class SocketHandler(websocket.WebSocketHandler):
         filee = open(filename, 'w+')
         filee.write(content)
         return Filemeta.addFile([filename, '100', Usermeta.filter(email = self.user)])
-
+    def readFile(self, filename):
+        print("hallo eller")
+        with open(filename) as f: s = f.read()
+        print(str(s))
+        print(filename)
+        return s
     def listFiles(self):
         mes='['
         for userr in Usermeta.filter(email = self.user):
@@ -57,7 +67,10 @@ class SocketHandler(websocket.WebSocketHandler):
             self.authenticated = True
             self.user = params[0]
         return self.authenticated
-
+    def logout(self):
+        self.authenticated = False
+        self.user = ""
+        return "True"
     def register(self, params):
         if Usermeta.userRegister(params):
             self.authenticated = True

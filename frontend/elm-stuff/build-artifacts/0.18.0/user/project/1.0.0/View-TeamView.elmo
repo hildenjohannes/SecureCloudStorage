@@ -294,7 +294,11 @@ var _user$project$View_TeamView$fileNav = function (model) {
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Download),
+											_1: {ctor: '[]'}
+										}
 									},
 									{
 										ctor: '::',
@@ -310,7 +314,7 @@ var _user$project$View_TeamView$fileNav = function (model) {
 											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$ShowLogin),
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
 												_1: {ctor: '[]'}
 											}
 										},
