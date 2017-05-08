@@ -122,7 +122,7 @@ websocketMessage model method params =
     "register" ->
       {model | view = TeamView} ! [Cmd.none]
     "download" ->
-        model ! [ download ["eriiii.hs","2341abf653"]]
+        model ! [ download params]
       --model ! [ download [extract (List.head params), extract (List.head (List.drop 1 params)) ] ]
     "logout" ->
       init

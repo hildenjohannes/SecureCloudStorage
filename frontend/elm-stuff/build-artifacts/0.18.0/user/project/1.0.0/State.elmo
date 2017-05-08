@@ -127,16 +127,7 @@ var _user$project$State$websocketMessage = F3(
 					model,
 					{
 						ctor: '::',
-						_0: _user$project$Ports$download(
-							{
-								ctor: '::',
-								_0: 'eriiii.hs',
-								_1: {
-									ctor: '::',
-									_0: '2341abf653',
-									_1: {ctor: '[]'}
-								}
-							}),
+						_0: _user$project$Ports$download(params),
 						_1: {ctor: '[]'}
 					});
 			case 'logout':
