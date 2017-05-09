@@ -57,8 +57,7 @@ navigationbar =
       div [id "navbar", class "navbar-collapse collpase"]
        [ul [class "nav navbar-nav navbar-right"]
         [li [class "active"] [a [href "#"] [text "Home"]],
-         li [] [a [href "#"] [text "Profile"]],
-         li [] [a [href "#"] [text "Settings"]]
+         li [] [a [href "#"] [text "Profile"]]
         ]--! ul
        ]--! navbar
       ]--! container-fluid
