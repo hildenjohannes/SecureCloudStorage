@@ -10,12 +10,10 @@ stylesheet =
     let
         tag =
             "link"
-
         attrs =
             [ attribute "Rel" "stylesheet"
             , attribute "property" "stylesheet"
             , attribute "href" "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-            --, attribute "href" "css/bootstrap.min.css"
             ]
 
         children =

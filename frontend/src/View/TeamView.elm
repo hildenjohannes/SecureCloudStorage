@@ -70,7 +70,8 @@ sidebar =
     [
     ul [class "nav nav-sidebar"]
       [
-       li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
+       --li [class "active"] [a [href "#"] [text "Overview", span [class "sr-only"] [text "current"]]],
+       li [] [a [href "#"] [text "My Cloud"]],
        li [] [a [href "#"] [text "TEAM 0"]],
        li [] [a [href "#"] [text "TEAM 1"]],
        li [] [a [href "#"] [text "TEAM 2"]],
@@ -84,11 +85,11 @@ fileNav model =
     [
     div [class "pull-right"]
       [
-
       button [class "btn btn-info"] [text "Manage Team"],
       input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected), class "btn btn-info"] [],
       button [class "btn btn-info", onClick Upload] [text "Upload file"],
       button [class "btn btn-info", onClick Download] [text "Download file"],
+      button [class "btn btn-info"] [text "Delete"],
       button [class "btn btn-info", onClick Logout] [text "Log out"]
       ]
     ]

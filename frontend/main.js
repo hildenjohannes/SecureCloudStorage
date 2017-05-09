@@ -10158,18 +10158,33 @@ var _user$project$View_TeamView$fileNav = function (model) {
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
-												_1: {ctor: '[]'}
-											}
+											_1: {ctor: '[]'}
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Log out'),
+											_0: _elm_lang$html$Html$text('Delete'),
 											_1: {ctor: '[]'}
 										}),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$button,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Log out'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -10198,11 +10213,7 @@ var _user$project$View_TeamView$sidebar = A2(
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$li,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('active'),
-						_1: {ctor: '[]'}
-					},
+					{ctor: '[]'},
 					{
 						ctor: '::',
 						_0: A2(
@@ -10214,23 +10225,8 @@ var _user$project$View_TeamView$sidebar = A2(
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Overview'),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$span,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('sr-only'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('current'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html$text('My Cloud'),
+								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
 					}),
