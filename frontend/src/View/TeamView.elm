@@ -82,16 +82,20 @@ fileNav : Model -> Html Msg
 fileNav model =
   div [class "row", style [("margin-top","6%")]]
     [
-    div [class "pull-right"]
+    div [class "input-group"]--"pull-right"]
       [
-      button [class "btn btn-info"] [text "Manage Team"],
-      input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected), class "btn btn-info"] [],
-      button [class "btn btn-info", onClick Upload] [text "Upload file"],
-      button [class "btn btn-info", onClick Download] [text "Download file"],
-      button [class "btn btn-info"] [text "Delete"],
-      button [class "btn btn-info", onClick Logout] [text "Log out"]
+      --input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected), class "btn btn-info "] [],
+      span [class "input-group-btn"] [
+        button [class "btn btn-info"] [text "Manage Team"],--style [("margin-left", "1.2%")]
+        button [class "btn btn-info", onClick Logout] [text "Log out"]],
+
+        button [class "btn btn-info", style [("float", "right")]] [input [type_ "file", id model.inputId, on "change" (Json.succeed FileSelected)] []],
+        button [class "btn btn-info", style [("float", "right")], onClick Upload] [text "Upload file"],
+        button [class "btn btn-info", style [("float", "right")], onClick Download] [text "Download file"],
+        button [class "btn btn-info", style [("float", "right")]] [text "Delete"]
       ]
     ]
+
 
 center : Model -> Html Msg
 center model =

@@ -10073,48 +10073,94 @@ var _user$project$View_TeamView$fileNav = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pull-right'),
+					_0: _elm_lang$html$Html_Attributes$class('input-group'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$span,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+							_0: _elm_lang$html$Html_Attributes$class('input-group-btn'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Manage Team'),
-							_1: {ctor: '[]'}
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Manage Team'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Log out'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$input,
+							_elm_lang$html$Html$button,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$type_('file'),
+								_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id(model.inputId),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html_Events$on,
-											'change',
-											_elm_lang$core$Json_Decode$succeed(_user$project$Types$FileSelected)),
-										_1: {
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
+											_0: {ctor: '_Tuple2', _0: 'float', _1: 'right'},
 											_1: {ctor: '[]'}
-										}
-									}
+										}),
+									_1: {ctor: '[]'}
 								}
 							},
-							{ctor: '[]'}),
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('file'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id(model.inputId),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html_Events$on,
+													'change',
+													_elm_lang$core$Json_Decode$succeed(_user$project$Types$FileSelected)),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -10124,8 +10170,17 @@ var _user$project$View_TeamView$fileNav = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Upload),
-										_1: {ctor: '[]'}
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'float', _1: 'right'},
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Upload),
+											_1: {ctor: '[]'}
+										}
 									}
 								},
 								{
@@ -10142,8 +10197,17 @@ var _user$project$View_TeamView$fileNav = function (model) {
 										_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Download),
-											_1: {ctor: '[]'}
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'float', _1: 'right'},
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Download),
+												_1: {ctor: '[]'}
+											}
 										}
 									},
 									{
@@ -10158,33 +10222,23 @@ var _user$project$View_TeamView$fileNav = function (model) {
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-											_1: {ctor: '[]'}
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'float', _1: 'right'},
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
 										},
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html$text('Delete'),
 											_1: {ctor: '[]'}
 										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$button,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Types$Logout),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Log out'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
+									_1: {ctor: '[]'}
 								}
 							}
 						}
@@ -10435,29 +10489,7 @@ var _user$project$View_TeamView$navigationbar = A2(
 													}),
 												_1: {ctor: '[]'}
 											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$li,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$a,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$href('#'),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Settings'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
+										_1: {ctor: '[]'}
 									}
 								}),
 							_1: {ctor: '[]'}
